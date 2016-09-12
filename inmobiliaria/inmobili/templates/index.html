@@ -1,121 +1,235 @@
 {% load static %} {% load staticfiles %}
 
 <html>
+
 <head>
-      <!--Import Google Icon Font-->
-      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <!--Import materialize.css-->
-      <link type="text/css" href="{% static 'css/materialize.min.css' %}" rel="stylesheet" media="screen,projection" />
-      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-      <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
-    
-<style>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" href="{% static 'css/materialize.min.css' %}" rel="stylesheet" media="screen,projection" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+
+    <style>
+        body {
+            background-color: #4DB6AC;
+        }
+        /*
 #modal1 {
     overflow-y: hidden !important;
     
 }
+*/
+        .intro {
+            text-align: center;
+            padding-top: 13%;
+            padding-bottom: 13%;
+            margin-bottom: 50px;
+        }     
+        .intro h1 {
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+        .intro h5 {
+            text-transform: uppercase;
+            background-color: #f5f5f5;
+            padding: 10px;
+            color: #333333;
+            display: inline-block;
+            font-size: 1.2rem;
+        }
+    </style>
 
-.intro
-{
-	text-align: center;
-	padding-top: 13%;
-	padding-bottom: 13%;
-	margin-bottom: 50px;
-}
+    <script>
+        $(document).ready(function() {
+            // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+            $('.modal-trigger').leanModal();
+        });
 
-.intro h1
-{
-	font-weight: 900;
-	text-transform: uppercase;
-}
+        $(document).ready(function() {
+            $('.slider').slider({
+                full_width: true
+            });
+        });
 
-.intro h5
-{
-	text-transform: uppercase;
-	background-color: #f5f5f5;
-	padding: 10px;
-	color: #333333;
-	display: inline-block;
-	font-size: 1.2rem;
-}    
-    
-    
-}
-
-</style>
-    
-<script>
-$(document).ready(function(){
-    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-    $('.modal-trigger').leanModal();
-  });    
-    
- $(document).ready(function(){
-      $('.slider').slider({full_width: true});
-    });    
-</script>       
+        $(document).ready(function() {
+            $(".button-collapse").sideNav();
+            $('ul.tabs').tabs('select_tab', 'inbox');
+        });
+        </script>
 </head>
 
 <body>
 
-      <nav>
-    <div style="background-color:#BDBDBD"; class="nav-wrapper">
-      <a href="#!" class="brand-logo"><i class="material-icons">visibility</i>Logo</a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="#modal1"><i class="material-icons">search</i></a></li>
-        <li><a class="modal-trigger" href="#modal1"><i class="material-icons">person_pin</i></a></li>
-        <li><a href="#"><i class="material-icons">refresh</i></a></li>
-        <li><a href="#"><i class="material-icons">more_vert</i></a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <!-- Modal Structure -->
-
-  <div id="modal1" class="modal">
-    <div class="modal-content">
-<div class="col m6">
-                    <div class="row">
-            <h3 class="center login-form-text">Login</h3>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#!" class="brand-logo">Logo</a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse" onclick="menu()"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="#modal1"><i class="material-icons">search</i></a></li>
+                <li><a class="modal-trigger" href="#modal1"><i class="material-icons">person_pin</i></a></li>
+                <li><a href="#"><i class="material-icons">refresh</i></a></li>
+                <li><a href="#"><i class="material-icons">more_vert</i></a></li>
+            </ul>
+            <ul class="side-nav" id="mobile-demo">
+                <li><a href="#modal1" class="modal-trigger">Entrar</a></li>
+                <li><a href="badges.html">Components</a></li>
+                <li><a href="http://materializecss.com/">MaterializeCSS</a></li>
+            </ul>
         </div>
-            <div class="row">
-                <form class="col s12">
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="email" type="email" class="validate">
-                            <label for="email">Email</label>
+    </nav>
+
+    <!-- Modal Structure -->
+
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <div class="col m6">
+
+
+                <div class="row">
+                    <div class="col s12">
+                        <ul class="tabs" style="background-color:#FAFAFA;">
+                            <li class="tab col s3"><a class="active" href="#inbox">L</a></li>
+                            <li class="tab col s3"><a href="#unread">R</a></li>
+                            <li class="tab col s3"><a href="#sent">P</a></li>
+                        </ul>
+                    </div>
+                    <div id="inbox" class="col s12">
+
+                        <!-- Login -->
+
+                        <div class="row">
+                            <h5 class="center" style="color:#424242">Benvenuti</h5>
+                        </div>
+                        <div class="row">
+                            <form class="col s12">
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="email" type="email" class="validate">
+                                        <label for="email">Correo electr&oacute;nico</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="pass" type="password" class="validate">
+                                        <label for="pass">Contrase&ntilde;a</label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <a href="login.html" class="btn waves-effect waves-light col s12">Ingresar</a>
+                                        </div>
+                                        <div class="input-field col s6 m6 l6">
+                                            <p class="margin medium-small"><a href="#">Reg&iacute;strate</a></p>
+                                        </div>
+                                        <div class="input-field col s6 m6 l6">
+                                            <p class="margin right-align medium-small"><a href="#">&iquest;Olvidaste tu contrase&ntilde;a?</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+
+                    <!-- Registro -->
+
+                    <div id="unread" class="col s12">
+
+                        <div class="row">
+                            <h5 class="center" style="color:#424242">Registrare</h5>
+                        </div>
+                        <div class="row">
+                            <form class="col s12">
+                                <div class="row">
+                                    <div class="input-field col s6">
+                                        <input id="nombre" type="text" class="validate">
+                                        <label for="nombre">Nombre</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <input id="apellido" type="text" class="validate">
+                                        <label for="apellido">Apellido</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="usuario" type="text" class="validate">
+                                        <label for="usuario">Nombre de usuario</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="email" type="email" class="validate">
+                                        <label for="email">Correo electr&oacute;nico</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="pass" type="password" class="validate">
+                                        <label for="pass">Contrase&ntilde;a</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="pass" type="password" class="validate">
+                                        <label for="pass">Repetir contrase&ntilde;a</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <a href="login.html" class="btn waves-effect waves-light col s12">Registrate</a>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+
+
+
+
+                    </div>
+                    <div id="sent" class="col s12">
+
+                        <!-- Recuperar contraseña  recuperare la contrassegno -->
+                        <div id="unread" class="col s12">
+
+                            <div class="row">
+                                <h5 class="center" style="color:#424242">Recuperare la contrassegno</h5>
+                            </div>
+                            <div class="row">
+                                <form class="col s12">
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <input id="email" type="email" class="validate">
+                                            <label for="email">Correo electr&oacute;nico</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <a href="login.html" class="btn waves-effect waves-light col s12">Recuperar contrase&ntilde;a</a>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="pass" type="password" class="validate">
-                            <label for="pass">Contrasenia</label>
-                        </div>
-
-
-
-
-        <div class="row">
-          <div class="input-field col s12">
-            <a href="login.html" class="btn waves-effect waves-light col s12">Ingresar</a>
-          </div>
-<!--                                        <div class="divider"></div>    -->
-          <div class="input-field col s6 m6 l6">
-            <p class="margin medium-small"><a href="#">Registrate</a></p>
-          </div>
-          <div class="input-field col s6 m6 l6">
-              <p class="margin right-align medium-small"><a href="#">Olvidaste tu contrasenia?</a></p>
-          </div> 
+                </div>
+            </div>
         </div>
-     </div> 
     </div>
-    </div>
-    </div>
-    </div>
-    </div>
-      
-<a href="{% url 'index:mapa' %}">hola</a>
 
-{% block content %}{% endblock %}
+
+
+    <div class="center login-form-text" style="padding-top:15%" ;>
+        <h2 style="color:#ffffff">
+Trova la tua casa donde quiser, wachim</h2>
+        <a href="{% url 'index:mapa' %}">
+            <div style="background-color:#E53935" ; class="waves-effect waves-light btn-large">Ir al mapa</div>
+        </a>
+    </div>
+
+
+    {% block content %}{% endblock %}
 </body>
+
 </html>

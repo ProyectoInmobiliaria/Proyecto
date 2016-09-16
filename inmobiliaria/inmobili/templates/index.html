@@ -3,79 +3,80 @@
 <html>
 
 <head>
-    <!--Import Google Icon Font-->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link type="text/css" href="{% static 'css/materialize.min.css' %}" rel="stylesheet" media="screen,projection" />
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
+    <link rel="stylesheet" href="{% static 'css/flickity.css' %}" media="screen">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>   
     <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
-
+    <script src="{% static 'js/flickity.pkgd.min.js' %}"></script>
     <style>
-        body {
-            background-color: #4DB6AC;
-        }
-        /*
-#modal1 {
-    overflow-y: hidden !important;
-    
+        
+body{
+    background-color : #F5f5f5;
+}        
+
+.gallery {
+  background: #FAFAFA;
 }
-*/
-        .intro {
-            text-align: center;
-            padding-top: 13%;
-            padding-bottom: 13%;
-            margin-bottom: 50px;
-        }     
-        .intro h1 {
-            font-weight: 900;
-            text-transform: uppercase;
-        }
-        .intro h5 {
-            text-transform: uppercase;
-            background-color: #f5f5f5;
-            padding: 10px;
-            color: #333333;
-            display: inline-block;
-            font-size: 1.2rem;
-        }
+
+.gallery-cell {
+  width: 66%;
+  height: 30em;
+  margin-right: 10px;
+  background: #8C8;
+  counter-increment: gallery-cell;
+}
+
+.gallery-cell:before {
+  display: block;
+  text-align: center;
+  content: counter(gallery-cell);
+  line-height: 400px;
+  font-size: 80px;
+  color: #ffffff;
+}        
+        
     </style>
 
     <script>
         $(document).ready(function() {
-            // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-            $('.modal-trigger').leanModal();
-        });
-
-        $(document).ready(function() {
             $('.slider').slider({
                 full_width: true
             });
-        });
-
-        $(document).ready(function() {
+            $('#myModal').leanModal();
             $(".button-collapse").sideNav();
-            $('ul.tabs').tabs('select_tab', 'inbox');
+            $('.carousel').carousel();
+            $('#rolfix').leanModal();
         });
+        var options = [ {selector: '#staggered-test', offset: 50, callback: 'Materialize.toast("This is our ScrollFire Demo!", 1500 )' }]; Materialize.scrollFire(options);
         </script>
 </head>
-
 <body>
-
     <nav>
         <div class="nav-wrapper">
-            <a href="#!" class="brand-logo">Logo</a>
-            <a href="#" data-activates="mobile-demo" class="button-collapse" onclick="menu()"><i class="material-icons">menu</i></a>
+            <a href="" class="brand-logo">Logo</a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
                 <li><a href="#modal1"><i class="material-icons">search</i></a></li>
-                <li><a class="modal-trigger" href="#modal1"><i class="material-icons">person_pin</i></a></li>
-                <li><a href="#"><i class="material-icons">refresh</i></a></li>
+                <li><a class="modal-trigger" id="myModal" href="#modal1"><i class="material-icons">person_pin</i></a></li>
+                <li><a class="modal-trigger" id="rolfix" href="#rolfi"><i class="material-icons">new_releases</i></a></li>
                 <li><a href="#"><i class="material-icons">more_vert</i></a></li>
             </ul>
-            <ul class="side-nav" id="mobile-demo">
-                <li><a href="#modal1" class="modal-trigger">Entrar</a></li>
-                <li><a href="badges.html">Components</a></li>
-                <li><a href="http://materializecss.com/">MaterializeCSS</a></li>
-            </ul>
+  <ul id="mobile-demo" class="side-nav">
+    <li><div class="userView">
+      <img class="background" src="http://cdn.wallpapersafari.com/21/79/5dNwjl.jpg">
+      <a href="#"><img class="circle" src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Rubio_Circle.png"></a>
+      <a href="#"><span class="white-text name">John Doe</span></a>
+      <a href="#"><span class="white-text email">jdandturk@gmail.com</span></a>
+    </div></li>
+    <li><a href="#"><i class="material-icons">cloud</i>First Link With Icon</a></li>
+    <li><a href="#">Second Link</a></li>
+    <li><div class="divider"></div></li>
+    <li><a class="subheader">Subheader</a></li>
+    <li><a class="waves-effect" href="#">Third Link With Waves</a></li>
+  </ul>
+
+     
         </div>
     </nav>
 
@@ -84,21 +85,19 @@
     <div id="modal1" class="modal">
         <div class="modal-content">
             <div class="col m6">
-
-
-                <div class="row">
-                    <div class="col s12">
+          <div class="row">
+                    <div class="col s12" >
                         <ul class="tabs" style="background-color:#FAFAFA;">
-                            <li class="tab col s3"><a class="active" href="#inbox">L</a></li>
-                            <li class="tab col s3"><a href="#unread">R</a></li>
-                            <li class="tab col s3"><a href="#sent">P</a></li>
+                            <li class="tab col s3"><a href="#inbox">Login</a></li>
+                            <li class="tab col s3"><a href="#unread">Register</a></li>
+                            <li class="tab col s3"><a href="#sent">Password</a></li>
                         </ul>
                     </div>
                     <div id="inbox" class="col s12">
 
                         <!-- Login -->
 
-                        <div class="row">
+                        <div class="row"><br>
                             <h5 class="center" style="color:#424242">Benvenuti</h5>
                         </div>
                         <div class="row">
@@ -128,14 +127,13 @@
                                 </div>
                             </form>
                         </div>
-
                     </div>
 
                     <!-- Registro -->
 
                     <div id="unread" class="col s12">
 
-                        <div class="row">
+                        <div class="row"><br>
                             <h5 class="center" style="color:#424242">Registrare</h5>
                         </div>
                         <div class="row">
@@ -182,17 +180,13 @@
 
                             </form>
                         </div>
-
-
-
-
                     </div>
                     <div id="sent" class="col s12">
 
-                        <!-- Recuperar contraseña  recuperare la contrassegno -->
+                        <!-- Recuperar contraseña -->
+                        
                         <div id="unread" class="col s12">
-
-                            <div class="row">
+                            <div class="row"><br>
                                 <h5 class="center" style="color:#424242">Recuperare la contrassegno</h5>
                             </div>
                             <div class="row">
@@ -208,7 +202,6 @@
                                             <a href="login.html" class="btn waves-effect waves-light col s12">Recuperar contrase&ntilde;a</a>
                                         </div>
                                     </div>
-
                                 </form>
                             </div>
                         </div>
@@ -217,19 +210,118 @@
             </div>
         </div>
     </div>
+    
+    <!-- Modal Trigger -->
 
 
-
-    <div class="center login-form-text" style="padding-top:15%" ;>
-        <h2 style="color:#ffffff">
-Trova la tua casa donde quiser, wachim</h2>
-        <a href="{% url 'index:mapa' %}">
-            <div style="background-color:#E53935" ; class="waves-effect waves-light btn-large">Ir al mapa</div>
-        </a>
+  <!-- Modal Structure -->
+  <div id="rolfi" class="modal bottom-sheet">
+    <div class="modal-content">
+      <h4>Modal Header</h4>
+      <p>A bunch of text</p>
     </div>
+    <div class="modal-footer">
+      <a href="#" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>
+    
+    
+    <div class="section no-pad-bot" id="index-banner" >
+    <div class="container">
+      <br><br><br><br><br><br><br><br><br><br><br><br>
+      <h1 class="header center red-text">Encontrá tu casa</h1>
+      <div class="row center">
+        <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
+      </div>
+      <div class="row center">
+        <a href="{% url 'index:mapa' %}" id="download-button" class="btn-large waves-effect waves-light red">Ir al mapa</a>
+      </div>
+      <br><br><br><br>
 
+    </div>
+  </div>
+    
 
-    {% block content %}{% endblock %}
+<div class="row grey lighten-3">
+<div class="col s12 " >
+<div class="container grey lighten-3">
+    <div class="section">
+        <span id="staggered-test"></span> 
+      <!--   Icon Section   -->
+      <div class="row">
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center light-blue-text"><img src="{% static 'pres1.png' %}"></h2>
+            <h5 class="center">Speeds up development</h5>
+            <p class="light">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center light-blue-text"><img src="{% static 'pres2.png' %}"></h2>
+            <h5 class="center">User Experience Focused</h5>
+            <p class="light">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center light-blue-text"><img src="{% static 'pres3.png' %}"></h2>
+            <h5 class="center">Easy to work with</h5>
+            <p class="light">We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>    
+    </div>    
+    </div>
+     </div>    
+    
+  <div class="container">
+    <div class="section">
+        <br><br><br><br>
+<div class="center">         
+<div class="gallery js-flickity"
+  data-flickity-options='{ "wrapAround": true, "pageDots":false, "autoPlay": 3000, "pauseAutoPlayOnHover": true}'>
+  <div class="gallery-cell"></div>
+  <div class="gallery-cell"></div>
+  <div class="gallery-cell"></div>
+  <div class="gallery-cell"></div>
+  <div class="gallery-cell"></div>
+</div>
+    </div>
+    </div>
+    </div>
+    <br><br> 
+
+ <footer class="page-footer grey darken-3">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Footer Content</h5>
+                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="#">Link 1</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#">Link 2</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#">Link 3</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#">Link 4</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright grey darken-4">
+            <div class="container">
+            © 2014 Copyright Text
+            <a class="grey-text text-lighten-4 right" href="#">More Links</a>
+            </div>
+          </div>
+        </footer>
+
+{% block content %}{% endblock %}
 </body>
-
 </html>

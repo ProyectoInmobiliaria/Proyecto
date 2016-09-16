@@ -3,17 +3,19 @@ from django.template import loader
 from django.template import RequestContext
 from django.http import Http404
 from django.views import generic
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import TemplateView
 from django.http import HttpResponseRedirect, HttpResponse
 import time
+from django.contrib import messages
 from calendar import month_name
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404, render_to_response
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login
 from django.core.context_processors import csrf
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.core.urlresolvers import reverse
@@ -24,7 +26,23 @@ from django.template import RequestContext
 
 
 def index(request):
-    return render_to_response("index.html")
+    context = RequestContext(request)
+    return render_to_response("index.html", context)
 
 def mapa(request):
-    return render_to_response("mapa.html")
+    context = RequestContext(request)
+    return render_to_response("mapa.html", context)
+
+def log(request):
+    context = RequestContext(request)
+    if 'POST' in request.method:
+        usern = request.POST['username']
+        passw = request.POST['password']
+        print usern + passw
+        user = authenticate(username=usern, password=passw)
+        if user is not None:
+            login(request, user)
+            return redirect ('/')
+        else:
+            messages.add_message(request, messages.INFO, 'The Username or Password doesnt match')
+            return redirect ('/')

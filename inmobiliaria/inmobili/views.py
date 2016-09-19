@@ -10,6 +10,7 @@ from django.shortcuts import get_object_or_404, render
 from django.views.generic import TemplateView
 from django.http import HttpResponseRedirect, HttpResponse
 import time
+from django.contrib.auth.models import User
 from django.contrib import messages
 from calendar import month_name
 from django.http import HttpResponseRedirect, HttpResponse
@@ -46,3 +47,30 @@ def log(request):
         else:
             messages.add_message(request, messages.INFO, 'The Username or Password doesnt match')
             return redirect ('/')
+
+def register(request):
+    context = RequestContext(request)
+    if 'POST' in request.method:
+        name = request.POST['regfirst']
+        lname = request.POST['reglast']
+        userw = request.POST['reguser']
+        email1 = request.POST['regmail']
+        passw1 = request.POST['regpass']
+        passw2 = request.POST['regpass2']
+        print userw
+        if passw1 == passw2:
+            user = User.objects.create_user(userw, email1, passw1)
+            user.first_name = name
+            user.last_name = lname
+            user.save()
+            return redirect ('/')
+        else:
+            messages.add_message(request, messages.INFO, 'The Passwords doesnt match')
+            return redirect ('/')
+
+
+
+
+
+
+

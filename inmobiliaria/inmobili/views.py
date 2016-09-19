@@ -29,8 +29,12 @@ from django.template import RequestContext
 
 def index(request):
     context = RequestContext(request)
-    return render_to_response("index.html", context)
-
+    user = request.user
+    if user.is_authenticated:
+        return render_to_response("nav.html", context)
+    else:
+        return render_to_response("mapa.html", context)
+    
 def mapa(request):
     context = RequestContext(request)
     return render_to_response("mapa.html", context)
@@ -46,8 +50,7 @@ def log(request):
             login(request, user)
             return redirect ('/')
         else:
-            messages.add_message(request, messages.INFO, 'The Username or Password doesnt match')
-            return redirect ('/')
+            message = 'Your message'
 
 def register(request):
     context = RequestContext(request)
@@ -68,7 +71,7 @@ def register(request):
         else:
             messages.add_message(request, messages.INFO, 'The Passwords doesnt match')
             return redirect ('/')
-        
+
 def logout(request):
     context = RequestContext(request)
     auth.logout(request)

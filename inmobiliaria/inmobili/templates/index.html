@@ -1,4 +1,5 @@
-{% load static %} {% load staticfiles %}
+{% load static %} 
+{% load staticfiles %}
 
 <html>
 
@@ -39,6 +40,10 @@
         </style>
 
         <script>
+            function toast(){
+                Materialize.toast({{ message }}, 4000)
+            }
+            
             $(document).ready(function() {
                 $('.slider').slider({
                     full_width: true
@@ -48,192 +53,13 @@
                 $('.carousel').carousel();
                 $('#rolfix').leanModal();
             });
-            var options = [ {selector: '#staggered-test', offset: 50, callback: 'Materialize.toast("This is our ScrollFire Demo!", 1500 )' }]; Materialize.scrollFire(options);
         </script>
     </head>
     <body>
-        <nav>
-            <div class="nav-wrapper">
-                <a href="" class="brand-logo">{{user}}</a>
-                <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-                <ul class="right hide-on-med-and-down">
-                    <li><a href="#modal1"><i class="material-icons">search</i></a></li>
-                    <li><a class="modal-trigger" id="myModal" href="#modal1"><i class="material-icons">person_pin</i></a></li>
-                    <li><a class="modal-trigger" id="rolfix" href="#rolfi"><i class="material-icons">new_releases</i></a></li>
-                    <li><a data-activates="dropdown1" class="dropdown-button"><i class="material-icons">more_vert</i></a></li>
-                </ul>
-                <ul id='dropdown1' class='dropdown-content'>
-                    <li><a href="{% url 'index:logout' %}">Logout</a></li>
-                </ul>
-                <ul id="mobile-demo" class="side-nav">
-                    <li><div class="userView">
-                        <img class="background" src="http://cdn.wallpapersafari.com/21/79/5dNwjl.jpg">
-                        <a href="#"><img class="circle" src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Rubio_Circle.png"></a>
-                        <a href="#"><span class="white-text name">John Doe</span></a>
-                        <a href="#"><span class="white-text email">jdandturk@gmail.com</span></a>
-                        </div></li>
-                    <li><a href="#"><i class="material-icons">cloud</i>First Link With Icon</a></li>
-                    <li><a href="#">Second Link</a></li>
-                    <li><div class="divider"></div></li>
-                    <li><a class="subheader">Subheader</a></li>
-                    <li><a class="waves-effect" href="#">Third Link With Waves</a></li>
-                </ul>
-
-
-            </div>
-        </nav>
-
-        <!-- Modal Structure -->
-
-        <div id="modal1" class="modal">
-            <div class="modal-content">
-                <div class="col m6">
-                    <div class="row">
-                        <div class="col s12" >
-                            <ul class="tabs" style="background-color:#FAFAFA;">
-                                <li class="tab col s3"><a href="#inbox">Login</a></li>
-                                <li class="tab col s3"><a href="#unread">Register</a></li>
-                                <li class="tab col s3"><a href="#sent">Password</a></li>
-                            </ul>
-                        </div>
-                        <div id="inbox" class="col s12">
-
-                            <!-- Login -->
-
-                            <div class="row"><br>
-                                <h5 class="center" style="color:#424242">Benvenuti</h5>
-                            </div>
-                            <div class="row">
-                                <form class="col s12" action="{% url 'index:log' %}" method="POST">
-                                    {% csrf_token %}
-                                    <div class="row">
-                                        <div class="input-field col s12">
-                                            <input id="username" name="username" type="text" class="validate">
-                                            <label for="user">Username</label>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="input-field col s12">
-                                            <input id="password" name="password" type="password" class="validate">
-                                            <label for="pass">Password</label>
-                                        </div>
-                                        <div class="row">
-                                            <div class="input-field col s12">
-                                                <button class="btn waves-effect waves-light" type="submit" name="action" style="width: 100%;">Login</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                                <div class="row">
-                                    <div class="input-field col s6 m6 l6">
-                                        <p class="margin medium-small"><a href="#">Reg&iacute;strate</a></p>
-                                    </div>
-                                    <div class="input-field col s6 m6 l6">
-                                        <p class="margin right-align medium-small"><a href="#">&iquest;Olvidaste tu contrase&ntilde;a?</a></p>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <!-- Registro -->
-
-                    <div id="unread" class="col s12">
-
-                        <div class="row"><br>
-                            <h5 class="center" style="color:#424242">Registrare</h5>
-                        </div>
-                        <div class="row">
-                            <form class="col s12" action="{% url 'index:register' %}" method="POST">
-                                {% csrf_token %}
-                                <div class="row">
-                                    <div class="input-field col s6">
-                                        <input id="regfirst" type="text" class="validate" name="regfirst">
-                                        <label for="nombre">Nombre</label>
-                                    </div>
-                                    <div class="input-field col s6">
-                                        <input id="reglast" type="text" class="validate" name="reglast">
-                                        <label for="apellido">Apellido</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <input id="reguser" type="text" class="validate" name="reguser">
-                                        <label for="usuario">Nombre de usuario</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <input id="regmail" type="email" class="validate" name="regmail">
-                                        <label for="email">Correo electr&oacute;nico</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <input id="regpass" type="password" class="validate" name="regpass">
-                                        <label for="pass">Contrase&ntilde;a</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <input id="regpass2" type="password" class="validate" name="regpass2">
-                                        <label for="pass">Repetir contrase&ntilde;a</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <button class="btn waves-effect waves-light" type="submit" name="action" style="width: 100%;">Register</button>
-                                    </div>
-                                </div>
-
-                            </form>
-                        </div>
-                    </div>
-                    <div id="sent" class="col s12">
-
-                        <!-- Recuperar contraseña -->
-
-                        <div id="unread" class="col s12">
-                            <div class="row"><br>
-                                <h5 class="center" style="color:#424242">Recuperare la contrassegno</h5>
-                            </div>
-                            <div class="row">
-                                <form class="col s12">
-                                    <div class="row">
-                                        <div class="input-field col s12">
-                                            <input id="email" type="email" class="validate">
-                                            <label for="email">Correo electr&oacute;nico</label>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="input-field col s12">
-                                            <a href="login.html" class="btn waves-effect waves-light col s12">Recuperar contrase&ntilde;a</a>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div id="nav">
+            {% block nav %}
+            {% endblock %}
         </div>
-
-        <!-- Modal Trigger -->
-
-
-        <!-- Modal Structure -->
-        <div id="rolfi" class="modal bottom-sheet">
-            <div class="modal-content">
-                <h4>Modal Header</h4>
-                <p>A bunch of text</p>
-            </div>
-            <div class="modal-footer">
-                <a href="#" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-            </div>
-        </div>
-
-
         <div class="section no-pad-bot" id="index-banner" >
             <div class="container">
                 <br><br><br><br><br><br><br><br><br><br><br><br>
@@ -329,7 +155,5 @@
                 </div>
             </div>
         </footer>
-
-        {% block content %}{% endblock %}
     </body>
 </html>

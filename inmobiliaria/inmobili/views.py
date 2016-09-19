@@ -12,11 +12,12 @@ from django.http import HttpResponseRedirect, HttpResponse
 import time
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.contrib import auth
 from calendar import month_name
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404, render_to_response
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.core.context_processors import csrf
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.core.urlresolvers import reverse
@@ -67,6 +68,11 @@ def register(request):
         else:
             messages.add_message(request, messages.INFO, 'The Passwords doesnt match')
             return redirect ('/')
+        
+def logout(request):
+    context = RequestContext(request)
+    auth.logout(request)
+    return redirect ('/')
 
 
 

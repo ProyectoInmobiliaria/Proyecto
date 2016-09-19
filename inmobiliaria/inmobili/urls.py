@@ -4,6 +4,7 @@ from inmobili.models import *
 
 
 urlpatterns = patterns('',
+    url(r'^logout/', 'inmobili.views.logout', name='logout'),
     url(r'^register/', 'inmobili.views.register', name='register'),
     url(r'^login/', 'inmobili.views.log', name='log'),
     url(r'^mapa/', 'inmobili.views.mapa', name='mapa'),

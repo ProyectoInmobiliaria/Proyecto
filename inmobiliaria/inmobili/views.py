@@ -44,7 +44,8 @@ def log(request):
             login(request, user)
             return redirect ('/')
         else:
-            message = 'Your message'
+            messages.add_message(request, messages.INFO, 'The Passwords doesnt match')
+            return redirect ('/')
 
 def register(request):
     context = RequestContext(request)

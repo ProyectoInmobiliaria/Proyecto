@@ -12,7 +12,7 @@
             <li><a data-activates="dropdown1" class="dropdown-button"><i class="material-icons">more_vert</i></a></li>
         </ul>
         <ul id='dropdown1' class='dropdown-content'>
-            <li><a href="{% url 'index:logout' %}">Profile</a></li>
+            <li><a>Profile</a></li>
             <li><a href="{% url 'index:logout' %}">Logout</a></li>
         </ul>
         <ul id="mobile-demo" class="side-nav">
@@ -49,24 +49,10 @@
 <nav>
     <div class="nav-wrapper">
         <a href="" class="brand-logo">{{user}}</a>
-        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
             <li><a href="#modal1"><i class="material-icons">search</i></a></li>
             <li><a class="modal-trigger" id="myModal" href="#modal1"><i class="material-icons">person_pin</i></a></li>
             <li><a class="modal-trigger" id="rolfix" href="#rolfi"><i class="material-icons">new_releases</i></a></li>
-        </ul>
-        <ul id="mobile-demo" class="side-nav">
-            <li><div class="userView">
-                <img class="background" src="http://cdn.wallpapersafari.com/21/79/5dNwjl.jpg">
-                <a href="#"><img class="circle" src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Rubio_Circle.png"></a>
-                <a href="#"><span class="white-text name">John Doe</span></a>
-                <a href="#"><span class="white-text email">jdandturk@gmail.com</span></a>
-                </div></li>
-            <li><a href="#"><i class="material-icons">cloud</i>First Link With Icon</a></li>
-            <li><a href="#">Second Link</a></li>
-            <li><div class="divider"></div></li>
-            <li><a class="subheader">Subheader</a></li>
-            <li><a class="waves-effect" href="#">Third Link With Waves</a></li>
         </ul>
     </div>
 </nav>

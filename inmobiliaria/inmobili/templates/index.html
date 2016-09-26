@@ -39,11 +39,7 @@
 
         </style>
 
-        <script>
-            function toast(){
-                Materialize.toast({{ message }}, 4000)
-            }
-            
+        <script>            
             $(document).ready(function() {
                 $('.slider').slider({
                     full_width: true
@@ -55,7 +51,7 @@
             });
         </script>
     </head>
-    <body>
+    <body style="background-color: black;">
         <div id="nav">
             {% block nav %}
             {% endblock %}

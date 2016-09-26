@@ -6,7 +6,6 @@ from django.views import generic
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
-from django.shortcuts import get_object_or_404, render
 from django.views.generic import TemplateView
 from django.http import HttpResponseRedirect, HttpResponse
 import time
@@ -14,16 +13,11 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib import auth
 from calendar import month_name
-from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404, render_to_response
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.core.context_processors import csrf
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
-from django.core.urlresolvers import reverse
-from django.template import RequestContext
-
-
 
 
 
@@ -34,7 +28,7 @@ def index(request):
         return render_to_response("nav.html", context)
     else:
         return render_to_response("mapa.html", context)
-    
+
 def mapa(request):
     context = RequestContext(request)
     return render_to_response("mapa.html", context)
@@ -67,10 +61,13 @@ def register(request):
             user.first_name = name
             user.last_name = lname
             user.save()
-            return redirect ('/')
-        else:
-            messages.add_message(request, messages.INFO, 'The Passwords doesnt match')
-            return redirect ('/')
+            userant = authenticate(username=userw, password=passw1)
+            if userant is not None:
+                login(request, userant)
+                return redirect ('/')
+            else:
+                messages.add_message(request, messages.INFO, 'The Passwords doesnt match')
+                return redirect ('/')
 
 def logout(request):
     context = RequestContext(request)

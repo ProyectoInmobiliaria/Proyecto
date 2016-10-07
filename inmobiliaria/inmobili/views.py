@@ -3,6 +3,7 @@ from django.template import loader
 from django.template import RequestContext
 from django.http import Http404
 from django.views import generic
+from inmobili.models import *
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
@@ -31,6 +32,7 @@ def index(request):
 
 def mapa(request):
     context = RequestContext(request)
+    context['casas'] = Casa.objects.all()
     return render_to_response("mapa.html", context)
 
 def log(request):
@@ -44,7 +46,8 @@ def log(request):
             login(request, user)
             return redirect ('/')
         else:
-            message = 'Your message'
+            messages.add_message(request, messages.INFO, 'The Passwords doesnt match')
+            return redirect ('/')
 
 def register(request):
     context = RequestContext(request)
@@ -73,8 +76,6 @@ def logout(request):
     context = RequestContext(request)
     auth.logout(request)
     return redirect ('/')
-
-
 
 
 

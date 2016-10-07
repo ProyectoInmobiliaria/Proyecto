@@ -128,3 +128,7 @@ http://flickity.metafizzy.co
 .flickity-page-dots .dot.is-selected {
   opacity: 1;
 }
+
+.carousel-cell {
+  margin-right: 0.7%;
+}

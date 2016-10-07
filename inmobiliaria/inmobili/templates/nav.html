@@ -1,14 +1,10 @@
-{% extends "./index.html" %}
-{% block nav %}
-{% if not user.is_anonymous %}
-{% load static %} 
-{% load staticfiles %}
+{% extends "./index.html" %} {% block nav %} {% if not user.is_anonymous %} {% load static %} {% load staticfiles %}
 <!--logged-->
 <style>
-
-    body{
+    body {
         font-family: Roboto-regular;
     }
+    
     .ivo {
         max-width: 4%;
         margin-top: 0.5%;
@@ -16,7 +12,7 @@
         margin-left: 1%;
     }       
     
-    .profpic{
+    .profpic {
         max-width: 15%;
     }
     
@@ -27,11 +23,12 @@
  
         
 </style>
+
 <nav>
     <div class="nav-wrapper">
-<!--        <img src="{% static '1.png' %}"  class="circle activator ivo hide-on-med-and-down" id="userinfo" href="#infous"  style="cursor:pointer;">-->
+        <!--        <img src="{% static '1.png' %}"  class="circle activator ivo hide-on-med-and-down" id="userinfo" href="#infous"  style="cursor:pointer;">-->
         <div class="button-collapsed" data-activates="slide-out" id="leftspace"><a class="brand-logo" style="cursor:pointer;">{{user}}</a></div>
-        
+
         <a href="#" data-activates="slide-out" class="button-collapsed hide-on-large-only"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
             <li><a class="modal-trigger" id="rolfi" href="#rolfix"><i class="material-icons">new_releases</i></a></li>
@@ -43,76 +40,46 @@
         <ul id="mobile-demo" class="side-nav" style="font-family:Roboto-regular;">
 
         </ul>
-    </div>    
+    </div>
 </nav>
 
 <ul id="slide-out" class="side-nav">
-            <li><div class="userView">
-                <img class="background" src="http://cdn.wallpapersafari.com/21/79/5dNwjl.jpg">
-                <a href="#"><img class="circle" src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Rubio_Circle.png"></a>
-                <a href="#"><span class="white-text name">John Doe</span></a>
-                <a href="#"><span class="white-text email">jdandturk@gmail.com</span></a>
-                </div></li>
-            <li><a href="#"><i class="material-icons">cloud</i>First Link With Icon</a></li>
-            <li><a href="#">Second Link</a></li>
-            <li><div class="divider"></div></li>
-            <li><a class="subheader">Subheader</a></li>
-            <li><a class="waves-effect" href="#">Third Link With Waves</a></li>
-            <div class="collapsible-body">
-              <ul>
-                <li><a href="#!">First</a></li>
-                <li><a href="#!">Second</a></li>
-                <li><a href="#!">Third</a></li>
-                <li><a href="#!">Fourth</a></li>
-              </ul>
-            </div>
-        </ul>
-
-
- <!-- Informacion del usuario -->
-<!--
-  <div id="infous" class="modal">
-    <div class="modal-content">
-        <div class="center">
-<img src="http://whitenessproject.org/img/09-rob.jpg" alt="profile image" class="circle responsive-imgMod profpic activator">
-            </div>
-        <br><br>
+    <li>
+        <div class="userView">
+            <img class="background" src="http://cdn.wallpapersafari.com/21/79/5dNwjl.jpg">
+            <a href="#"><img class="circle" src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Rubio_Circle.png"></a>
+            <a href="#"><span class="white-text name">John Doe</span></a>
+            <a href="#"><span class="white-text email">jdandturk@gmail.com</span></a>
+        </div>
+    </li>
+    <li><a href="#"><i class="material-icons">cloud</i>First Link With Icon</a></li>
+    <li><a href="#">Second Link</a></li>
+    <li>
         <div class="divider"></div>
-                    <div class="card-content">
-                        <br><br>
-                        <div class="col s12 m6 l6 hide-on-small-only largo"><i class="material-icons red-text">person</i>Nombre nombre nombre</div>
-                        <div class="col s12 m6 l6 hide-on-small-only right-align largo">Nombre nombre nombre<i class="material-icons red-text">location_on</i></div>
-                        <div class="col s12 m6 l6 hide-on-small-only largo"><i class="material-icons red-text">local_phone</i>Nombre nombre nombre</div>
-                        <div class="col s12 m6 l6 hide-on-small-only right-align largo">Nombre nombre nombre<i class="material-icons red-text">local_post_office</i></div>
-                        
-                        
-                        <div class="col s12 hide-on-med-and-up largo"><i class="material-icons red-text">person</i>Nombre nombre nombre</div>
-                        <div class="col s12 hide-on-med-and-up largo"><i class="material-icons red-text">location_on</i>Nombre nombre nombre</div>
-                        <div class="col s12 hide-on-med-and-up largo"><i class="material-icons red-text">local_phone</i>Nombre nombre nombre</div>
-                        <div class="col s12 hide-on-med-and-up largo"><i class="material-icons red-text">local_post_office</i>Nombre nombre nombre</div>         
-                        <br><br>
-                    </div>        
+    </li>
+    <li><a class="subheader">Subheader</a></li>
+    <li><a class="waves-effect" href="#">Third Link With Waves</a></li>
+    <div class="collapsible-body">
+        <ul>
+            <li><a href="#!">First</a></li>
+            <li><a href="#!">Second</a></li>
+            <li><a href="#!">Third</a></li>
+            <li><a href="#!">Fourth</a></li>
+        </ul>
     </div>
-  </div>
-          
--->
+</ul>
 
-<nav>
-
-  </nav>
-
-
-<!-- Modal Structure -->
+<!-- Notificaciones -->
 
 <div id="rolfix" class="modal bottom-sheet">
     <div class="modal-content">
-      <h4>Modal Header</h4>
-      <p>A bunch of text</p>
+        <h4>Modal Header</h4>
+        <p>A bunch of text</p>
     </div>
     <div class="modal-footer">
-      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
     </div>
-  </div>
+</div>
 
 
 {% else %}
@@ -125,7 +92,7 @@
     </div>
 </nav>
 
-        
+
 
 <!-- Modal Structure -->
 
@@ -133,49 +100,50 @@
     <div class="modal-content">
         <div class="col m6">
             <div class="row">
-                <div class="col s12" >
+                <div class="col s12">
                     <ul class="tabs" style="background-color:#FAFAFA;">
                         <li class="tab col s3"><a href="#inbox">Ingreso</a></li>
                         <li class="tab col s3"><a href="#unread">Registro</a></li>
                         <li class="tab col s3"><a href="#sent">Contraseña</a></li>
                     </ul>
                 </div>
-                </div>
-                <div id="inbox" class="col s12">
+            </div>
+            <div id="inbox" class="col s12">
 
-                    <!-- Login -->
+                <!-- Login -->
 
-                    <div class="row">
-                        <form class="col s12" action="{% url 'index:log' %}" method="POST">
-                            {% csrf_token %}
-                            <div class="row"><br>
-                                <div class="input-field col s12">
-                                    <input id="username" name="username" type="text" class="validate">
-                                    <label for="user">Nombre de usuario</label>
-                                </div>
+                <div class="row">
+                    <form class="col s12" action="{% url 'index:log' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="row">
+                            <br>
+                            <div class="input-field col s12">
+                                <input id="username" name="username" type="text" class="validate">
+                                <label for="user">Nombre de usuario</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="password" name="password" type="password" class="validate">
+                                <label for="pass">Contraseña</label>
                             </div>
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <input id="password" name="password" type="password" class="validate">
-                                    <label for="pass">Contraseña</label>
-                                </div>
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <button class="btn waves-effect waves-light" type="submit" name="action" style="width: 100%;">Login</button>
-                                    </div>
+                                    <button class="btn waves-effect waves-light" type="submit" name="action" style="width: 100%;">Login</button>
                                 </div>
                             </div>
-                            <div class="input-field col s6 m6 l6" style="margin-top:0px;">
-                                <p class="margin medium-small"><a href="#">Reg&iacute;strate</a></p>
-                            </div>
-                            <div class="input-field col s6 m6 l6">
-                                <p class="margin right-align medium-small"><a href="#">&iquest;Olvidaste tu contrase&ntilde;a?</a></p>
-                            </div>
-                        </form>
-                    </div>
-
+                        </div>
+                        <div class="input-field col s6 m6 l6" style="margin-top:0px;">
+                            <p class="margin medium-small"><a href="#">Reg&iacute;strate</a></p>
+                        </div>
+                        <div class="input-field col s6 m6 l6">
+                            <p class="margin right-align medium-small"><a href="#">&iquest;Olvidaste tu contrase&ntilde;a?</a></p>
+                        </div>
+                    </form>
                 </div>
-            
+
+            </div>
+
 
             <!-- Registro -->
 
@@ -183,7 +151,8 @@
                 <div class="row">
                     <form class="col s12" action="{% url 'index:register' %}" method="POST">
                         {% csrf_token %}
-                        <div class="row"><br>
+                        <div class="row">
+                            <br>
                             <div class="input-field col s6">
                                 <input id="regfirst" type="text" class="validate" name="regfirst">
                                 <label for="nombre">Nombre</label>
@@ -210,24 +179,25 @@
                                 <input id="regpass" type="password" class="validate" name="regpass">
                                 <label for="pass">Contrase&ntilde;a</label>
                             </div>
-                        
-                        <div class="row">
-                            <div class="input-field col s6">
-                                <input id="regpass2" type="password" class="validate" name="regpass2">
-                                <label for="pass">Repetir contrase&ntilde;a</label>
+
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input id="regpass2" type="password" class="validate" name="regpass2">
+                                    <label for="pass">Repetir contrase&ntilde;a</label>
+                                </div>
                             </div>
-                        </div></div>
+                        </div>
                         <div class="input-field col s12 m6 l12">
-    <select class="icons">
-      <option value="" disabled selected>Elige tu icono</option>
-      <option value="" data-icon="{% static '1.png' %}" class="circle">Solo le pido a Dios</option>
-      <option value="" data-icon="{% static '2.png' %}" class="circle">Que se mueran todos los bosteros</option>
-      <option value="" data-icon="{% static '3.png' %}" class="circle">Que se mueran para siempre</option>
-      <option value="" data-icon="{% static '4.png' %}" class="circle">Para toda la alegria de la gente</option>
-      <option value="" data-icon="{% static '5.png' %}" class="circle">♪ ♫ ♩ ♬</option>        
-    </select>
-    <label>Avatar</label>
-  </div>
+                            <select class="icons">
+                                <option value="" disabled selected>Elige tu icono</option>
+                                <option value="" data-icon="{% static '1.png' %}" class="circle">Solo le pido a Dios</option>
+                                <option value="" data-icon="{% static '2.png' %}" class="circle">Que se mueran todos los bosteros</option>
+                                <option value="" data-icon="{% static '3.png' %}" class="circle">Que se mueran para siempre</option>
+                                <option value="" data-icon="{% static '4.png' %}" class="circle">Para toda la alegria de la gente</option>
+                                <option value="" data-icon="{% static '5.png' %}" class="circle">♪ ♫ ♩ ♬</option>
+                            </select>
+                            <label>Avatar</label>
+                        </div>
                         <div class="row">
                             <div class="input-field col s12">
                                 <button class="btn waves-effect waves-light" type="submit" name="action" style="width: 100%;">Reg&iacute;strate</button>
@@ -236,14 +206,15 @@
                     </form>
                 </div>
             </div>
-            
+
             <!-- Recuperar contraseña -->
-            
+
             <div id="sent" class="col s12">
                 <div id="unread" class="col s12">
                     <div class="row">
                         <form class="col s12">
-                            <div class="row"><br>
+                            <div class="row">
+                                <br>
                                 <div class="input-field col s12">
                                     <input id="email" type="email" class="validate">
                                     <label for="email">Correo electr&oacute;nico</label>
@@ -262,5 +233,4 @@
     </div>
 </div>
 
-{% endif %}
-{% endblock %}
+{% endif %} {% endblock %}

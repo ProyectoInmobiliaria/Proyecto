@@ -12,8 +12,8 @@ class Casa(models.Model):
         ("1", 'Alquiler'),
     )
     Operation = models.CharField(max_length=6,
-                                choices=CATEGORIAS,
-                                default="0")
+                                 choices=CATEGORIAS,
+                                 default="0")
     location = models.CharField(max_length=60)
     district = models.CharField(max_length=60)
     address = models.CharField(max_length=60)
@@ -25,6 +25,11 @@ class Casa(models.Model):
     condition = models.CharField(max_length=60)
     heating = models.CharField(max_length=60)
     description = models.TextField()
-    
+
     def __unicode__(self):
         return self.address
+
+
+    class UserProfile(models.Model):
+        user   = models.OneToOneField(User)
+        avatar = models.ImageField()

@@ -46,19 +46,18 @@
 <ul id="slide-out" class="side-nav">
     <li>
         <div class="userView">
-            <img class="background" src="http://cdn.wallpapersafari.com/21/79/5dNwjl.jpg">
-            <a href="#"><img class="circle" src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Rubio_Circle.png"></a>
-            <a href="#"><span class="white-text name">John Doe</span></a>
-            <a href="#"><span class="white-text email">jdandturk@gmail.com</span></a>
+            <img class="background" src="{% static 'perfo.png' %}">
+            <a href="#"><img class="circle" src="{% static '1.png' %}"></a>
+            <a href="#"><span class="white-text name">{{user.first_name}}</span></a>
+            <a href="#"><span class="white-text email">{{user.email}}</span></a>
         </div>
     </li>
-    <li><a href="#"><i class="material-icons">cloud</i>First Link With Icon</a></li>
-    <li><a href="#">Second Link</a></li>
+    <li><a href="#"><i class="material-icons">cloud</i>Despues veo los iconos </a></li>
+    <li><a href="#"><i class="material-icons">notifications</i>Notificaciones</a></li>
     <li>
         <div class="divider"></div>
     </li>
-    <li><a class="subheader">Subheader</a></li>
-    <li><a class="waves-effect" href="#">Third Link With Waves</a></li>
+    <li><a class="waves-effect" href="{% url 'index:logout' %}"><i class="material-icons">reply</i>Cerrar sesi&oacute;n</a></li>
     <div class="collapsible-body">
         <ul>
             <li><a href="#!">First</a></li>
@@ -74,11 +73,42 @@
 <div id="rolfix" class="modal bottom-sheet">
     <div class="modal-content">
         <h4>Modal Header</h4>
-        <p>A bunch of text</p>
     </div>
-    <div class="modal-footer">
-        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-    </div>
+  <ul class="collection">
+    <li class="collection-item avatar">
+      <i class="material-icons circle blue">vpn_key</i>
+      <span class="title">Title</span>
+      <p>First Line <br>
+         Second Line
+      </p>
+      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+    </li>
+      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+    <li class="collection-item avatar">
+      <i class="material-icons circle">folder</i>
+      <span class="title">Title</span>
+      <p>First Line <br>
+         Second Line
+      </p>
+      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+    </li>
+    <li class="collection-item avatar">
+      <i class="material-icons circle green">insert_chart</i>
+      <span class="title">Title</span>
+      <p>First Line <br>
+         Second Line
+      </p>
+      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+    </li>
+    <li class="collection-item avatar">
+      <i class="material-icons circle red">play_arrow</i>
+      <span class="title">Title</span>
+      <p>First Line <br>
+         Second Line
+      </p>
+      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+    </li>
+  </ul>
 </div>
 
 

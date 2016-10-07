@@ -12,8 +12,10 @@
     <script src="{% static 'js/flickity.pkgd.min.js' %}"></script>
     <style>
         body {
-            background-color: #EEEEEE;
+            background-color: #F5F5F5;
             font-family: Roboto-light;
+            background-image: url("{% static 'fondo.png' %}");
+            background-repeat: no-repeat;
         }
         
         .gallery {
@@ -80,17 +82,17 @@
             });
         </script>
     </head>
-    <body>
+    <body >
         <div id="nav">
             {% block nav %}
             {% endblock %}
         </div>
-    <div class="section no-pad-bot" id="index-banner">
-        <div class="container">
+    <div class="section no-pad-bot" id="index-banner" style="background-image:#FFFFFF;">
+        <div class="container" style="background-image:#FFFFFF;">
             <br><br><br><br><br><br><br><br><br><br><br><br>
-            <h1 class="header center" style="color:#000; font-family:Roboto-regular;">Encontrá tu casa</h1>
+            <h1 class="header center" style="color:#FFF; font-family:Roboto-regular;">Encontrá tu casa</h1>
             <div class="row center">
-                <h5 class="header col s12 light ">A modern responsive front-end framework based on Material Design</h5>
+                <h5 class="header col s12 light white-text">A modern responsive front-end framework based on Material Design</h5>
             </div>
             <div class="row center">
                 <a href="{% url 'index:mapa' %}" id="download-button" class="btn-large waves-effect waves-light" style="background-color:#009688">Ir al mapa</a>
@@ -101,7 +103,6 @@
             <br>
         </div>
     </div>
-
 
     <div class="row grey lighten-2">
         <div class="col s12 ">

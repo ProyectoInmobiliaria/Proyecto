@@ -1,10 +1,14 @@
 # -*- encoding: utf-8 -*-
 from __future__ import unicode_literals
 from django.db import models
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib import admin
+from django.core.files.storage import FileSystemStorage
 
 # Create your models here.
+FS_USER_AVATARS= FileSystemStorage(location=settings.MEDIA_ROOT + "/user-avatars/")
+
 
 class Casa(models.Model):
     CATEGORIAS = (
@@ -25,11 +29,13 @@ class Casa(models.Model):
     condition = models.CharField(max_length=60)
     heating = models.CharField(max_length=60)
     description = models.TextField()
+    price =  models.CharField(max_length=20)
+    img_frente = models.ImageField(upload_to='', null=True)
 
     def __unicode__(self):
         return self.address
 
 
-    class UserProfile(models.Model):
-        user   = models.OneToOneField(User)
-        avatar = models.ImageField()
+class Perfil(models.Model):
+    user   = models.OneToOneField(User, on_delete=models.CASCADE)
+    avatar = models.ImageField("Avatar", storage=FS_USER_AVATARS, null=True)

@@ -25,6 +25,18 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage
 def index(request):
     context = RequestContext(request)
     user = request.user
+    casas = Casa.objects.all().order_by("address")[0:10]
+    paginator = Paginator(casas, 5)
+    try: page = int(request.GET.get("page", '5'))
+    except ValueError: page = 1
+
+    try:
+        casas = paginator.page(page)
+    except (InvalidPage, EmptyPage):
+        casas = paginator.page(paginator.num_pages)
+
+    context.update(dict(casas=casas, user=request.user,
+                        casa_list=casas.object_list))
     if user.is_authenticated:
         return render_to_response("nav.html", context)
     else:

@@ -94,7 +94,8 @@ def logout(request):
     auth.logout(request)
     return redirect ('/')
 
-
+def bubblecontent(request, id_post):
+    context = RequestContext(request)
 
 
 

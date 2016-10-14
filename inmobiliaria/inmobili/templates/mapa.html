@@ -5,7 +5,7 @@
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <meta charset="utf-8">
         <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700|Open+Sans+Condensed:700,300,300italic|Open+Sans:400,300italic,400italic,600,600italic,700,700italic,800,800italic|PT+Sans:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
-
+        <script type="text/javascript" src="{% static 'js/infobubble.js' %}"></script>
         <script src="{% static 'js/jquery.js' %}"></script>
         <title>Mapa</title>
         <style>
@@ -23,86 +23,31 @@
             #map img {
                 max-width: none !important;
             }
-            .gm-style-iw {
-                width: 350px !important;
-                top: 15px !important;
-                left: 0px !important;
-                background-color: #fff;
-                box-shadow: 0 1px 6px rgba(178, 178, 178, 0.6);
-                border: 1px solid rgba(72, 181, 233, 0.6);
-                border-radius: 2px 2px 10px 10px;
-            }
-            #iw-container {
-                margin-bottom: 10px;
-            }
-            #iw-container .iw-title {
-                font-family: 'Open Sans Condensed', sans-serif;
-                font-size: 22px;
-                font-weight: 400;
-                padding: 10px;
-                background-color: #48b5e9;
-                color: white;
-                margin: 0;
-                border-radius: 2px 2px 0 0;
-            }
-            #iw-container .iw-content {
-                font-size: 13px;
-                line-height: 18px;
-                font-weight: 400;
-                margin-right: 1px;
-                padding: 15px 5px 20px 15px;
-                max-height: 140px;
-                overflow-y: auto;
-                overflow-x: hidden;
-            }
-            .iw-content img {
-                float: right;
-                margin: 0 5px 5px 10px;
-            }
-            .iw-subTitle {
+
+            .phoneytext {
+                text-shadow: 0 -1px 0 #000;
+                color: #fff;
+                font-family: Helvetica Neue, Helvetica, arial;
                 font-size: 16px;
-                font-weight: 700;
-                padding: 5px 0;
-            }
-            .iw-bottom-gradient {
-                position: absolute;
-                width: 326px;
-                height: 25px;
-                bottom: 10px;
-                right: 18px;
-                background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
-                background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
-                background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
-                background: -ms-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+                line-height: 25px;
+                padding: 4px 45px 4px 15px;
+                font-weight: bold;
+                background: url(../images/arrow.png) 95% 50% no-repeat;
             }
         </style>
     </head>
     <body>
-        {% for casa in casas %}
-        <input class="address" type="hidden" value="{{casa.address}}">
-        {% endfor %}
         <div id="map"></div>
         <script>
 
             var locations = [];
-            var address = [];
             var marker;
             var i;
-            var infowindow;
+            var infoBubble;
 
-            var contentString = '<div id="iw-container">' +
-                '<div class="iw-title">Este es el titulo</div>' +
-                '<div class="iw-content">' +
-                '<div class="iw-subTitle">{% autoescape on %} {{ casas.address }} {% endautoescape %}</div>' +
-                '<img src="http://maps.marnoto.com/en/5wayscustomizeinfowindow/images/vistalegre.jpg" alt="Porcelain Factory of Vista Alegre" height="115" width="83">' +
-                '<p>Founded in 1824, the Porcelain Factory of Vista Alegre was the first industrial unit dedicated to porcelain production in Portugal. For the foundation and success of this risky industrial development was crucial the spirit of persistence of its founder, José Ferreira Pinto Basto. Leading figure in Portuguese society of the nineteenth century farm owner, daring dealer, wisely incorporated the liberal ideas of the century, having become "the first example of free enterprise" in Portugal.</p>' +
-                '<div class="iw-subTitle">$$$$</div>' +
-                '<p>Dario Benedetto<br>3830-292 Ílhavo - Portugal<br>'+
-                '<br>Phone. +351 234 320 600<br>#ElQLasHaceLasPaga<br>www: www.myvistaalegre.com</p>'+
-                '</div>' +
-                '<div class="iw-bottom-gradient"></div>' +
-                '</div>';
-
+           
+            
+                
             function initialize() {
                 var mapOptions = {
                     center: {lat: -31.4 , lng: -64.1833},
@@ -113,87 +58,56 @@
                 window.map1 = new google.maps.Map(document.getElementById("map"),mapOptions);
                 var geocoder = new google.maps.Geocoder();
 
-                address = document.getElementsByClassName('address');
 
                 function putMarker(){
-                    for (i = 0; i < address.length; ++i) {
-                        geocoder.geocode({ 'address': address[i].value}, function(results, status) {
+                     {% for casa in casas %}             
+                        geocoder.geocode({ 'address': '{{casa.address}}'}, function(results, status) {
                             if (status == 'OK') {
                                 //locations.push(results[0].geometry.location);
                                 var markerOptions = { position: results[0].geometry.location }
                                 marker = new google.maps.Marker(markerOptions);
                                 marker.setMap(map1);
 
-                                var infowindow = new google.maps.InfoWindow({
-                                    content: contentString
+                                infoBubble = new InfoBubble({
+                                    content: '<a href="#"><img src="/static/1.png"></a> <p style="margin-top: -60px; margin-left: 70px;">{{casa}}</p>  <p style="margin-left: 70px;">price: {{casa.price}}</p>',
+                                    position: new google.maps.LatLng(-35, 151),
+                                    shadowStyle: 1,
+                                    padding: 0,
+                                    backgroundColor: 'rgb(211, 211, 211)',
+                                    borderRadius: 4,
+                                    arrowSize: 10,
+                                    borderWidth: 1,
+                                    borderColor: '#2c2c2c',
+                                    disableAutoPan: true,
+                                    hideCloseButton: true,
+                                    arrowPosition: 30,
+                                    backgroundClassName: 'phoney',
+                                    arrowStyle: 2
                                 });
-
-                                google.maps.event.addListener(marker,'click', (function(marker, infowindow){
-                                    return function() {
-                                        infowindow.close();
-                                        infowindow.open(map1,marker);
-                                    };
-                                })(marker,infowindow));
-
-                                google.maps.event.addListener(map1, 'click', (function(map1, infowindow) {
-                                    return function() {
-                                        infowindow.close();
-                                    };
-                                })(map1, infowindow));
-
-
-                                google.maps.event.addListener(infowindow, 'domready', function() {
-
-                                    // Reference to the DIV that wraps the bottom of infowindow
-                                    var iwOuter = $('.gm-style-iw');
-
-                                    /* Since this div is in a position prior to .gm-div style-iw.
-                                     * We use jQuery and create a iwBackground variable,
-                                     * and took advantage of the existing reference .gm-style-iw for the previous div with .prev().
-                                    */
-                                    var iwBackground = iwOuter.prev();
-
-                                    // Removes background shadow DIV
-                                    iwBackground.children(':nth-child(2)').css({'display' : 'none'});
-
-                                    // Removes white background DIV
-                                    iwBackground.children(':nth-child(4)').css({'display' : 'none'});
-
-                                    // Moves the infowindow 115px to the right.
-                                    iwOuter.parent().parent().css({left: '115px'});
-
-                                    // Moves the shadow of the arrow 76px to the left margin.
-                                    iwBackground.children(':nth-child(1)').attr('style', function(i,s){ return s + 'left: 76px !important;'});
-
-                                    // Moves the arrow 76px to the left margin.
-                                    iwBackground.children(':nth-child(3)').attr('style', function(i,s){ return s + 'left: 76px !important;'});
-
-                                    // Changes the desired tail shadow color.
-                                    iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(72, 181, 233, 0.6) 0px 1px 6px', 'z-index' : '1'});
-
-                                    // Reference to the div that groups the close button elements.
-                                    var iwCloseBtn = iwOuter.next();
-
-                                    // Apply the desired effect to the close button
-                                    iwCloseBtn.css({opacity: '1', right: '38px', top: '3px', border: '7px solid #48b5e9', 'border-radius': '13px', 'box-shadow': '0 0 5px #3990B9'});
-
-                                    // If the content of infowindow not exceed the set maximum height, then the gradient is removed.
-                                    if($('.iw-content').height() < 140){
-                                        $('.iw-bottom-gradient').css({display: 'none'});
-                                    }
-
-                                    // The API automatically applies 0.7 opacity to the button after the mouseout event. This function reverses this event to the desired value.
-                                    iwCloseBtn.mouseout(function(){
-                                        $(this).css({opacity: '1'});
+                                addListenerToMarker(marker, infoBubble);
+                                function addListenerToMarker(marker, infoBubble){
+                                    google.maps.event.addListener(marker, 'click', function() {
+                                        google.maps.event.addListenerOnce(infoBubble, 'domready', function(){ 
+                                        });
+                                        infoBubble.open(map1, marker); 
                                     });
-                                });
+                                    google.maps.event.addListener(map1, 'click', function() {
+                                        google.maps.event.addListenerOnce(infoBubble, 'domready', function(){ 
+                                        });
+                                        infoBubble.close(); 
+                                    });
+
+                                }
+
 
                             } else {
                                 alert("Geocoding no tuvo éxito debido a: " + status);
                             }
                         });
+                    
+                    {% endfor %}
                     }
-                }
+                
                 putMarker();
             }
 

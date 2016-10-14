@@ -38,4 +38,4 @@ class Casa(models.Model):
 
 class Perfil(models.Model):
     user   = models.OneToOneField(User, on_delete=models.CASCADE)
-    avatar = models.ImageField("Avatar", storage=FS_USER_AVATARS, null=True)
+    avatar = models.CharField(max_length=256, default="")

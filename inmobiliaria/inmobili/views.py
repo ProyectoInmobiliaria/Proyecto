@@ -19,7 +19,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.core.context_processors import csrf
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
-
+from .models import Perfil
 
 
 def index(request):
@@ -61,6 +61,9 @@ def log(request):
             messages.add_message(request, messages.INFO, 'The Passwords doesnt match')
             return redirect ('/')
 
+   
+        
+        
 def register(request):
     context = RequestContext(request)
     if 'POST' in request.method:
@@ -74,9 +77,11 @@ def register(request):
         if passw1 == passw2:
             user = User.objects.create_user(userw, email1, passw1)
             user.first_name = name
-            user.last_name = lname
+            user.last_name = lname            
             user.save()
             userant = authenticate(username=userw, password=passw1)
+            profile = Perfil(user=user, avatar=request.POST['avatar'])
+            profile.save()
             if userant is not None:
                 login(request, userant)
                 return redirect ('/')

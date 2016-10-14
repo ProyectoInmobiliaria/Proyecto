@@ -39,3 +39,12 @@ class Casa(models.Model):
 class Perfil(models.Model):
     user   = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = models.CharField(max_length=256, default="")
+    
+    
+class Comment(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+    author = models.CharField(max_length=60)
+    body = models.CharField(max_length=600)
+    casa = models.ForeignKey(Casa, null=True)
+    def __unicode__(self):
+        return self.body

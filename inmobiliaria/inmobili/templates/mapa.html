@@ -9,6 +9,8 @@
         <script src="{% static 'js/jquery.js' %}"></script>
         <title>Mapa</title>
         <style>
+            
+            
             html, body {
                 height: 100%;
                 margin: 0;
@@ -69,19 +71,19 @@
                                 marker.setMap(map1);
 
                                 infoBubble = new InfoBubble({
-                                    content: '<a href="#"><img src="/static/1.png"></a> <p style="margin-top: -60px; margin-left: 70px;">{{casa}}</p>  <p style="margin-left: 70px;">price: {{casa.price}}</p>',
+                                    content: '<a href="#"><img src="/static/1.png" style="margin-top: 15px; margin-left: 5px;"></a> <p style="margin-top: -60px; margin-left: 90px;">{{casa}}</p>  <p style="margin-left: 90px;">price: {{casa.price}}</p> <a href="{% url "index:casa" casa.id %}" style="margin-left: 290px;">Show more</a>',
                                     position: new google.maps.LatLng(-35, 151),
                                     shadowStyle: 1,
                                     padding: 0,
                                     backgroundColor: 'rgb(211, 211, 211)',
                                     borderRadius: 4,
                                     arrowSize: 10,
-                                    borderWidth: 1,
-                                    borderColor: '#2c2c2c',
+                                    border: null,
                                     disableAutoPan: true,
                                     hideCloseButton: true,
                                     arrowPosition: 30,
                                     backgroundClassName: 'phoney',
+                                    height: 100,
                                     arrowStyle: 2
                                 });
                                 addListenerToMarker(marker, infoBubble);

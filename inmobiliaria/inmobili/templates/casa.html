@@ -1,0 +1,21 @@
+{{casa.address}}
+
+
+
+<div id="comentarios">
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" type="text/javascript"></script>
+<script>
+    
+    console.log("entro")
+    
+    $.ajax({
+        url: "{% url 'index:comentarios' casa.id %}",
+    }).success(function(data) {
+        $( "#comentarios" ).html(data);
+    });
+
+
+</script>

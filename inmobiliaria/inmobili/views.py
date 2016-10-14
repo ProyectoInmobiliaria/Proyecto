@@ -25,7 +25,7 @@ from .models import Perfil
 def index(request):
     context = RequestContext(request)
     user = request.user
-    casas = Casa.objects.all().order_by("address")[0:10]
+    casas = Casa.objects.all().order_by("id")[0:10]
     paginator = Paginator(casas, 5)
     try: page = int(request.GET.get("page", '5'))
     except ValueError: page = 1
@@ -94,8 +94,35 @@ def logout(request):
     auth.logout(request)
     return redirect ('/')
 
-def bubblecontent(request, id_post):
+def casa(request, id_casa):
     context = RequestContext(request)
+    casa = Casa.objects.get(pk=id_casa)
+    context.update(dict(casa=casa, user=request.user))
+    context.update(csrf(request))
+    return render_to_response("casa.html", context)
 
+def comentarios(request, id_casa):
+    context = RequestContext(request)
+    casa = Casa.objects.get(pk=id_casa)
+    context['comments'] = Comment.objects.filter(casa=casa)
+    context.update(dict(casa=casa, user=request.user))
+    context.update(csrf(request))
+    return render_to_response("coments.html", context)
+
+def comment(request, id_casa):
+    context = RequestContext(request)
+    casa = Casa.objects.get(pk=id_casa)
+    if 'POST' in request.method:
+        author = request.user
+        content = request.POST['comentario']
+        comentario = Comment(author=author, 
+                             body=content,
+                             casa=casa)
+        comentario.save()
+    comments = Comment.objects.filter(casa=casa)
+    context.update(dict(user=request.user, comments=comments))
+    context.update(csrf(request))
+    return redirect ('/')
+    return render_to_response('coments.html',context)
 
 

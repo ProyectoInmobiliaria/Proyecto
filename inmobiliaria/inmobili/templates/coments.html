@@ -1,0 +1,41 @@
+<div style="overflow-y: scroll;
+            margin-left: 11px;
+            height: 420px;
+            margin-top: -5px;">
+    {% for comment in comments %}
+    <div class="dentro" id="pri" style="height: 60px;
+                                        margin-top: 5px;
+                                        padding: 10px 15px;
+                                        width: 289px;
+                                        margin-left: -8px;">
+        {{ comment.author }} says: {{ comment.body|linebreaks }}
+    </div>
+    {% endfor %}
+</div>
+
+<div style="margin-top: 430px;
+            height: 102px;
+            width: 320px;">
+    <div id="addc" style="margin-top: 0px;">Mete un comentario</div>
+    <!-- Comment form  -->
+    <form action="{% url 'index:comment' casa.id %}" method="POST">
+
+        {% csrf_token %}
+        <div class="input-group" style="margin-top: 30px;
+                                        margin-left: 110px;">
+            <textarea class="form-control" placeholder="Contenido" name='comentario' aria-describedby="basic-addon1" style="height: 60px;
+                                                                                                                            width: 200px;"></textarea>
+        </div>
+        <div id="submit" style="margin-top: 45px;"><input type="submit" value="Submit" style="background-color: #26A69A;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            text-align: center;
+            width: 80px;
+            height: 35px;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 13px;"></div>
+
+    </form>
+</div>

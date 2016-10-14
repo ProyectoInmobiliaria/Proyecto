@@ -4,70 +4,6 @@
 <html>
 
     <head>
-<<<<<<< HEAD
-        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}" media="screen,projection" />
-        <link rel="stylesheet" href="{% static 'css/flickity.css' %}" media="screen">
-        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
-        <script src="{% static 'js/flickity.pkgd.min.js' %}"></script>
-        <style>
-            body {
-                background-color: #EEEEEE;
-                font-family: Roboto-light;
-            }
-
-            .gallery {
-                background: #FAFAFA;
-            }
-
-            .gallery-cell {
-                width: 66%;
-                height: 30em;
-                background: #8C8;
-                counter-increment: gallery-cell;
-            }
-
-            .gallery-cell:before {
-                display: block;
-                text-align: center;
-                content: counter(gallery-cell);
-                line-height: 400px;
-                font-size: 80px;
-                color: #ffffff;
-            }
-
-            .img-wrap {
-                height: 384px;
-                overflow: hidden;
-                position: relative;
-                width: 600px;
-            }
-
-            .img-overlay {
-                background-color: #000;
-                bottom: 0;
-                color: #fff;
-                opacity: 0;
-                filter: alpha(opacity=0);
-                position: absolute;
-                width: 100%;
-            }
-
-            .img-overlay h4,
-            .img-overlay p {
-                padding: 0 1%;
-            }
-
-            .img-wrap:hover .img-overlay {
-                opacity: 0.75;
-                filter: alpha(opacity=75);
-                transition: opacity 0.25s;
-                -moz-transition: opacity 0.25s;
-                -webkit-transition: opacity 0.25s;
-            }
-        </style>
-=======
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}" media="screen,projection" />
     <link rel="stylesheet" href="{% static 'css/flickity.css' %}" media="screen">
@@ -79,7 +15,7 @@
             background-color: #F5F5F5;
             font-family: Roboto-light;
             background-image: url("{% static 'fondo.png' %}");
-            background-repeat: no-repeat;
+            background-repeat: repeat-x;
         }
         
         .gallery {
@@ -132,7 +68,6 @@
             -webkit-transition: opacity 0.25s;
         }
     </style>
->>>>>>> f95c20738f48d679fe93aab26633476bb230bf21
 
         <script>            
             $(document).ready(function() {
@@ -152,53 +87,22 @@
             {% block nav %}
             {% endblock %}
         </div>
-<<<<<<< HEAD
-        <div class="section no-pad-bot" id="index-banner">
-            <div class="container">
-                <br><br><br><br><br><br><br><br><br><br><br><br>
-                <h1 class="header center" style="color:#000; font-family:Roboto-regular;">Encontrá tu casa</h1>
-                <div class="row center">
-                    <h5 class="header col s12 light ">A modern responsive front-end framework based on Material Design</h5>
-                </div>
-                <div class="row center">
-                    <a href="{% url 'index:mapa' %}" id="download-button" class="btn-large waves-effect waves-light" style="background-color:#009688">Ir al mapa</a>
-                </div>
-                <br>
-                <br>
-                <br>
-                <br>
-=======
     <div class="section no-pad-bot" id="index-banner" style="background-image:#FFFFFF;">
         <div class="container" style="background-image:#FFFFFF;">
-            <br><br><br><br><br><br><br><br><br><br><br><br>
-            <h1 class="header center" style="color:#FFF; font-family:Roboto-regular;">Encontrá tu casa</h1>
+            <div style="padding-top:30%;">
+            <h1 class="header center" style="color:#FFF; font-family:Roboto-regular; font-size:4em;">Encontrá tu casa</h1>
             <div class="row center">
-                <h5 class="header col s12 light white-text">A modern responsive front-end framework based on Material Design</h5>
+                <h5 class="header col s12 light white-text hide-on-small-only">A modern responsive front-end framework based on Material Design</h5>
             </div>
             <div class="row center">
                 <a href="{% url 'index:mapa' %}" id="download-button" class="btn-large waves-effect waves-light" style="background-color:#009688">Ir al mapa</a>
->>>>>>> f95c20738f48d679fe93aab26633476bb230bf21
+            </div>    
             </div>
+            <br>
+            <br>
+            <br>
+            <br>
         </div>
-<<<<<<< HEAD
-
-
-        <div class="row grey lighten-2">
-            <div class="col s12 ">
-                <div class="container grey lighten-2">
-                    <div class="section">
-                        <span id="staggered-test"></span><br>
-                        <h4 class="center" style="color:#757575">Una muy piola introduccion</h4><br>
-
-                        <!--   Icon Section   -->
-                        <div class="row"  style="color:#757575">
-                            <div class="col s12 m4">
-                                <div class="icon-block">
-                                    <h2 class="center light-blue-text"><img src="{% static 'pres1.png' %}"></h2>
-                                    <h5 class="center">Speeds up development</h5>
-                                    <p class="light">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
-                                </div>
-=======
     </div>
 
     <div class="row grey lighten-2">
@@ -215,110 +119,109 @@
                                 <h2 class="center light-blue-text"><img src="{% static 'pres1.png' %}"></h2>
                                 <h5 class="center">Speeds up development</h5>
                                 <p class="light">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
->>>>>>> f95c20738f48d679fe93aab26633476bb230bf21
                             </div>
+                        </div>
 
-                            <div class="col s12 m4">
-                                <div class="icon-block">
-                                    <h2 class="center light-blue-text"><img src="{% static 'pres2.png' %}"></h2>
-                                    <h5 class="center">User Experience Focused</h5>
-                                    <p class="light">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
-                                </div>
+                        <div class="col s12 m4">
+                            <div class="icon-block">
+                                <h2 class="center light-blue-text"><img src="{% static 'pres2.png' %}"></h2>
+                                <h5 class="center">User Experience Focused</h5>
+                                <p class="light">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
                             </div>
+                        </div>
 
-                            <div class="col s12 m4">
-                                <div class="icon-block">
-                                    <h2 class="center light-blue-text"><img src="{% static 'pres3.png' %}"></h2>
-                                    <h5 class="center">Easy to work with</h5>
-                                    <p class="light">We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
-                                </div>
+                        <div class="col s12 m4">
+                            <div class="icon-block">
+                                <h2 class="center light-blue-text"><img src="{% static 'pres3.png' %}"></h2>
+                                <h5 class="center">Easy to work with</h5>
+                                <p class="light">We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>    
+        </div>
+    </div>    
 
-        <br>
-        <h3 class="center" style="color:#424242">Casas destacadas</h3>
-        <p class="light center" style="color:#616161; font-size:16px;">Encontr&aacute; viviendas que podr&iacute;an gustarte y una descripci&oacute;n mas larga porque si no queda mal<p>    
-        <br>
-        <br>    
-
-
+    <br>
+    <h3 class="center" style="color:#424242">Casas destacadas</h3>
+    <p class="light center" style="color:#616161; font-size:16px;">Encontr&aacute; viviendas que podr&iacute;an gustarte y una descripci&oacute;n mas larga porque si no queda mal<p>    
+    <br>
+    <br>    
+        
+        
         <div class="carousel" data-flickity='{ "imagesLoaded": true, "percentPosition": false, "wrapAround": true, "autoPlay": true}'>
-            <div class="carousel-cell img-wrap">
-                <img class="responsive-img" src="http://construyehogar.com/wp-content/uploads/2014/07/Fachada-de-casa-moderna-de-un-nivel.jpg" />
-                <div class="img-overlay">
-                    <h4>Title</h4>
-                    <p>A description of the image</p>
-                </div>
-            </div>
-
-            <div class="carousel-cell img-wrap">
-                <img class="responsive-img" src="http://construyehogar.com/wp-content/uploads/2014/07/Fachada-de-casa-moderna-de-un-nivel.jpg" />
-                <div class="img-overlay ">
-                    <h4>Title</h4>
-                    <p>A description of the image</p>
-                </div>
-            </div>
-
-            <div class="carousel-cell img-wrap">
-                <img class="responsive-img" src="http://construyehogar.com/wp-content/uploads/2014/07/Fachada-de-casa-moderna-de-un-nivel.jpg" />
-                <div class="img-overlay">
-                    <h4>Title</h4>
-                    <p>A description of the image</p>
-                </div>
-            </div>
-
-            <div class="carousel-cell img-wrap">
-                <img class="responsive-img" src="http://construyehogar.com/wp-content/uploads/2014/07/Fachada-de-casa-moderna-de-un-nivel.jpg" />
-                <div class="img-overlay">
-                    <h4>Title</h4>
-                    <p>A description of the image</p>
-                </div>
-            </div>
-
-            <div class="carousel-cell img-wrap">
-                <img class="responsive-img" src="http://construyehogar.com/wp-content/uploads/2014/07/Fachada-de-casa-moderna-de-un-nivel.jpg" />
-                <div class="img-overlay">
-                    <h4>Title</h4>
-                    <p>A description of the image</p>
-                </div>
+        <div class="carousel-cell img-wrap">
+            <img class="responsive-img" src="http://construyehogar.com/wp-content/uploads/2014/07/Fachada-de-casa-moderna-de-un-nivel.jpg" />
+            <div class="img-overlay">
+                <h4>Title</h4>
+                <p>A description of the image</p>
             </div>
         </div>
 
-        <br>
-        <br>
-        <br> 
+        <div class="carousel-cell img-wrap">
+            <img class="responsive-img" src="http://construyehogar.com/wp-content/uploads/2014/07/Fachada-de-casa-moderna-de-un-nivel.jpg" />
+            <div class="img-overlay ">
+                <h4>Title</h4>
+                <p>A description of the image</p>
+            </div>
+        </div>
 
-        <footer class="page-footer grey darken-3 center">
-            <div class="container">
-                <div class="row">
-                    <div class="col l4 s12">
-                        <h5 class="white-text">Footer Content</h5>
-                        <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-                    </div>
-                    <div class="col l4 s12">
-                        <h5 class="white-text">Links Kilidin</h5>
-                        <ul>
-                            <li><a class="grey-text text-lighten-3 center" href="#">Link 1</a></li>
-                            <li><a class="grey-text text-lighten-3 center" href="#">Link 2</a></li>
-                            <li><a class="grey-text text-lighten-3" href="#">Link 3</a></li>
-                            <li><a class="grey-text text-lighten-3" href="#">Link 4</a></li>
-                        </ul>
-                    </div>
-                    <div class="col l4 s12">
-                        <h5 class="white-text">Footer Content</h5>
-                        <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-                    </div>
+        <div class="carousel-cell img-wrap">
+            <img class="responsive-img" src="http://construyehogar.com/wp-content/uploads/2014/07/Fachada-de-casa-moderna-de-un-nivel.jpg" />
+            <div class="img-overlay">
+                <h4>Title</h4>
+                <p>A description of the image</p>
+            </div>
+        </div>
+
+        <div class="carousel-cell img-wrap">
+            <img class="responsive-img" src="http://construyehogar.com/wp-content/uploads/2014/07/Fachada-de-casa-moderna-de-un-nivel.jpg" />
+            <div class="img-overlay">
+                <h4>Title</h4>
+                <p>A description of the image</p>
+            </div>
+        </div>
+
+        <div class="carousel-cell img-wrap">
+            <img class="responsive-img" src="http://construyehogar.com/wp-content/uploads/2014/07/Fachada-de-casa-moderna-de-un-nivel.jpg" />
+            <div class="img-overlay">
+                <h4>Title</h4>
+                <p>A description of the image</p>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <br>
+    <br> 
+
+    <footer class="page-footer grey darken-3 center">
+        <div class="container">
+            <div class="row">
+                <div class="col l4 s12">
+                    <h5 class="white-text">Footer Content</h5>
+                    <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                </div>
+                <div class="col l4 s12">
+                    <h5 class="white-text">Terceros</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="http://materializecss.com/">Materialize</a></li>
+                        <li><a class="grey-text text-lighten-3 center" href="http://www.flaticon.com/">Flat Icon</a></li>
+                        <li><a class="grey-text text-lighten-3 center" href="http://www.flaticon.com/">Free Pik</a></li>
+                    </ul>
+                </div>
+                <div class="col l4 s12">
+                    <h5 class="white-text">Footer Content</h5>
+                    <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
                 </div>
             </div>
-            <div class="footer-copyright grey darken-4">
-                <div class="container center">
-                    © 2014 Copyright Text
-                </div>
+        </div>
+        <div class="footer-copyright grey darken-4">
+            <div class="container center">
+                © No Copyright Text
             </div>
-        </footer>
+        </div>
+    </footer>
     </body>
 </html>

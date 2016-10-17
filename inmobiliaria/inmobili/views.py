@@ -122,7 +122,6 @@ def comment(request, id_casa):
     comments = Comment.objects.filter(casa=casa)
     context.update(dict(user=request.user, comments=comments))
     context.update(csrf(request))
-    return redirect ('/')
-    return render_to_response('coments.html',context)
+    return redirect('/casa/'+id_casa)
 
 

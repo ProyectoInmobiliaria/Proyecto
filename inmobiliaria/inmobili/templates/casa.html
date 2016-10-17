@@ -1,5 +1,79 @@
-{{casa.address}}
+{% load static %} 
+{% load staticfiles %}
+<link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}" media="screen,projection" />
 
+
+
+
+
+
+
+
+<div class="container">
+    <table class="bordered">
+        <thead>
+            <tr>
+                <th data-field="id" style="width: 60%;">Name</th>
+                <th data-field="name">Value</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>Operation</td>
+                <td>{{casa.operation}}</td>
+            </tr>
+            <tr>
+                <td>Location</td>
+                <td>{{casa.location}}</td>
+            </tr>
+            <tr>
+                <td>District</td>
+                <td>{{casa.district}}</td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td>{{casa.address}}</td>
+            </tr>
+            <tr>
+                <td>Surface</td>
+                <td>{{casa.surface}}</td>
+            </tr>
+            <tr>
+                <td>Free Surface</td>
+                <td>{{casa.free_surface}}</td>
+            </tr>
+            <tr>
+                <td>Cover Surface</td>
+                <td>{{casa.cover_surface}}</td>
+            </tr>
+            <tr>
+                <td>Rooms</td>
+                <td>{{casa.rooms}}</td>
+            </tr>
+            <tr>
+                <td>Bathrooms</td>
+                <td>{{casa.bathrooms}}</td>
+            </tr>
+            <tr>
+                <td>Condition</td>
+                <td>{{casa.condition}}</td>
+            </tr>
+            <tr>
+                <td>Heating</td>
+                <td>{{casa.heating}}</td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td>{{casa.description}}</td>
+            </tr>
+            <tr>
+                <td>Price</td>
+                <td>{{casa.price}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
 
 <div id="comentarios">
@@ -8,9 +82,9 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" type="text/javascript"></script>
 <script>
-    
+
     console.log("entro")
-    
+
     $.ajax({
         url: "{% url 'index:comentarios' casa.id %}",
     }).success(function(data) {

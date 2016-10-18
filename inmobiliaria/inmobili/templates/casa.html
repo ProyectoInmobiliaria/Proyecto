@@ -1,80 +1,248 @@
-{% load static %} 
-{% load staticfiles %}
-<link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}" media="screen,projection" />
+{% load static %} {% load staticfiles %}
+
+<html>
+
+    <head>
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}" media="screen,projection" />
+        <link rel="stylesheet" href="{% static 'css/flickity.css' %}" media="screen">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+        <script src="{% static 'js/flickity.pkgd.min.js' %}"></script>
 
 
+        <style>
+            body {
+                font-family: Roboto-regular;
+                background-color: #FAFAFA;
+                color: #212121;
+            }
+
+            .carousel-cell {
+                width: 100%;
+                height: 800px;
+                background: #FAFAFA;
+            }
+
+            #map {
+                height: 40%;
+                width: 100%;
+            }
+
+            .siz {
+                font-size: 2.5em;
+            }
+
+            .darkgrey {
+                color: #757575;
+            }
+
+            .spaced {
+                padding-top: 1%;
+            }
+
+            .spacet {
+                padding-bottom: 3%;
+                background-color: #fdfdfd;
+            }
+
+            .padco {
+                background-color: red;
+                border-color: red;
+            }
+
+            .copp {
+                background-image: linear-gradient(to bottom, rgba(55, 55, 55, 1) 0%, rgba(55, 55, 55, 1) 100%), linear-gradient(to bottom, rgba(44, 44, 44, 1) 0%, rgba(44, 44, 44, 1) 100%);
+                background-clip: content-box, padding-box;
+            }
+
+            .seisuno {
+                color: #616161;
+            }
+        </style>
+        <script>
+            function initMap() {
+                var mapOptions = {
+                    center: {lat: -31.4 , lng: -64.1833},
+                    zoom: 13,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+
+                window.map1 = new google.maps.Map(document.getElementById("map"),mapOptions);
+                var geocoder = new google.maps.Geocoder();
+
+                function putMarker(){           
+                    geocoder.geocode({ 'address': '{{casa.address}}'}, function(results, status) {
+                        if (status == 'OK') {
+                            
+                            var mapOptions = {
+                                center: results[0].geometry.location,
+                                zoom: 16,
+                                mapTypeId: google.maps.MapTypeId.ROADMAP
+                            };
+                            map = new google.maps.Map(document.getElementById("map"),mapOptions);
+                            //var image = '/static/marker.png';
+                            var markerOptions = { position: results[0].geometry.location }
+                                                //icon: image}
+                            marker = new google.maps.Marker(markerOptions);
+                            marker.setMap(map);
+                            
+                        } else {
+                            alert("Geocoding no tuvo éxito debido a: " + status);
+                        }
+                    });
+                }
+                putMarker();
+            }
+        </script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEd3RtCNs2RUdQkLl40wXvOpnhXMwMWpg&callback=initMap">
+        </script>
+    </head>
+
+    <body>
+
+        <br>
+        <br>
+        <div class="row">
+            <div class="carousel" data-flickity='{ "imagesLoaded": true, "percentPosition": false,'>
+                <div class="carousel-cell img-wrap center">
+                    <img class="responsive-img" src="http://construyehogar.com/wp-content/uploads/2014/07/Fachada-de-casa-moderna-de-un-nivel.jpg" />
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h4 class="center" style="color:#424242">{{casa.tipo}} de {{casa.district}}</h4>
+            <br>
+        </div>
+        <div class="row">
+            <div class="col l10 push-l2 seisuno">
+                <div class="col l2 center-align grey-text"><i class="material-icons siz darkgrey">store</i>
+                    <br>
+                    <p class="center-align darkgrey">{{casa.tipo}}</p>
+                </div>
+                <div class="col l2 center-align grey-text"><i class="material-icons siz darkgrey">beenhere</i>
+                    <br>
+                    <p class="center-align darkgrey">{{casa.rooms}} ambientes</p>
+                </div>
+                <div class="col l2 center-align grey-text "><i class="material-icons siz darkgrey">attach_money</i>
+                    <br>
+                    <p class="center-align darkgrey">{{casa.price}}</p>
+                </div>
+                <div class="col l2 center-align grey-text"><i class="material-icons siz darkgrey">room</i>
+                    <br>
+                    <p class="center-align darkgrey">{{casa.district}}, {{casa.location}}</p>
+                </div>
+                <div class="col l2 center-align grey-text "><i class="material-icons siz darkgrey">face</i>
+                    <br>
+                    <p class="center-align darkgrey">{{casa.people}} personas</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="spaced" style="background-color:#fdfdfd"></div>
 
 
+        <div class="row padco">
+            <div class="col l10 center push-l1">
+                <h4 class="center" style="color:#424242">Descripci&oacute;n</h4>
+                <p class="seisuno">Venta de Departamento 2 AMBIENTES en VILLA URQUIZA. Frente con Balcón Terraza de 8.66 x 3, y opcional cochera fija Cubierta. El Edificio cuenta con Amenities. Piscina, patio de juegos y Quincho o Salón de usos Múltiples El Departamento se encuentra en Excelente Estado y cuenta con: Living Comedor (5.50 x 3.50) 1º Dormitorio (3.30 x 3.00) Cocina con Lavadero Incorporado (5.00 x 1.80) Baño Completo. Baulera tipo jaula de 3.00 x 1.50 x 2.70 (en sótano del edificio) Opcional Cochera Fija Cubierta.</p>
+            </div>
+            <div class="col l5 push-l1">
+                <table class="highlight bordered seisuno">
+                    <tbody>
+                        <tr>
+                            <td>Localidad</td>
+                            <td class="right-align">{{casa.location}}</td>
+                        </tr>
+                        <tr>
+                            <td>Barrio</td>
+                            <td class="right-align">{{casa.district}}</td>
+                        </tr>
+                        <tr>
+                            <td>Dirección</td>
+                            <td class="right-align">{{casa.address}}</td>
+                        </tr>
+                        <tr>
+                            <td>Operacion</td>
+                            <td class="right-align">{{casa.Operation}}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
 
 
+            <div class="row" style="background-color:#fdfdfd">
+                <div class="col l5 push-l1">
 
 
-<div class="container">
-    <table class="bordered">
-        <thead>
-            <tr>
-                <th data-field="id" style="width: 60%;">Name</th>
-                <th data-field="name">Value</th>
-            </tr>
-        </thead>
+                    <table class="highlight bordered seisuno">
+                        <tbody>
+                            <tr>
+                                <td>Superficie Libre</td>
+                                <td class="right-align">{{casa.free_surface}}</td>
+                            </tr>
+                            <tr>
+                                <td>Superficie Cubierta</td>
+                                <td class="right-align">{{casa.cover_surface}}</td>
+                            </tr>
+                            <tr>
+                                <td>Calefacción</td>
+                                <td class="right-align">{{casa.heating}}</td>
+                            </tr>
 
-        <tbody>
-            <tr>
-                <td>Operation</td>
-                <td>{{casa.operation}}</td>
-            </tr>
-            <tr>
-                <td>Location</td>
-                <td>{{casa.location}}</td>
-            </tr>
-            <tr>
-                <td>District</td>
-                <td>{{casa.district}}</td>
-            </tr>
-            <tr>
-                <td>Address</td>
-                <td>{{casa.address}}</td>
-            </tr>
-            <tr>
-                <td>Surface</td>
-                <td>{{casa.surface}}</td>
-            </tr>
-            <tr>
-                <td>Free Surface</td>
-                <td>{{casa.free_surface}}</td>
-            </tr>
-            <tr>
-                <td>Cover Surface</td>
-                <td>{{casa.cover_surface}}</td>
-            </tr>
-            <tr>
-                <td>Rooms</td>
-                <td>{{casa.rooms}}</td>
-            </tr>
-            <tr>
-                <td>Bathrooms</td>
-                <td>{{casa.bathrooms}}</td>
-            </tr>
-            <tr>
-                <td>Condition</td>
-                <td>{{casa.condition}}</td>
-            </tr>
-            <tr>
-                <td>Heating</td>
-                <td>{{casa.heating}}</td>
-            </tr>
-            <tr>
-                <td>Description</td>
-                <td>{{casa.description}}</td>
-            </tr>
-            <tr>
-                <td>Price</td>
-                <td>{{casa.price}}</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+                            <tr>
+                                <td>Baños</td>
+                                <td class="right-align">{{casa.bathrooms}}</td>
+                            </tr>
 
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="spacet"></div>
+        <div class="divider "></div>
+
+
+        <br>
+        <h4 class="center">Ubicaci&oacute;n</h4>
+        <br>
+
+        <div id="map"></div>
+        <br>
+        <div class="divider"></div>
+
+        <div class="row">
+            <div class="col l8">
+
+            </div>    
+        </div>
+
+        <footer class="page-footer grey darken-4 center copp">
+            <div class="container">
+                <div class="row">
+                    <div class="col l4 s12">
+
+                    </div>
+                    <div class="col l4 s12">
+
+                        <ul>
+                            <li><a class="grey-text text-lighten-3" href="http://materializecss.com/">Materialize</a></li>
+                        </ul>
+                    </div>
+                    <div class="col l4 s12">
+
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </body>
+
+</html>
 
 <div id="comentarios">
 

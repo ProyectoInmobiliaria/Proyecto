@@ -7,18 +7,26 @@ from django.contrib import admin
 from django.core.files.storage import FileSystemStorage
 
 # Create your models here.
-FS_USER_AVATARS= FileSystemStorage(location=settings.MEDIA_ROOT + "/user-avatars/")
+FS_USER_AVATARS= FileSystemStorage(location=settings.MEDIA_ROOT + "/casa-images/")
 
 
 class Casa(models.Model):
     CATEGORIAS = (
-        ("0", 'Venta'),
-        ("1", 'Alquiler'),
+        ('Venta', 'Venta'),
+        ('Alquiler', 'Alquiler'),
     )
-    Operation = models.CharField(max_length=6,
+    Operation = models.CharField(max_length=16,
                                  choices=CATEGORIAS,
-                                 default="0")
-    location = models.CharField(max_length=60)
+                                 default=0)
+    CATEGORIAS1 = (
+        ('Departamento', 'Departamento'),
+        ('Casa', 'Casa'),
+        ('Oficina', 'Oficina'),
+    )
+    tipo = models.CharField(max_length=16,
+                            choices=CATEGORIAS1,
+                            default=1)
+    location = models.CharField(max_length=60)  
     district = models.CharField(max_length=60)
     address = models.CharField(max_length=60)
     surface = models.CharField(max_length=60)
@@ -30,7 +38,8 @@ class Casa(models.Model):
     heating = models.CharField(max_length=60)
     description = models.TextField()
     price =  models.CharField(max_length=20)
-    img_frente = models.ImageField(upload_to='', null=True)
+    people = models.CharField(max_length=60)
+    img_frente = models.ImageField(upload_to=FS_USER_AVATARS, null=True)
 
     def __unicode__(self):
         return self.address
@@ -42,9 +51,19 @@ class Perfil(models.Model):
     
     
 class Comment(models.Model):
+    casa = models.OneToOneField(Casa, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     author = models.CharField(max_length=60)
     body = models.CharField(max_length=600)
-    casa = models.ForeignKey(Casa, null=True)
+    
     def __unicode__(self):
         return self.body
+    
+class Image(models.Model):
+    casa = models.OneToOneField(Casa, on_delete=models.CASCADE)
+    img = models.ImageField(upload_to=FS_USER_AVATARS)
+    
+
+class Fav(models.Model):
+    author = models.CharField(max_length=60)
+    casa = models.ForeignKey(Casa, null=True)

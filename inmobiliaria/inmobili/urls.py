@@ -6,6 +6,8 @@ from inmobili.models import *
 urlpatterns = patterns('',
     url(r'^logout/', 'inmobili.views.logout', name='logout'),
     url(r'^register/', 'inmobili.views.register', name='register'),
+    url(r'^favorite/(?P<id_casa>\d+)', 'inmobili.views.favorite', name='favorite'),
+    url(r'^showfav/', 'inmobili.views.showfav', name='showfav'),
     url(r'^comentarios/(?P<id_casa>\d+)', 'inmobili.views.comentarios', name='comentarios'),
     url(r'^comment/(?P<id_casa>\d+)', 'inmobili.views.comment', name='comment'),
     url(r'^casa/(?P<id_casa>\d+)', 'inmobili.views.casa', name='casa'),

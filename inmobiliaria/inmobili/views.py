@@ -124,4 +124,16 @@ def comment(request, id_casa):
     context.update(csrf(request))
     return redirect('/casa/'+id_casa)
 
+def favorite(request, id_casa):
+    context = RequestContext(request)
+    casa = Casa.objects.get(pk=id_casa)
+    author = request.user
+    fav = Fav(author=author, casa=casa)
+    fav.save()
+    return redirect ('/mapa/')
 
+def showfav(request):
+    context = RequestContext(request)
+    user = request.user
+    context['favorites'] = Fav.objects.filter(author=user)
+    return render_to_response("favorites.html", context)

@@ -4,3 +4,4 @@ from inmobili.models import *
 admin.site.register(Casa)
 admin.site.register(Perfil)
 admin.site.register(Comment)
+admin.site.register(Image)

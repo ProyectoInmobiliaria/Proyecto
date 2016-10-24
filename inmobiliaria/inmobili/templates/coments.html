@@ -1,0 +1,74 @@
+
+
+<div>
+    <div class="col m8 offset-m2">
+        <br>
+        <h5>Comentarios</h5>
+        {% for comment in comments %}
+        <ul class="collection">
+            <li class="collection-item avatar">
+                {% if comment.satifaccion == "sentiment_satisfied" %}
+                <i class="material-icons circle blue">{{comment.satifaccion}}</i>
+                {% endif %}
+                {% if comment.satifaccion == "sentiment_neutral" %}
+                <i class="material-icons circle yellow">{{comment.satifaccion}}</i>
+                {% endif %}
+                {% if comment.satifaccion == "sentiment_dissatisfied" %}
+                <i class="material-icons circle red">{{comment.satifaccion}}</i>
+                {% endif %}
+                <span class="title">{{comment.author}}</span>
+                <p class="seisuno">{{comment.body}}</p>
+            </li>
+        </ul>
+        {% endfor %}
+
+        <!-- Respuesta -->
+        <div class="respuesta-mensaje"></div><div class="respuesta-mensaje2"></div>
+        <ul class="collection" style="width:88%; margin-left:12%;">
+            <li class="collection-item avatar" i>
+                <i class="material-icons circle grey">store</i>
+                <span class="title">Da inmobiliti</span>
+                <p class="seisuno"> Todavia no lo hice
+            </li>
+        </ul>   
+    </div>
+    
+    <form action="{% url 'index:comment' casa.id %}" method="POST">
+        {% csrf_token %}
+        <div class="col m8 offset-m2">
+            <ul class="collection">
+                <div class="row">
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <div class="input-field col s12">
+
+                               <select name="estado" style="background-color: rgba(28, 24, 24, 0);
+                                                             border-style: none;
+                                                             outline-style: none;
+                                                             width: 13%;
+                                                             padding: 5px;
+                                                             border-bottom: 1px solid #9e9e9e;
+                                                             height: 3rem;">
+                                    <option value="" disabled selected>Estado</option>
+                                    <option value="sentiment_satisfied">Buenisima</option>
+                                    <option value="sentiment_neutral">Neutral</option>
+                                    <option value="sentiment_dissatisfied">Malisima</option>
+                                </select>
+
+                            </div>
+                            <div class="input-field col s6">
+                                <input name="coment" style="margin-top: -61px; margin-left: 150px; width: 600px;" id="last_name" type="text" class="validate">
+                                <label for="last_name" style="margin-top: -61px; margin-left: 159px;">Coment</label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <button style="margin-left: 820px; height: 34px; margin-top: -63px; position: relative; width: 0px; padding-right: 10px;" class="btn waves-effect waves-light" type="submit" name="action">
+                    <i class="material-icons right">send</i>
+                </button>
+            </ul>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,172 @@
+{% load static %} 
+{% load staticfiles %}
+
+<html>
+
+    <head>
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}" media="screen,projection" />
+        <link rel="stylesheet" href="{% static 'css/flickity.css' %}" media="screen">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+        <script src="{% static 'js/flickity.pkgd.min.js' %}"></script>
+        <title>Inicio</title>    
+        <style>
+            body {
+                background-color: #F5F5F5;
+                font-family: Roboto-regular;
+                background-image: url("{% static 'fondo.png' %}");
+                background-repeat: repeat-x;
+            }
+
+
+            .img-wrap {
+                height: 384px;
+                overflow: hidden;
+                position: relative;
+                width: 600px;
+            }
+
+            .img-overlay {
+                background-color: #000;
+                color: #fff;
+                opacity: 0;
+                filter: alpha(opacity=0);
+                position: absolute;
+                margin-top: -8%;
+                width: 100%;
+            }
+
+            .img-wrap:hover .img-overlay {
+                opacity: 0.75;
+                filter: alpha(opacity=75);
+                transition: opacity 0.25s;
+                -moz-transition: opacity 0.25s;
+                -webkit-transition: opacity 0.25s;
+            }
+
+            .flickity-page-dots{
+                margin-bottom: 50px !important;
+            }
+
+            #portada{
+                min-height: 400px;
+                height: 100%;
+            }
+
+            @media only screen and (min-width: 768px) {
+                #portada{
+                    min-height: 680px !important;
+                }}
+
+        </style>
+
+        <script>            
+            $(document).ready(function() {
+                $('select').material_select();
+                $('#myModal').leanModal();
+                $('#rolfi').leanModal();
+                $(".button-collapsed").sideNav();
+                $('.carousel').carousel(); 
+            });
+        </script>
+    </head>
+    <body>
+        <div id="nav">
+            {% block nav %}
+            {% endblock %}
+        </div>
+        <div id="portada">
+            <div class="section no-pad-bot">
+                <div class="container" style="background-image:#FFFFFF;">
+                    <div style="padding-top:30%;">
+                        <h1 class="center" style="color:#FFF; font-family:Roboto-normal; font-size:4em;">Encontrá tu casa</h1>
+                        <div class="row center">
+                            <h5 class="header col s12 light white-text hide-on-small-only">A modern responsive front-end framework based on Material Design</h5>
+                        </div><br>
+                        <div class="row center">
+                            <a href="{% url 'index:mapa' %}" id="download-button" class="btn-large waves-effect waves-light" style="background-color:#009688">Ir al mapa</a>
+                        </div>    
+                    </div>
+                </div>
+            </div></div>
+
+        <div class="row grey lighten-2">
+            <div class="col s12 ">
+                <div class="container grey lighten-2">
+                    <div class="section">
+                        <h4 class="center" style="color:#757575; margin-bottom:0px;">Features</h4><br>
+
+                        <!--   Icon Section   -->
+                        <div class="row"  style="color:#757575">
+                            <div class="col s12 m4">
+                                <div class="icon-block">
+                                    <h2 class="center light-blue-text"><img src="{% static 'pres1.png' %}"></h2>
+                                    <h5 class="center">Speeds up development</h5>
+                                    <p class="light center">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
+                                </div>
+                            </div>
+
+                            <div class="col s12 m4">
+                                <div class="icon-block">
+                                    <h2 class="center light-blue-text"><img src="{% static 'pres4.png' %}"></h2>
+                                    <h5 class="center">Responsive Design</h5>
+                                    <p class="light center">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
+                                </div>
+                            </div>
+
+                            <div class="col s12 m4">
+                                <div class="icon-block">
+                                    <h2 class="center light-blue-text"><img src="{% static 'pres3.png' %}"></h2>
+                                    <h5 class="center">Easy to work with</h5>
+                                    <p class="light center">We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+
+        <br>
+        <h3 class="center" style="color:#424242">Casas destacadas</h3>
+        <p class="light center" style="color:#616161; font-size:16px;">Encontr&aacute; viviendas que podr&iacute;an gustarte y una descripci&oacute;n mas larga porque si no queda mal<p>    
+        <br>
+
+
+
+
+        {% block galeria %}
+        {% include "galeria.html" %}
+        {% endblock %}
+
+
+        <footer class="page-footer grey darken-3 center">
+            <div class="container">
+                <div class="row">
+                    <div class="col l4 s12">
+                        <h5 class="white-text" >Contacto</h5>
+                        <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                    </div>
+                    <div class="col l4 s12">
+                        <h5 class="white-text">Terceros</h5>
+                        <ul>
+                            <li><a class="grey-text text-lighten-3" href="http://materializecss.com/">Materialize</a></li>
+                            <li><a class="grey-text text-lighten-3 center" href="http://www.flaticon.com/">Flat Icon</a></li>
+                            <li><a class="grey-text text-lighten-3 center" href="http://flickity.metafizzy.co/">Flickity</a></li>    
+                        </ul>
+                    </div>
+                    <div class="col l4 s12">
+                        <h5 class="white-text">Footer Content</h5>
+                        <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright grey darken-4">
+                <div class="container center">
+                    <a class="grey-text" style="font-family:Roboto" href="https://github.com/ProyectoInmobiliaria/Proyecto">Github</a>
+                </div>
+            </div>
+        </footer>                 
+    </body>
+</html>

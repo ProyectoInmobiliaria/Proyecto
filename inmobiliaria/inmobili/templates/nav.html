@@ -1,0 +1,271 @@
+{% extends "./index.html" %} {% block nav %} {% if not user.is_anonymous %} {% load static %} {% load staticfiles %}
+<!--logged-->
+<style>
+    body {
+        font-family: Roboto-regular;
+    }
+
+    .ivo {
+        max-width: 4%;
+        margin-top: 0.5%;
+        margin-right: 1%;
+        margin-left: 1%;
+    }       
+
+    .profpic {
+        max-width: 15%;
+    }
+
+    #leftspace {
+        padding-left: 1%;
+    }
+
+
+
+</style>
+
+<nav>
+    <div class="nav-wrapper">
+        <!--        <img src="{% static '1.png' %}"  class="circle activator ivo hide-on-med-and-down" id="userinfo" href="#infous"  style="cursor:pointer;">-->
+        <div class="button-collapsed" data-activates="slide-out" id="leftspace"><a class="brand-logo" style="cursor:pointer;">{{user}}</a></div>
+
+        <a href="#" data-activates="slide-out" class="button-collapsed hide-on-large-only"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+            <li><a class="modal-trigger" id="rolfi" href="#rolfix"><i class="material-icons">new_releases</i></a></li>
+            <li><a data-activates="dropdown1" class="dropdown-button"><i class="material-icons">more_vert</i></a></li>
+        </ul>
+        <ul id='dropdown1' class='dropdown-content'>
+            <li><a href="{% url 'index:logout' %}">Logout</a></li>
+        </ul>
+        <ul id="mobile-demo" class="side-nav" style="font-family:Roboto-regular;">
+
+        </ul>
+    </div>
+</nav>
+
+<ul id="slide-out" class="side-nav">
+    <li>
+        <div class="userView">
+
+            <img class="background" src="http://cdn.wallpapersafari.com/21/79/5dNwjl.jpg">
+            <a href="#"><img class="circle" src="{{user.perfil.avatar}}"></a>
+            <a href="#"><span class="white-text name">{{user.first_name}} {{user.last_name}}</span></a>
+
+            <img class="background" src="{% static 'perfo.png' %}">
+
+            <a href="#"><span class="white-text email">{{user.email}}</span></a>
+        </div>
+    </li>
+    <li><a href="{% url 'index:showfav' %}"><i class="material-icons">cloud</i>Casas favoritas </a></li>
+    <li><a href="#"><i class="material-icons">notifications</i>Notificaciones</a></li>
+    <li>
+        <div class="divider"></div>
+    </li>
+    <li><a class="waves-effect" href="{% url 'index:logout' %}"><i class="material-icons">reply</i>Cerrar sesi&oacute;n</a></li>
+    <div class="collapsible-body">
+        <ul>
+            <li><a href="#!">First</a></li>
+            <li><a href="#!">Second</a></li>
+            <li><a href="#!">Third</a></li>
+            <li><a href="#!">Fourth</a></li>
+        </ul>
+    </div>
+</ul>
+
+<!-- Notificaciones -->
+
+<div id="rolfix" class="modal bottom-sheet">
+    <div class="modal-content">
+        <h4>Modal Header</h4>
+    </div>
+  <ul class="collection">
+    <li class="collection-item avatar">
+      <i class="material-icons circle blue">vpn_key</i>
+      <span class="title">Title</span>
+      <p>First Line <br>
+         Second Line
+      </p>
+      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+    </li>
+      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+    <li class="collection-item avatar">
+      <i class="material-icons circle">folder</i>
+      <span class="title">Title</span>
+      <p>First Line <br>
+         Second Line
+      </p>
+      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+    </li>
+    <li class="collection-item avatar">
+      <i class="material-icons circle green">insert_chart</i>
+      <span class="title">Title</span>
+      <p>First Line <br>
+         Second Line
+      </p>
+      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+    </li>
+    <li class="collection-item avatar">
+      <i class="material-icons circle red">play_arrow</i>
+      <span class="title">Title</span>
+      <p>First Line <br>
+         Second Line
+      </p>
+      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+    </li>
+  </ul>
+</div>
+
+
+{% else %}
+<!--Not Logged-->
+<nav>
+    <div class="nav-wrapper">
+        <ul class="right hide-on-med-and-down">
+            <li><a class="modal-trigger" id="myModal" href="#modal1"><i class="material-icons">person_pin</i></a></li>
+        </ul>
+    </div>
+</nav>
+
+
+
+<!-- Modal Structure -->
+
+<div id="modal1" class="modal" style="font-family:Roboto-regular;">
+    <div class="modal-content">
+        <div class="col m6">
+            <div class="row">
+                <div class="col s12">
+                    <ul class="tabs" style="background-color:#FAFAFA;">
+                        <li class="tab col s3"><a href="#inbox">Ingreso</a></li>
+                        <li class="tab col s3"><a href="#unread">Registro</a></li>
+                        <li class="tab col s3"><a href="#sent">Contraseña</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="inbox" class="col s12">
+
+                <!-- Login -->
+
+                <div class="row">
+                    <form class="col s12" action="{% url 'index:log' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="row">
+                            <br>
+                            <div class="input-field col s12">
+                                <input id="username" name="username" type="text" class="validate">
+                                <label for="user">Nombre de usuario</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="password" name="password" type="password" class="validate">
+                                <label for="pass">Contraseña</label>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <button class="btn waves-effect waves-light" type="submit" name="action" style="width: 100%;">Login</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-field col s6 m6 l6" style="margin-top:0px;">
+                            <p class="margin medium-small" style="margin-top: 30px;"><a href="#">Reg&iacute;strate</a></p>
+                        </div>
+                        <div class="input-field col s6 m6 l6">
+                            <p class="margin right-align medium-small"><a href="#">&iquest;Olvidaste tu contrase&ntilde;a?</a></p>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+
+            <!-- Registro -->
+
+            <div id="unread" class="col s12">
+                <div class="row">
+                    <form class="col s12" action="{% url 'index:register' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="row">
+                            <br>
+                            <div class="input-field col s6">
+                                <input id="regfirst" type="text" class="validate" name="regfirst">
+                                <label for="nombre">Nombre</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="reglast" type="text" class="validate" name="reglast">
+                                <label for="apellido">Apellido</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="reguser" type="text" class="validate" name="reguser">
+                                <label for="usuario">Nombre de usuario</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="regmail" type="email" class="validate" name="regmail">
+                                <label for="email">Correo electr&oacute;nico</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="regpass" type="password" class="validate" name="regpass">
+                                <label for="pass">Contrase&ntilde;a</label>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input id="regpass2" type="password" class="validate" name="regpass2">
+                                    <label for="pass">Repetir contrase&ntilde;a</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-field col s12 m6 l12">
+                            <select style="visibility: hidden;" class="icons" name="avatar">
+                                <option value="" disabled selected>Elige tu icono</option>
+                                <option value="{% static '1.png' %}" data-icon="{% static '1.png' %}" class="circle">Solo le pido a Dios</option>
+                                <option value="{% static '2.png' %}" data-icon="{% static '2.png' %}" class="circle">Que se mueran todos los bosteros</option>
+                                <option value="{% static '3.png' %}" data-icon="{% static '3.png' %}" class="circle">Que se mueran para siempre</option>
+                                <option value="{% static '4.png' %}" data-icon="{% static '4.png' %}" class="circle">Para toda la alegria de la gente</option>
+                                <option value="{% static '5.png' %}" data-icon="{% static '5.png' %}" class="circle">♪ ♫ ♩ ♬</option>
+                            </select>
+                            <label style="font-size: 1rem;">Avatar</label>
+                        </div>
+                       
+                        <div class="row">
+                            <div class="input-field col s12" style="margin-top:-27px;">
+                                <button class="btn waves-effect waves-light" type="submit" name="action" style="width: 100%;">Reg&iacute;strate</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            
+
+            <!-- Recuperar contraseña -->
+
+            <div id="sent" class="col s12">
+                <div id="unread" class="col s12">
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="row">
+                                <br>
+                                <div class="input-field col s12">
+                                    <input id="email" type="email" class="validate">
+                                    <label for="email">Correo electr&oacute;nico</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <a href="login.html" class="btn waves-effect waves-light col s12">Recuperar contrase&ntilde;a</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endif %} {% endblock %}

@@ -1,0 +1,29 @@
+{% block galeria %} {% load static %} {% load staticfiles %}
+<!--logged-->
+
+<html>
+
+    <div data-flickity='{ "imagesLoaded": true, "percentPosition": false, "wrapAround": true, "autoPlay": true}'>
+
+        {% for casa in casa_list %}
+
+        <div class="carousel-cell img-wrap center">
+            <div class="gallery-cell">
+                <a href="{% url 'index:casa' casa.id %}"/>
+                <img class="responsive-img adjust" src="http://construyehogar.com/wp-content/uploads/2014/07/Fachada-de-casa-moderna-de-un-nivel.jpg" />
+                <div class="img-overlay">
+                    <h5>{{casa}}</h5>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+        
+    </div>
+
+    {% endblock %}
+
+</html>
+
+
+

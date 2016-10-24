@@ -1,0 +1,272 @@
+{% load static %} {% load staticfiles %}
+
+<html>
+
+    <head>
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}" media="screen,projection" />
+        <link rel="stylesheet" href="{% static 'css/flickity.css' %}" media="screen">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+        <script src="{% static 'js/flickity.pkgd.min.js' %}"></script>
+
+        <title>Casa</title>
+        <style>
+            body {
+                font-family: Roboto-regular;
+                background-color: #FAFAFA;
+                color: #212121;
+            }
+
+            #map {
+                height: 40%;
+                min-height: 255px;
+                width: 100%;
+            }
+
+            .siz {
+                font-size: 2.5em;
+            }
+
+            .darkgrey {
+                color: #757575;
+            }
+
+            .spaced {
+                padding-top: 1%;
+            }
+
+            .spacet {
+                padding-bottom: 3%;
+                background-color: #fdfdfd;
+            }
+
+            .copp {
+                background-image: linear-gradient(to bottom, rgba(55, 55, 55, 1) 0%, rgba(55, 55, 55, 1) 100%), linear-gradient(to bottom, rgba(44, 44, 44, 1) 0%, rgba(44, 44, 44, 1) 100%);
+                background-clip: content-box, padding-box;
+            }
+
+            .seisuno {
+                color: #616161;
+            }
+
+            .daicons {
+                padding-top: 4%;
+                color: #212121;
+                font-size: 40px;
+            }
+
+            .respuesta-mensaje{
+                height: 45px;
+                background-color: #E0E0E0;
+                position: absolute;
+                width: 3px;
+                margin-left: 45px;
+            }
+
+            .respuesta-mensaje2{
+                width: 40px;
+                margin-top: 45px;
+                position: absolute;
+                height: 3px;
+                background-color: #E0E0E0;
+                margin-left: 45px;
+            }
+
+            .up{
+                transition: background-color 0.5s ease;
+            }
+
+            .up:hover{
+                background-color: #757575;
+            }
+
+            .carousel-cell {
+                background: #FAFAFA;
+                width: 100%;
+                height: 500px !important;
+                margin-right: 10px;
+            }
+
+            @media screen and (max-width: 500px){
+                .carousel-cell {
+                    height: 200px !important;
+                }}
+
+            @media screen and (max-width: 800px) and (min-width: 500px){
+                .carousel-cell {
+                    height: 450px !important;
+                }}
+
+        </style>
+        <script>
+            function initMap() {
+
+                var geocoder = new google.maps.Geocoder();
+
+                geocoder.geocode({ 'address': '{{casa.address}}, {{casa.district}}, Argentina'}, function(results, status) {
+                    if (status == 'OK') {
+                        var map1 = new google.maps.Map(document.getElementById("map"), {
+                            zoom: 16,
+                            mapTypeControl: false,
+                            center: results[0].geometry.location,
+                            scrollwheel: false,
+                        });
+
+                        var markerOptions = { position: results[0].geometry.location}
+                        marker = new google.maps.Marker(markerOptions);
+                        marker.setMap(map1);
+
+                    } else {
+                        alert("Geocoding no tuvo éxito debido a: " + status);
+                    }
+                });
+            }
+
+        </script>
+
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEd3RtCNs2RUdQkLl40wXvOpnhXMwMWpg&callback=initMap">
+        </script>
+    </head>
+    <body>
+        <br>
+        <br>
+        <div data-flickity>
+            <div class="carousel-cell center">
+                <img class="responsive-img" src="http://www.smallworks.ca/wp-content/uploads/exterior11.jpg" />
+            </div>
+            <div class="carousel-cell center">
+                <img class="responsive-img" src="http://construyehogar.com/wp-content/uploads/2014/07/Fachada-de-casa-moderna-de-un-nivel.jpg" />
+            </div>
+            <div class="carousel-cell center">
+                <img class="responsive-img" src="http://www.planosplanos.com/wp-content/uploads/2016/01/Plano-de-casa-de-1-planta-con-4-dormitorios-y-elegante-dise%C3%B1o-moderno.jpg" />
+            </div>
+        </div><br>
+
+        <div>
+            <h4 class="center" style="color:#424242; font-family:Roboto">{{casa.tipo}} de {{casa.address}}</h4>
+            <br>
+        </div>
+        <div class="row container">
+            <div class="col s12 offset-l1 seisuno">
+                <div class="col l2 s4 center-align grey-text"><i class="material-icons siz darkgrey">store</i>
+                    <br>
+                    <p class="center-align darkgrey">{{casa.tipo}}</p>
+                </div>
+                <div class="col l2 center-align grey-text hide-on-med-and-down"><i class="material-icons siz darkgrey">accessibility</i>
+                    <br>
+                    <p class="center-align darkgrey">{{casa.rooms}} ambientes</p>
+                </div>
+                <div class="col l2 s4 center-align grey-text "><i class="material-icons siz darkgrey">attach_money</i>
+                    <br>
+                    <p class="center-align darkgrey">{{casa.price}}</p>
+                </div>
+                <div class="col l2 s4 center-align grey-text"><i class="material-icons siz darkgrey">room</i>
+                    <br>
+                    <p class="center-align darkgrey">{{casa.district}}</p>
+                </div>
+                <div class="col l2 center-align grey-text hide-on-med-and-down"><i class="material-icons siz darkgrey">face</i>
+                    <br>
+                    <p class="center-align darkgrey">{{casa.people}} personas</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="spaced" style="background-color:#fdfdfd"></div>
+
+        <div class="row">
+            <div class="col l10 center push-l1">
+                <h4 class="center" style="color:#424242">Descripci&oacute;n</h4>
+                <p class="seisuno">Venta de Departamento 2 AMBIENTES en VILLA URQUIZA. Frente con Balcón Terraza de 8.66 x 3, y opcional cochera fija Cubierta. El Edificio cuenta con Amenities. Piscina, patio de juegos y Quincho o Salón de usos Múltiples El Departamento se encuentra en Excelente Estado y cuenta con: Living Comedor (5.50 x 3.50) 1º Dormitorio (3.30 x 3.00) Cocina con Lavadero Incorporado (5.00 x 1.80) Baño Completo. Baulera tipo jaula de 3.00 x 1.50 x 2.70 (en sótano del edificio) Opcional Cochera Fija Cubierta.</p>
+            </div>
+            <div class="col m5 push-m1 s12">
+                <table class="highlight bordered seisuno">
+                    <tbody>
+                        <tr>
+                            <td>Localidad</td>
+                            <td class="right-align">{{casa.location}}</td>
+                        </tr>
+                        <tr>
+                            <td>Barrio</td>
+                            <td class="right-align">{{casa.district}}</td>
+                        </tr>
+                        <tr>
+                            <td>Dirección</td>
+                            <td class="right-align">{{casa.address}}</td>
+                        </tr>
+                        <tr>
+                            <td>Operacion</td>
+                            <td class="right-align">{{casa.Operation}}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row" style="background-color:#fdfdfd">
+                <div class="col m5 push-m1 s12">
+                    <table class="highlight bordered seisuno">
+                        <tbody>
+                            <tr>
+                                <td>Superficie Libre</td>
+                                <td class="right-align">{{casa.free_surface}}</td>
+                            </tr>
+                            <tr>
+                                <td>Superficie Cubierta</td>
+                                <td class="right-align">{{casa.cover_surface}}</td>
+                            </tr>
+                            <tr>
+                                <td>Calefacción</td>
+                                <td class="right-align">{{casa.heating}}</td>
+                            </tr>
+                            <tr>
+                                <td>Baños</td>
+                                <td class="right-align">{{casa.bathrooms}}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="spacet"></div>
+        <div class="divider "></div>
+
+
+        <br>
+        <h4 class="center">Ubicaci&oacute;n</h4>
+        <br>
+
+        <div id="map"></div>
+        <br>
+        <div class="divider"></div>
+
+        <div id="coment" class="row" style="background-color:#F5F5F5">
+        </div>
+        <div class="spacet" style="background-color:#F5F5F5 !important;"></div>
+    </body>
+
+</html>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" type="text/javascript"></script>
+<script>
+
+
+
+
+    console.log("entro")
+
+    $.ajax({
+        url: "{% url 'index:comentarios' casa.id %}",
+    }).success(function(data) {
+        $( "#coment" ).html(data);
+    });
+
+
+
+
+
+
+</script>

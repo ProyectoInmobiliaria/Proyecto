@@ -143,63 +143,76 @@
             <h4 class="center">Filtros</h4>
             <div class="divider"></div>
             <div id="difizq">
-                <li>
-                    <div class="ptop"></div>
-                    <div class="ptop"></div>
+                <form  method="POST">
+                    {% csrf_token %}
+                    <li>
+                        <div class="ptop"></div>
+                        <div class="ptop"></div>
 
-                    <div class="chip">
-                        Precio
-                        <i class="close material-icons">close</i>
-                    </div>
-                    <div class="ptop"></div>
-                    <p class="big">Operacion</p>
-                    <form action="#">
+                        <div class="chip">
+                            Precio
+                            <i class="close material-icons">close</i>
+                        </div>
+                        <div class="ptop"></div>
+                        
+                        <p class="big">Tipo</p>
                         <p style="margin-top:0px;">
                             <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" />
-                            <label class="deres" for="filled-in-box">Departamento</label>
-                            <input type="checkbox" class="filled-in" id="filled-in-box2" checked="checked" />
-                            <label class="deres" for="filled-in-box2">Casa</label>
-                            <input type="checkbox" class="filled-in" id="filled-in-box3" checked="checked" />
-                            <label class="deres" for="filled-in-box3">Oficina</label>
+                            <label class="deres" for="filled-in-box">Casa</label>
+                            <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" />
+                            <label class="deres" for="filled-in-box">Depto</label>
+                            <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" />
+                            <label class="deres" for="filled-in-box">Oficina</label>
                         </p>
+                        
+                        <p class="big">Operacion</p>
+                        <div class="input-field col s12 grey-text" style="margin-top:-1px;">
+                            <select style="visibility: hidden;">
+                                <option value="" disabled selected>Cualquiera</option>
+                                <option value="1">Venta</option>
+                                <option value="2"></option>
+                                <option value="3">Villa Urquiza</option>
+                            </select>
+                        </div>
 
-                    </form>
+                        <p class="big">Precio</p>
+                        <div class="ptop"></div>
+                        <div ng-model="value" id="range-input"></div>
+                        
+                        <div class="ptop"></div>
+                        <div class="ptop"></div>
+                        <div class="ptop"></div>
+                        
+                        <p class="big">Barrio</p>
+                        <div class="input-field col s12 grey-text" style="margin-top:-1px;">
+                            <select style="visibility: hidden;">
+                                <option value="" disabled selected>Cualquiera</option>
+                                <option value="1">Nuñez</option>
+                                <option value="2">Villa Devoto</option>
+                                <option value="3">Villa Urquiza</option>
+                            </select>
+                        </div>
 
-                    <p class="big">Precio</p>
-                    <div class="ptop"></div>
-                    <div ng-model="value" id="range-input"></div>
-                    <div class="ptop"></div>
-                    <div class="ptop"></div>
-                    <div class="ptop"></div>
-                    <p class="big">Barrio</p>
-                    <div class="input-field col s12 grey-text" style="margin-top:-1px;">
-                        <select>
-                            <option value="" disabled selected>Cualquiera</option>
-                            <option value="1">Nuñez</option>
-                            <option value="2">Villa Devoto</option>
-                            <option value="3">Villa Urquiza</option>
-                        </select>
-                    </div>
+                        <div id="range-input"></div>
+                        <div class="ptop"></div>
+                        
+                        <p class="big">Ambientes</p>
+                        <div class="input-field col s12 grey-text">
+                            <select style="visibility: hidden;" multiple style="margin-bottom:-100px;">
+                                <option value="" disabled selected>Cualquiera</option>
+                                <option value="1">1-3</option>
+                                <option value="2">4-6</option>
+                                <option value="3">6-9</option>
+                                <option value="3">+9</option>
+                            </select>
+                        </div>
 
-                    <div id="range-input"></div>
-                    <div class="ptop"></div>
-                    <p class="big">Ambientes</p>
-                    <div class="input-field col s12 grey-text">
-                        <select multiple style="margin-bottom:-100px;">
-                            <option value="" disabled selected>Cualquiera</option>
-                            <option value="1">1-3</option>
-                            <option value="2">4-6</option>
-                            <option value="3">6-9</option>
-                            <option value="3">+9</option>
-                        </select>
-                    </div>
-
-                    <button class="btn waves-effect waves-light right" type="submit" name="action">Filtrar
-                        <i class="material-icons right">format_paint</i>
-                    </button>
-                </li>
+                        <button class="btn waves-effect waves-light right" type="submit" name="action">Filtrar
+                            <i class="material-icons right">format_paint</i>
+                        </button>
+                    </li>
+                </form>
             </div>
-
         </ul>
         <a class="waves-effect waves-light btn-large navbu white grey-text button-collaps" data-activates="slide-outt"><i class="material-icons grey-text left">filter_list</i>Menu</a>
         <div id="map"></div>

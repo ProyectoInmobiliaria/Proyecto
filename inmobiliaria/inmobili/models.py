@@ -10,6 +10,7 @@ from django.core.files.storage import FileSystemStorage
 FS_USER_AVATARS= FileSystemStorage(location=settings.MEDIA_ROOT + "/casa-images/")
 
 
+
 class Casa(models.Model):
     CATEGORIAS = (
         ('Venta', 'Venta'),
@@ -51,10 +52,11 @@ class Perfil(models.Model):
     
     
 class Comment(models.Model):
-    casa = models.OneToOneField(Casa, on_delete=models.CASCADE)
+    casa = models.ForeignKey(Casa, null=True)
     created = models.DateTimeField(auto_now_add=True)
     author = models.CharField(max_length=60)
     body = models.CharField(max_length=600)
+    satifaccion = models.CharField(max_length=60)
     
     def __unicode__(self):
         return self.body
@@ -66,4 +68,4 @@ class Image(models.Model):
 
 class Fav(models.Model):
     author = models.CharField(max_length=60)
-    casa = models.ForeignKey(Casa, null=True)
+    casa = models.OneToOneField(Casa, on_delete=models.CASCADE)

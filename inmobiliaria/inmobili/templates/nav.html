@@ -20,23 +20,16 @@
         padding-left: 1%;
     }
 
-    .unselected{
-        -webkit-text-stroke: 1px #9E9E9E;   
-        color: #fff;
-    }
 
-    .unselected:hover{
-        color: #FFEB3B;   
-        -webkit-text-stroke: 0px white;   
-    }   
 
 </style>
 
 <nav>
     <div class="nav-wrapper">
+        <!--        <img src="{% static '1.png' %}"  class="circle activator ivo hide-on-med-and-down" id="userinfo" href="#infous"  style="cursor:pointer;">-->
         <div class="button-collapsed" data-activates="slide-out" id="leftspace"><a class="brand-logo" style="cursor:pointer;">{{user}}</a></div>
 
-        <a data-activates="slide-out" class="button-collapsed hide-on-large-only"><i class="material-icons">menu</i></a>
+        <a href="#" data-activates="slide-out" class="button-collapsed hide-on-large-only"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
             <li><a class="modal-trigger" id="rolfi" href="#rolfix"><i class="material-icons">new_releases</i></a></li>
             <li><a data-activates="dropdown1" class="dropdown-button"><i class="material-icons">more_vert</i></a></li>
@@ -55,26 +48,26 @@
         <div class="userView">
 
             <img class="background" src="http://cdn.wallpapersafari.com/21/79/5dNwjl.jpg">
-            <a><img class="circle" src="{{user.avatar}}"></a>
-            <a><span class="white-text name">{{user.first_name}} {{user.last_name}}</span></a>
+            <a href="#"><img class="circle" src="{{user.perfil.avatar}}"></a>
+            <a href="#"><span class="white-text name">{{user.first_name}} {{user.last_name}}</span></a>
 
             <img class="background" src="{% static 'perfo.png' %}">
 
-            <a><span class="white-text email">{{user.email}}</span></a>
+            <a href="#"><span class="white-text email">{{user.email}}</span></a>
         </div>
     </li>
-    <li><a><i class="material-icons">cloud</i>Despues veo los iconos </a></li>
-    <li><a><i class="material-icons">notifications</i>Notificaciones</a></li>
+    <li><a href="{% url 'index:showfav' %}"><i class="material-icons">cloud</i>Casas favoritas </a></li>
+    <li><a href="#"><i class="material-icons">notifications</i>Notificaciones</a></li>
     <li>
         <div class="divider"></div>
     </li>
-    <li><a class="waves-effect" href="{% url 'index:logout' %}"><i class="material-icons">close</i>Cerrar sesi&oacute;n</a></li>
+    <li><a class="waves-effect" href="{% url 'index:logout' %}"><i class="material-icons">reply</i>Cerrar sesi&oacute;n</a></li>
     <div class="collapsible-body">
         <ul>
-            <li><a>First</a></li>
-            <li><a>Second</a></li>
-            <li><a>Third</a></li>
-            <li><a>Fourth</a></li>
+            <li><a href="#!">First</a></li>
+            <li><a href="#!">Second</a></li>
+            <li><a href="#!">Third</a></li>
+            <li><a href="#!">Fourth</a></li>
         </ul>
     </div>
 </ul>
@@ -85,24 +78,41 @@
     <div class="modal-content">
         <h4>Modal Header</h4>
     </div>
-    <ul class="collection">
-        <li class="collection-item avatar">
-            <i class="material-icons circle blue">vpn_key</i>
-            <span class="title">Title</span>
-            <p>First Line <br>
-                Second Line
-            </p>
-            <a class="secondary-content"><i class="material-icons yellow-text">grade</i></a>
-        </li>
-        <li class="collection-item avatar">
-            <i class="material-icons circle green">insert_chart</i>
-            <span class="title">Title</span>
-            <p>First Line <br>
-                Second Line
-            </p>
-            <a class="secondary-content"><i class="material-icons unselected">grade</i></a>
-        </li>
-    </ul>
+  <ul class="collection">
+    <li class="collection-item avatar">
+      <i class="material-icons circle blue">vpn_key</i>
+      <span class="title">Title</span>
+      <p>First Line <br>
+         Second Line
+      </p>
+      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+    </li>
+      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+    <li class="collection-item avatar">
+      <i class="material-icons circle">folder</i>
+      <span class="title">Title</span>
+      <p>First Line <br>
+         Second Line
+      </p>
+      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+    </li>
+    <li class="collection-item avatar">
+      <i class="material-icons circle green">insert_chart</i>
+      <span class="title">Title</span>
+      <p>First Line <br>
+         Second Line
+      </p>
+      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+    </li>
+    <li class="collection-item avatar">
+      <i class="material-icons circle red">play_arrow</i>
+      <span class="title">Title</span>
+      <p>First Line <br>
+         Second Line
+      </p>
+      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+    </li>
+  </ul>
 </div>
 
 
@@ -158,10 +168,10 @@
                             </div>
                         </div>
                         <div class="input-field col s6 m6 l6" style="margin-top:0px;">
-                            <p class="margin medium-small"><a>Reg&iacute;strate</a></p>
+                            <p class="margin medium-small" style="margin-top: 30px;"><a href="#">Reg&iacute;strate</a></p>
                         </div>
                         <div class="input-field col s6 m6 l6">
-                            <p class="margin right-align" style="margin-top:0;"><a>&iquest;Olvidaste tu contrase&ntilde;a?</a></p>
+                            <p class="margin right-align medium-small"><a href="#">&iquest;Olvidaste tu contrase&ntilde;a?</a></p>
                         </div>
                     </form>
                 </div>
@@ -211,25 +221,26 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="input-field col l12">
-                            <select class="icons">
+                        <div class="input-field col s12 m6 l12">
+                            <select style="visibility: hidden;" class="icons" name="avatar">
                                 <option value="" disabled selected>Elige tu icono</option>
-                                <option value="" data-icon="{% static '1.png' %}" class="circle">Solo le pido a Dios</option>
-                                <option value="" data-icon="{% static '2.png' %}" class="circle">Que se mueran todos los bosteros</option>
-                                <option value="" data-icon="{% static '3.png' %}" class="circle">Que se mueran para siempre</option>
-                                <option value="" data-icon="{% static '4.png' %}" class="circle">Para toda la alegria de la gente</option>
-                                <option value="" data-icon="{% static '5.png' %}" class="circle">♪ ♫ ♩ ♬</option>
+                                <option value="{% static '1.png' %}" data-icon="{% static '1.png' %}" class="circle">Solo le pido a Dios</option>
+                                <option value="{% static '2.png' %}" data-icon="{% static '2.png' %}" class="circle">Que se mueran todos los bosteros</option>
+                                <option value="{% static '3.png' %}" data-icon="{% static '3.png' %}" class="circle">Que se mueran para siempre</option>
+                                <option value="{% static '4.png' %}" data-icon="{% static '4.png' %}" class="circle">Para toda la alegria de la gente</option>
+                                <option value="{% static '5.png' %}" data-icon="{% static '5.png' %}" class="circle">♪ ♫ ♩ ♬</option>
                             </select>
-                            <label>Avatar</label>
+                            <label style="font-size: 1rem;">Avatar</label>
                         </div>
+                       
                         <div class="row">
-                            <div class="input-field col s12">
-                                <button class="btn waves-effect waves-light" type="submit" name="action" style="width:100%;">Reg&iacute;strate</button>
+                            <div class="input-field col s12" style="margin-top:-27px;">
+                                <button class="btn waves-effect waves-light" type="submit" name="action" style="width: 100%;">Reg&iacute;strate</button>
                             </div>
                         </div>
                     </form>
                 </div>
-            </div>
+            
 
             <!-- Recuperar contraseña -->
 

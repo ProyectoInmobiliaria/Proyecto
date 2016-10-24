@@ -114,10 +114,12 @@ def comment(request, id_casa):
     casa = Casa.objects.get(pk=id_casa)
     if 'POST' in request.method:
         author = request.user
-        content = request.POST['comentario']
+        satifaccion = request.POST['estado']
+        content = request.POST['coment']
         comentario = Comment(author=author, 
                              body=content,
-                             casa=casa)
+                             casa=casa,
+                             satifaccion=satifaccion)
         comentario.save()
     comments = Comment.objects.filter(casa=casa)
     context.update(dict(user=request.user, comments=comments))
@@ -128,9 +130,13 @@ def favorite(request, id_casa):
     context = RequestContext(request)
     casa = Casa.objects.get(pk=id_casa)
     author = request.user
-    fav = Fav(author=author, casa=casa)
-    fav.save()
-    return redirect ('/mapa/')
+    f = Fav.objects.get(casa=casa)
+    if f is not None:
+        return redirect ('/mapa/')
+    else:
+        fav = Fav(author=author, casa=casa)
+        fav.save()
+        return redirect ('/mapa/')
 
 def showfav(request):
     context = RequestContext(request)

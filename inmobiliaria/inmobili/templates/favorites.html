@@ -1,9 +1,4 @@
-<!--{% for i in favorites %}
-    {{i.casa}} <br> 
-{% endfor %}
--->
-{% load static %} {% load staticfiles %} {% for i in favorites %} {{i.casa}}
-<br> {% endfor %}
+{% load static %} {% load staticfiles %}
 <html>
 
 <head>
@@ -166,11 +161,36 @@
             <div class="card ns">
                 <div class="card-content">
                     <div class="tabs-vertical-2">
-                        <div id="a">Soy una tarjeta muy simple. Soy buena mostrando pequeños trozos de información. Soy conveniente porque requiero pocas etiquetas para usarme efectivamente</div>
-                        <div id="b">b</div>
+
+
+                        <div id="a">
+
+                                             <p>Usuario: {{user.username}}</p>
+                                             <p>Nombre: {{user.first_name}} {{user.last_name}}</p>
+                                             <p>Date Joined: {{user.date_joined}}</p>
+    
+
+                        </div>
+                            
+                        <div id="b">
+
+                                            {% for i in favorites %}
+                                            {{i.casa}}<br>
+                                            {% empty %}
+                                            <li>No posee casas favoritas</li>
+                                            {% endfor %}
+
+                        </div>
+
                         <div id="c">c</div>
-                    </div>
-                </div>
+
+
+
+                        </div>
+               
+
+
+             </div>
             </div>
         </div>
     </div>

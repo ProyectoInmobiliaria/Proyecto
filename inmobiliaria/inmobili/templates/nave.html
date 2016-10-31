@@ -1,4 +1,4 @@
-{% extends "./index.html" %} {% block nav %} {% if not user.is_anonymous %} {% load static %} {% load staticfiles %}
+{% block nave %} {% if not user.is_anonymous %} {% load static %} {% load staticfiles %}
 <!--logged-->
 <style>
     body {
@@ -56,8 +56,10 @@ var myfavbtn = document.getElementById("myfav");
     <div class="nav-wrapper">
          <div class="hide-on-small-only" data-activates="slide-out" id="leftspace"><a href="{% url 'index:showfav' %}" class="waves-effect waves-light btn white-text transparent z-depth-0" style="border:1px solid white;">{{user}}</a></div>
         <a href="#" data-activates="slide-out" class="button-collapsed hide-on-med-and-up"><i class="material-icons" style="font-size:45px; margin-left:8px;">menu</i></a>
+
         <ul class="right hide-on-med-and-down menu">  
              <li><a href="{% url 'index:logout' %}"><i class="material-icons">close</i></a></li>
+                  <a href="http://127.0.0.1:8000/" class="brand-logo center">Logo</a>
                 <li><a class="modal-trigger" id="rolfi" href="#rolfix" data-bubble="2"><i class="material-icons">new_releases</i></a></li>
            
         </ul>

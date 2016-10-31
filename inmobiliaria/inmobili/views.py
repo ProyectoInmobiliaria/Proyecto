@@ -38,7 +38,7 @@ def index(request):
     context.update(dict(casas=casas, user=request.user,
                         casa_list=casas.object_list))
     if user.is_authenticated:
-        return render_to_response("nav.html", context)
+        return render_to_response("index.html", context)
     else:
         return render_to_response("mapa.html", context)
 
@@ -75,7 +75,7 @@ def register(request):
         passw2 = request.POST['regpass2']
         u = User.objects.filter(username=userw)
         print u
-        if u is None:
+        if u is not None:
             if passw1 == passw2:    
                 user = User.objects.create_user(userw, email1, passw1)
                 user.first_name = name
@@ -94,7 +94,7 @@ def register(request):
                 messages.add_message(request, messages.INFO, 'The Passwords doesnt match')
                 return redirect ('/')
         else:
-            messages.add_message(request, messages.INFO, 'Ese usuario ya esta en uso')
+            messages.add_message(request, messages.INFO, 'Ese usuario ya fue')
             return redirect ('/')
             
 

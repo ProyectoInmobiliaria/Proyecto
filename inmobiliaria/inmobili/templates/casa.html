@@ -111,13 +111,18 @@
                         marker.setMap(map1);
 
                     } else {
-                        alert("Geocoding no tuvo éxito debido a: " + status);
+                        pass
                     }
                 });
             }
 
         </script>
+        <div id="nav">
 
+        {% block nave %}
+        {% include "nave.html" %}
+        {% endblock %}
+        </div>
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEd3RtCNs2RUdQkLl40wXvOpnhXMwMWpg&callback=initMap">
         </script>
     </head>
@@ -131,6 +136,8 @@
         <!--<div class="carousel-cell center">
 <img class="responsive-img" src="{{ i.img.url }}"/>
 </div>-->  
+
+
         <br>
         <div data-flickity>
             {% for i in img %}

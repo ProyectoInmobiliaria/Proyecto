@@ -44,7 +44,10 @@ def index(request):
 
 def mapa(request):
     context = RequestContext(request)
-    context['casas'] = Casa.objects.all()
+    arry = []
+    ca = Casa.objects.all()
+    context.update(dict(casas=ca, arry=arry))
+    context.update(csrf(request))
     return render_to_response("mapa.html", context)
 
 def log(request):
@@ -61,9 +64,6 @@ def log(request):
             messages.add_message(request, messages.INFO, 'The Passwords doesnt match')
             return redirect ('/')
 
-   
-        
-        
 def register(request):
     context = RequestContext(request)
     if 'POST' in request.method:
@@ -73,21 +73,30 @@ def register(request):
         email1 = request.POST['regmail']
         passw1 = request.POST['regpass']
         passw2 = request.POST['regpass2']
-        print userw
-        if passw1 == passw2:
-            user = User.objects.create_user(userw, email1, passw1)
-            user.first_name = name
-            user.last_name = lname            
-            user.save()
-            userant = authenticate(username=userw, password=passw1)
-            profile = Perfil(user=user, avatar=request.POST['avatar'])
-            profile.save()
-            if userant is not None:
-                login(request, userant)
-                return redirect ('/')
+        u = User.objects.filter(username=userw)
+        print u
+        if u is None:
+            if passw1 == passw2:    
+                user = User.objects.create_user(userw, email1, passw1)
+                user.first_name = name
+                user.last_name = lname            
+                user.save()
+                userant = authenticate(username=userw, password=passw1)
+                profile = Perfil(user=user, avatar=request.POST['avatar'])
+                profile.save()
+                if userant is not None:
+                    login(request, userant)
+                    return redirect ('/')
+                else:
+                    messages.add_message(request, messages.INFO, 'Algo salio mal')
+                    return redirect ('/')
             else:
                 messages.add_message(request, messages.INFO, 'The Passwords doesnt match')
                 return redirect ('/')
+        else:
+            messages.add_message(request, messages.INFO, 'Ese usuario ya esta en uso')
+            return redirect ('/')
+            
 
 def logout(request):
     context = RequestContext(request)
@@ -97,15 +106,17 @@ def logout(request):
 def casa(request, id_casa):
     context = RequestContext(request)
     casa = Casa.objects.get(pk=id_casa)
+    context['img'] = Image.objects.filter(casa=casa)
     context.update(dict(casa=casa, user=request.user))
     context.update(csrf(request))
     return render_to_response("casa.html", context)
 
 def comentarios(request, id_casa):
     context = RequestContext(request)
+    u = User.objects.all()
     casa = Casa.objects.get(pk=id_casa)
     context['comments'] = Comment.objects.filter(casa=casa)
-    context.update(dict(casa=casa, user=request.user))
+    context.update(dict(casa=casa, users=u))
     context.update(csrf(request))
     return render_to_response("coments.html", context)
 
@@ -114,12 +125,10 @@ def comment(request, id_casa):
     casa = Casa.objects.get(pk=id_casa)
     if 'POST' in request.method:
         author = request.user
-        satifaccion = request.POST['estado']
         content = request.POST['coment']
         comentario = Comment(author=author, 
                              body=content,
-                             casa=casa,
-                             satifaccion=satifaccion)
+                             casa=casa)
         comentario.save()
     comments = Comment.objects.filter(casa=casa)
     context.update(dict(user=request.user, comments=comments))

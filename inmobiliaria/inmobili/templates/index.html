@@ -45,19 +45,33 @@
                 -webkit-transition: opacity 0.25s;
             }
 
-            .flickity-page-dots{
-                margin-bottom: 50px !important;
-            }
 
             #portada{
                 min-height: 400px;
                 height: 100%;
             }
 
+            html {
+                overflow: auto;
+            }
+
+            ::-webkit-scrollbar {
+                width: 8px;
+            }
+
+            ::-webkit-scrollbar-track {
+                background-color: #E0E0E0;
+            }
+
+            ::-webkit-scrollbar-thumb {
+                background: #191919;
+            }
+
             @media only screen and (min-width: 768px) {
                 #portada{
                     min-height: 680px !important;
-                }}
+                }
+            }
 
         </style>
 
@@ -69,6 +83,7 @@
                 $(".button-collapsed").sideNav();
                 $('.carousel').carousel(); 
             });
+
         </script>
     </head>
     <body>
@@ -91,35 +106,37 @@
                 </div>
             </div></div>
 
-        <div class="row grey lighten-2">
+        <div class="row grey lighten-2" style="width:90%; padding-bottom:3%;">
             <div class="col s12 ">
                 <div class="container grey lighten-2">
                     <div class="section">
-                        <h4 class="center" style="color:#757575; margin-bottom:0px;">Features</h4><br>
+                        <br>
+                        <h4 class="center" style="color:#424242; margin-bottom:0px;">Features</h4>
+                        <br>
 
                         <!--   Icon Section   -->
-                        <div class="row"  style="color:#757575">
+                        <div class="row"  style="color:#424242">
                             <div class="col s12 m4">
                                 <div class="icon-block">
-                                    <h2 class="center light-blue-text"><img src="{% static 'pres1.png' %}"></h2>
+                                    <h2 class="center"><img src="{% static 'pres4.png' %}"></h2>
                                     <h5 class="center">Speeds up development</h5>
-                                    <p class="light center">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
+                                    <p class="light center">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. </p>
                                 </div>
                             </div>
 
                             <div class="col s12 m4">
                                 <div class="icon-block">
-                                    <h2 class="center light-blue-text"><img src="{% static 'pres4.png' %}"></h2>
+                                    <h2 class="center"><img src="{% static 'pres51.png' %}"></h2>
                                     <h5 class="center">Responsive Design</h5>
-                                    <p class="light center">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
+                                    <p class="light center">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users.</p>
                                 </div>
                             </div>
 
                             <div class="col s12 m4">
                                 <div class="icon-block">
-                                    <h2 class="center light-blue-text"><img src="{% static 'pres3.png' %}"></h2>
+                                    <h2 class="center"><img src="{% static 'pres61.png' %}"></h2>
                                     <h5 class="center">Easy to work with</h5>
-                                    <p class="light center">We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
+                                    <p class="light center">We have provided detailed documentation as well as specific code examples to help new users get started.</p>
                                 </div>
                             </div>
                         </div>
@@ -141,30 +158,25 @@
         {% endblock %}
 
 
-        <footer class="page-footer grey darken-3 center">
+        <footer class="page-footer center" style="background-color:#2F3034; color:#acacac">
             <div class="container">
                 <div class="row">
                     <div class="col l4 s12">
-                        <h5 class="white-text" >Contacto</h5>
-                        <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                        <p style="color:#727272; font-family:Roboto-bold; font-size:15px;">CONTACTO</p>
+                        <p>You can use rows and columns here to organize your footer content.</p>
                     </div>
                     <div class="col l4 s12">
-                        <h5 class="white-text">Terceros</h5>
-                        <ul>
-                            <li><a class="grey-text text-lighten-3" href="http://materializecss.com/">Materialize</a></li>
-                            <li><a class="grey-text text-lighten-3 center" href="http://www.flaticon.com/">Flat Icon</a></li>
-                            <li><a class="grey-text text-lighten-3 center" href="http://flickity.metafizzy.co/">Flickity</a></li>    
+                        <p style="color:#727272; font-family:Roboto-bold; font-size:15px;">TERCEROS</p>
+                        <ul style="">
+                            <li><a style="color:#acacac;" href="http://materializecss.com/">Materialize</a></li>
+                            <li><a style="color:#acacac;" href="http://www.flaticon.com/">Flat Icon</a></li>
+                            <li><a style="color:#acacac;" href="http://flickity.metafizzy.co/">Flickity</a></li>    
                         </ul>
                     </div>
                     <div class="col l4 s12">
-                        <h5 class="white-text">Footer Content</h5>
-                        <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                        <p style="color:#727272; font-family:Roboto-bold; font-size:15px;">FREE CODE</p>
+                        <a style="color:#acacac " href="https://github.com/ProyectoInmobiliaria/Proyecto">Esto es un link a nuestro github!</a>
                     </div>
-                </div>
-            </div>
-            <div class="footer-copyright grey darken-4">
-                <div class="container center">
-                    <a class="grey-text" style="font-family:Roboto" href="https://github.com/ProyectoInmobiliaria/Proyecto">Github</a>
                 </div>
             </div>
         </footer>                 

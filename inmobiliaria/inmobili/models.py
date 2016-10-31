@@ -1,15 +1,13 @@
+## Buscar minimal django file upload example
 # -*- encoding: utf-8 -*-
 from __future__ import unicode_literals
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib import admin
-from django.core.files.storage import FileSystemStorage
+#from django.core.files.storage import FileSystemStorage
 
 # Create your models here.
-FS_USER_AVATARS= FileSystemStorage(location=settings.MEDIA_ROOT + "/casa-images/")
-
-
 
 class Casa(models.Model):
     CATEGORIAS = (
@@ -40,7 +38,7 @@ class Casa(models.Model):
     description = models.TextField()
     price =  models.CharField(max_length=20)
     people = models.CharField(max_length=60)
-    img_frente = models.ImageField(upload_to=FS_USER_AVATARS, null=True)
+    img_frente = models.ImageField("Imagen de la Casa", upload_to="casa/")
 
     def __unicode__(self):
         return self.address
@@ -56,14 +54,13 @@ class Comment(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     author = models.CharField(max_length=60)
     body = models.CharField(max_length=600)
-    satifaccion = models.CharField(max_length=60)
     
     def __unicode__(self):
         return self.body
     
 class Image(models.Model):
     casa = models.OneToOneField(Casa, on_delete=models.CASCADE)
-    img = models.ImageField(upload_to=FS_USER_AVATARS)
+    img = models.FileField("Imagen de la Casa", upload_to="casa/")
     
 
 class Fav(models.Model):

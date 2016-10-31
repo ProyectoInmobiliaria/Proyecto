@@ -154,48 +154,58 @@
                             <i class="close material-icons">close</i>
                         </div>
                         <div class="ptop"></div>
-                        
+
                         <p class="big">Tipo</p>
                         <p style="margin-top:0px;">
                             <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" />
                             <label class="deres" for="filled-in-box">Casa</label>
-                            <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" />
-                            <label class="deres" for="filled-in-box">Depto</label>
-                            <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" />
-                            <label class="deres" for="filled-in-box">Oficina</label>
+                            <input type="checkbox" class="filled-in" id="filled-in-box1" checked="checked" />
+                            <label class="deres" for="filled-in-box1">Depto</label>
+                            <input type="checkbox" class="filled-in" id="filled-in-box2" checked="checked" />
+                            <label class="deres" for="filled-in-box2">Oficina</label>
                         </p>
-                        
+
                         <p class="big">Operacion</p>
                         <div class="input-field col s12 grey-text" style="margin-top:-1px;">
                             <select style="visibility: hidden;">
                                 <option value="" disabled selected>Cualquiera</option>
                                 <option value="1">Venta</option>
-                                <option value="2"></option>
-                                <option value="3">Villa Urquiza</option>
+                                <option value="2">Alquiler</option>
                             </select>
                         </div>
 
                         <p class="big">Precio</p>
                         <div class="ptop"></div>
                         <div ng-model="value" id="range-input"></div>
+
+                        <div class="ptop"></div>
+                        <div class="ptop"></div>
+                        <div class="ptop"></div>
+
+                        {% for casa in casas %}
+                            {% if casa.district != arry %}
+                                {{ arry|add:", casa.district" }}
+                            {% endif %}
+                            {{casa.district}}
+                        {% endfor %}
                         
-                        <div class="ptop"></div>
-                        <div class="ptop"></div>
-                        <div class="ptop"></div>
+                        {{arry}}
                         
+
                         <p class="big">Barrio</p>
                         <div class="input-field col s12 grey-text" style="margin-top:-1px;">
                             <select style="visibility: hidden;">
                                 <option value="" disabled selected>Cualquiera</option>
-                                <option value="1">Nuñez</option>
-                                <option value="2">Villa Devoto</option>
-                                <option value="3">Villa Urquiza</option>
+
+                                {% for a in arry %}
+                                <option value="1">{{arry}}</option>
+                                {% endfor %}
                             </select>
                         </div>
 
                         <div id="range-input"></div>
                         <div class="ptop"></div>
-                        
+
                         <p class="big">Ambientes</p>
                         <div class="input-field col s12 grey-text">
                             <select style="visibility: hidden;" multiple style="margin-bottom:-100px;">
@@ -282,7 +292,8 @@
 
 
                         } else {
-                            alert("Geocoding no tuvo éxito debido a: " + status);
+                            
+                        alert("Geocoding no tuvo éxito debido a: " + status);
                         }
                     });
 

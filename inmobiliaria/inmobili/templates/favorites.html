@@ -1,3 +1,179 @@
-{% for i in favorites %}
+<!--{% for i in favorites %}
     {{i.casa}} <br> 
 {% endfor %}
+-->
+{% load static %} {% load staticfiles %} {% for i in favorites %} {{i.casa}}
+<br> {% endfor %}
+<html>
+
+<head>
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}" media="screen,projection" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+    <title>Perfil</title>
+</head>
+<style>
+    body {
+        background-image: url("{% static 'ddd.png' %}");
+    }
+    
+    .card {
+        border-radius: 0px;
+    }
+    
+    .material-icons {
+        margin-top: 9px;
+        font-size: 30px;
+        color: #ede7f6;
+    }
+    
+    .indicator {
+        display: none;
+    }
+    
+    
+    @media screen and (min-width: 1000px){
+
+    .tabs {
+        width: 80px;
+        background-color: transparent;
+        height: auto;
+        -ms-flex-direction: column;
+        -webkit-flex-direction: column;
+        flex-direction: column;
+        overflow-x: hidden;
+    }
+    
+    .tab{
+        margin: 37px 0px 50px 0px !important;
+    }    
+        
+    .tabs-vertical {
+        height: 400px;
+    }
+        
+    .tabs-vertical-2 {
+        height: 400px;
+    }    
+    
+    .active {
+        border-right: 3px solid #d1c4e9;
+        background-color: #9575cd;
+    }
+    
+    .ns {
+        background-color: #fafafa;
+    }
+    
+    #ttr{
+        float:  !important;
+    }
+    
+    .lark {
+        padding-right: 0px !important;
+        height: 400px;
+    }
+    
+    img {
+        margin-top: 90px;
+        width: 142px;
+        height: 142px;
+    }
+    
+    .mys {
+        margin-top: 120px;
+    }
+    
+    #nopr{
+        padding-right: 0px;
+    }  
+        
+    #nopl{
+        padding-left: 0px;
+    }    
+    }
+    
+    
+    
+@media screen and (max-width: 999px){    
+    .tabs {
+        margin-top: 110px;
+        background-color: transparent;
+    }
+    
+    .tabs-vertical {
+        height: 250px;
+    }
+    
+    .tabs-vertical-2 {
+        height: auto;
+    }
+    
+    .lark {
+        padding-right: 0px !important;
+        margin-top: -80px !important;
+    }
+    
+    .active {
+        background-color: #5E35B1;
+    }
+    
+    
+    img {
+        margin-top: 20px;
+        width: 92px;
+        height: 92px;
+    }
+    
+    #nopl{
+        margin-top: -21px;
+    }
+    
+    }
+   
+</style>    
+
+<body>
+    <div class="row mys">
+        <div class="col s12 l5 push-l1" id="nopr">
+            <div class="card deep-purple lighten-1">
+                <div class="card-content" id="nopr">
+                    <div class="tabs-vertical">
+                        <div class="col s12 l9 white-text center">
+                            <img class="circle" src="{{user.perfil.avatar}}">
+                            <p style="font-size:25px; margin-top:10px;">{{user.first_name}} {{user.last_name}}</p>
+                            <p style="margin-top:5px; color:#b39ddb;">{{user}}</p>
+                        </div>
+                            <div class="col l3 lark" style="text-align:right;">
+                                <ul class="tabs" id="ttr">
+                                    <li class="tab" id="ttr">
+                                        <a href="#a"><i class="material-icons">person</i></a>
+                                    </li>
+                                    <li class="tab">
+                                        <a href="#b"><i class="material-icons">favorite</i></a>
+                                    </li>
+                                    <li class="tab">
+                                        <a href="#c"><i class="material-icons">edit</i></a>
+                                    </li>
+                                </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 l5 push-l1" id="nopl">
+            <div class="card ns">
+                <div class="card-content">
+                    <div class="tabs-vertical-2">
+                        <div id="a">Soy una tarjeta muy simple. Soy buena mostrando pequeños trozos de información. Soy conveniente porque requiero pocas etiquetas para usarme efectivamente</div>
+                        <div id="b">b</div>
+                        <div id="c">c</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

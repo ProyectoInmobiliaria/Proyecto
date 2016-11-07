@@ -46,7 +46,11 @@ def mapa(request):
     context = RequestContext(request)
     arry = []
     ca = Casa.objects.all()
-    context.update(dict(casas=ca, arry=arry))
+    for a in ca:
+        arry.append(a.district)
+    foo = set(arry)
+    print ca
+    context.update(dict(casas=ca, foo=foo))
     context.update(csrf(request))
     return render_to_response("mapa.html", context)
 
@@ -94,7 +98,7 @@ def register(request):
                 messages.add_message(request, messages.INFO, 'The Passwords doesnt match')
                 return redirect ('/')
         else:
-            messages.add_message(request, messages.INFO, 'Ese usuario ya fue')
+            messages.add_message(request, messages.INFO, 'Ese usuario ya esta en uso')
             return redirect ('/')
             
 
@@ -152,3 +156,32 @@ def showfav(request):
     user = request.user
     context['favorites'] = Fav.objects.filter(author=user)
     return render_to_response("favorites.html", context)
+
+def filtrar(request):
+    context = RequestContext(request)
+    allcasas = Casa.objects.all()
+    foo = []
+    if 'POST' in request.method:
+        cas = request.POST['tipo1']
+        dep = request.POST['tipo2']
+        ofi = request.POST['tipo3']
+        opera = request.POST['operacion']
+        pre = request.POST['precio']
+        barr = request.POST['barrio']
+        room = request.POST['rooms']
+        for c in allcasas:
+            if c.tipo in {cas, dep, ofi}:
+                if (c.Operation == opera and c.district == barr and c.rooms == room):
+                    print pre
+                    print pre[0]
+                    print pre[1]
+                    if c.price >= pre[0] and c.price < pre[1]:
+                        foo.append(c)
+                        break
+        foo2 = set(foo)
+        print foo2
+        
+        context.update(dict(casas=foo2))
+        context.update(csrf(request))
+        return render_to_response("mapa.html", context)
+        

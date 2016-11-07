@@ -1,0 +1,263 @@
+{% block nav %} {% if not user.is_anonymous %} {% load static %} {% load staticfiles %}
+<!--logged-->
+<style>
+    body {
+        font-family: Roboto-regular;
+    }
+
+    .ivo {
+        max-width: 4%;
+        margin-top: 0.5%;
+        margin-right: 1%;
+        margin-left: 1%;
+    }       
+
+    .profpic {
+        max-width: 15%;
+    }
+
+    #leftspace {
+        padding-left: 1%;
+        padding-top: 1%;
+        position: absolute;
+    }
+    
+    .menu {
+        display:inline-block;
+    }
+    
+    .red-fav{
+        color: #F44336 !important;
+    }
+
+    .menu a:hover[data-bubble]:after, .menu a:active[data-bubble]:after, .menu a:focus[data-bubble]:after{
+        content:attr(data-bubble);
+        position:absolute;
+        right:0.4em;
+        height:1.5em;
+        line-height:1.5em;
+        padding:0 .46em;
+        background-color: rgba(0, 150, 136, 0.8);
+        color:#fff;
+        border-radius:4em;
+        top:0.3em;
+    }
+</style>
+<script>
+$(function() {
+var myfavbtn = document.getElementById("myfav");
+  $(myfavbtn).click( function() {
+    $(this).text("favorite");
+    $(this).toggleClass("red-fav");
+  } );
+} );
+</script>
+<nav>
+    <div class="nav-wrapper">
+         <div class="hide-on-small-only" data-activates="slide-out" id="leftspace"><a href="{% url 'index:showfav' %}" class="waves-effect waves-light btn white-text transparent z-depth-0" style="border:1px solid white;">{{user}}</a></div>
+        <a href="#" data-activates="slide-out" class="button-collapsed hide-on-med-and-up"><i class="material-icons" style="font-size:45px; margin-left:8px;">menu</i></a>
+        <ul class="right hide-on-med-and-down menu">  
+             <li><a href="{% url 'index:logout' %}"><i class="material-icons">close</i></a></li>
+                <a href="http://127.0.0.1:8000/" class="brand-logo center">Logo</a>
+                <li><a class="modal-trigger" id="rolfi" href="#rolfix" data-bubble="2"><i class="material-icons">new_releases</i></a></li>
+           
+        </ul>
+    </div>
+</nav>
+
+<ul id="slide-out" class="side-nav">
+    <li>
+        <div class="userView">
+            <a href="#"><img class="circle" src="{{user.perfil.avatar}}"></a>
+            <a href="#"><span class="white-text name">{{user.first_name}} {{user.last_name}}</span></a>
+
+            <img class="background" src="{% static 'back2b.png' %}">
+
+            <a href="#"><span class="white-text email">{{user.email}}</span></a>
+        </div>
+    </li>
+    <li><a href="{% url 'index:showfav' %}"><i class="material-icons">favorite</i>Casas favoritas </a></li>
+    <li><a class="modal-trigger" id="rolfi" href="#rolfix" data-bubble="2"><i class="material-icons">notifications</i>Notificaciones</a></li>
+    <li>
+        <div class="divider"></div>
+    </li>
+    <li><a class="waves-effect" href="{% url 'index:logout' %}"><i class="material-icons">close</i>Cerrar sesi&oacute;n</a></li>
+</ul>
+
+<!-- Notificaciones -->
+
+<div id="rolfix" class="modal bottom-sheet">
+    <div class="modal-content">
+        <h4>Notificaciones</h4>
+    </div>
+    <ul class="collection">
+        <li class="collection-item avatar">
+            <i class="material-icons circle blue">vpn_key</i>
+            <span class="title">Title</span>
+            <p>First Line <br>
+                Second Line
+            </p>
+            <a class="secondary-content"><i class="material-icons red-text">favorite</i></a>
+        </li>
+        <li class="collection-item avatar">
+            <i class="material-icons circle green">insert_chart</i>
+            <span class="title">Title</span>
+            <p>First Line <br>
+                Second Line
+            </p>
+            <a class="secondary-content"><i class="material-icons grey-text" id="myfav">favorite_border</i></a>
+        </li>
+    </ul>
+</div>
+
+
+{% else %}
+<!--Not Logged-->
+<nav>
+    <div class="nav-wrapper">
+        <ul class="right hide-on-med-and-down">
+            <li><a class="btncontact">FEATURES</a></li>
+            <li><a class="btncontact">CONTACTO</a></li>
+            <li><a class="waves-effect waves-light btn white-text transparent z-depth-0" id="myModal" href="#modal1" style="border:1px solid white;">Ingresar</a></li>
+        </ul>
+    </div>
+</nav>
+
+
+
+<!-- Modal Structure -->
+
+<div id="modal1" class="modal" style="font-family:Roboto-regular;">
+    <div class="modal-content">
+
+            <div class="row">
+                <div class="col s12">
+                    <ul class="tabs" style="background-color:#FAFAFA;">
+                        <li class="tab col s3"><a href="#ingreso">Ingreso</a></li>
+                        <li class="tab col s3"><a href="#registro">Registro</a></li>
+<!--                        <li class="tab col s3"><a href="#contrasenia">Contraseña</a></li>-->
+                    </ul>
+                </div>
+            </div>
+            <div id="ingreso" class="col s12">
+
+                <!-- Login -->
+
+                <div class="row">
+                    <form class="col s12" action="{% url 'index:log' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="row">
+                            <br>
+                            <div class="input-field col s12">
+                                <input id="username" name="username" type="text" class="validate">
+                                <label for="user">Nombre de usuario</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="password" name="password" type="password" class="validate">
+                                <label for="pass">Contraseña</label>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <button class="btn waves-effect waves-light grey darken-3" type="submit" name="action" style="width: 100%;">INGRESAR</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+
+            <!-- Registro -->
+
+            <div id="registro" class="col s12">
+                <div class="row">
+                    <form class="col s12" action="{% url 'index:register' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="row">
+                            <br>
+                            <div class="input-field col s6">
+                                <input id="regfirst" type="text" class="validate" name="regfirst">
+                                <label for="nombre">Nombre</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="reglast" type="text" class="validate" name="reglast">
+                                <label for="apellido">Apellido</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="reguser" type="text" class="validate" name="reguser">
+                                <label for="usuario">Nombre de usuario</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="regmail" type="email" class="validate" name="regmail">
+                                <label for="email">Correo electr&oacute;nico</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="regpass" type="password" class="validate" name="regpass">
+                                <label for="pass">Contrase&ntilde;a</label>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input id="regpass2" type="password" class="validate" name="regpass2">
+                                    <label for="pass">Repetir contrase&ntilde;a</label>
+                                </div>
+                            </div>
+                        </div>       
+                        <div class="input-field col s12 m6 l12">
+                            <select style="visibility: hidden;" class="icons" name="avatar">
+                                <option value="" disabled selected>Elige tu icono</option>
+                                <option value="{% static '1.png' %}" data-icon="{% static '1.png' %}" class="circle">Cisco</option>
+                                <option value="{% static '2.png' %}" data-icon="{% static '2.png' %}" class="circle">Barry</option>
+                                <option value="{% static '3.png' %}" data-icon="{% static '3.png' %}" class="circle">Wally</option>
+                                <option value="{% static '4.png' %}" data-icon="{% static '4.png' %}" class="circle">Joe</option>
+                                <option value="{% static '5.png' %}" data-icon="{% static '5.png' %}" class="circle">Wells</option>
+                            </select>
+                            <label style="font-size: 1rem;">Avatar</label>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <button class="btn waves-effect waves-light grey darken-3" type="submit" name="action" style="width:100%;">Reg&iacute;strate</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Recuperar contraseña -->
+
+<!--
+            <div id="contrasenia" class="col s12">
+                <div id="unread" class="col s12">
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="row">
+                                <br>
+                                <div class="input-field col s12">
+                                    <input id="email" type="email" class="validate">
+                                    <label for="email">Correo electr&oacute;nico</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <a href="login.html" class="btn waves-effect waves-light col grey darken-3 s12">Recuperar contrase&ntilde;a</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+-->
+
+    </div>
+</div>
+
+{% endif %} {% endblock %}

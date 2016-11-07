@@ -1,4 +1,9 @@
-{% load static %} {% load staticfiles %}
+<!--{% for i in favorites %}
+    {{i.casa}} <br> 
+{% endfor %}
+-->
+{% load static %} {% load staticfiles %} {% for i in favorites %} {{i.casa}}
+<br> {% endfor %}
 <html>
 
 <head>
@@ -128,14 +133,9 @@
     }
    
 </style>    
-        <div id="nav">
 
-        {% block nave %}
-        {% include "nave.html" %}
-        {% endblock %}
-        </div>
 <body>
-    <div style="margin-top:4%" class="row mys">
+    <div class="row mys">
         <div class="col s12 l5 push-l1" id="nopr">
             <div class="card deep-purple lighten-1">
                 <div class="card-content" id="nopr">
@@ -166,36 +166,11 @@
             <div class="card ns">
                 <div class="card-content">
                     <div class="tabs-vertical-2">
-
-
-                        <div id="a">
-
-                                             <p>Usuario: {{user.username}}</p>
-                                             <p>Nombre: {{user.first_name}} {{user.last_name}}</p>
-                                             <p>Date Joined: {{user.date_joined}}</p>
-    
-
-                        </div>
-                            
-                        <div id="b">
-
-                                            {% for i in favorites %}
-                                            {{i.casa}}<br>
-                                            {% empty %}
-                                            <li>No posee casas favoritas</li>
-                                            {% endfor %}
-
-                        </div>
-
+                        <div id="a">Soy una tarjeta muy simple. Soy buena mostrando pequeños trozos de información. Soy conveniente porque requiero pocas etiquetas para usarme efectivamente</div>
+                        <div id="b">b</div>
                         <div id="c">c</div>
-
-
-
-                        </div>
-               
-
-
-             </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

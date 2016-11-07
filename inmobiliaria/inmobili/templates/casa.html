@@ -111,18 +111,16 @@
                         marker.setMap(map1);
 
                     } else {
-                        pass
+                        alert("Geocoding no tuvo éxito debido a: " + status);
                     }
                 });
             }
 
         </script>
-        <div id="nav">
-
-        {% block nave %}
-        {% include "nave.html" %}
+        {% block nav %}
+        {% include "nav.html" %}
         {% endblock %}
-        </div>
+
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEd3RtCNs2RUdQkLl40wXvOpnhXMwMWpg&callback=initMap">
         </script>
     </head>
@@ -136,13 +134,9 @@
         <!--<div class="carousel-cell center">
 <img class="responsive-img" src="{{ i.img.url }}"/>
 </div>-->  
-
-
         <br>
         <div data-flickity>
-            {% for i in img %}
-            <img src="{% static 'nieve.jpg' %}"/>
-            {% endfor %}
+            
         </div><br>
 
         <div>
@@ -248,14 +242,17 @@
         <div id="coment" class="row" style="background-color:#F5F5F5">
         </div>
         <div class="spacet" style="background-color:#F5F5F5 !important;"></div>
+        <div>
+            <img src="{{ i.img.url }}"/>
+        </div>
     </body>
 
 </html>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" type="text/javascript"></script>
 <script>
-    
-    
+
+
     $(function() {
         var navbtn = document.getElementById("navbtn");
         $(navbtn).click( function() {

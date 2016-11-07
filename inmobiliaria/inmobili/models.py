@@ -31,13 +31,13 @@ class Casa(models.Model):
     surface = models.CharField(max_length=60)
     free_surface = models.CharField(max_length=60)
     cover_surface = models.CharField(max_length=60)
-    rooms = models.CharField(max_length=60)
-    bathrooms = models.CharField(max_length=60)
+    rooms = models.IntegerField(default=1)
+    bathrooms = models.IntegerField(default=1)
     condition = models.CharField(max_length=60)
     heating = models.CharField(max_length=60)
     description = models.TextField()
-    price =  models.CharField(max_length=20)
-    people = models.CharField(max_length=60)
+    price =  models.IntegerField(default=0)
+    people = models.IntegerField(default=1)
     img_frente = models.ImageField("Imagen de la Casa", upload_to="casa/")
 
     def __unicode__(self):

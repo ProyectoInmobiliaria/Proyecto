@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from django.http import HttpResponse
 from django.template import loader
 from django.template import RequestContext
@@ -65,7 +67,7 @@ def log(request):
             login(request, user)
             return redirect ('/')
         else:
-            messages.add_message(request, messages.INFO, 'The Passwords doesnt match')
+            messages.add_message(request, messages.INFO, 'Usuario o contraseña incorrecta!')
             return redirect ('/')
 
 def register(request):
@@ -95,7 +97,7 @@ def register(request):
                     messages.add_message(request, messages.INFO, 'Algo salio mal')
                     return redirect ('/')
             else:
-                messages.add_message(request, messages.INFO, 'The Passwords doesnt match')
+                messages.add_message(request, messages.INFO, 'Contraseñas no coinciden')
                 return redirect ('/')
         else:
             messages.add_message(request, messages.INFO, 'Ese usuario ya esta en uso')

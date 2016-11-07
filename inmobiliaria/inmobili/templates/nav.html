@@ -118,6 +118,7 @@ var myfavbtn = document.getElementById("myfav");
         <ul class="right hide-on-med-and-down">
             <li><a class="btncontact">FEATURES</a></li>
             <li><a class="btncontact">CONTACTO</a></li>
+            <a href="http://127.0.0.1:8000/" class="brand-logo center">Logo</a>
             <li><a class="waves-effect waves-light btn white-text transparent z-depth-0" id="myModal" href="#modal1" style="border:1px solid white;">Ingresar</a></li>
         </ul>
     </div>
@@ -165,6 +166,19 @@ var myfavbtn = document.getElementById("myfav");
                             </div>
                         </div>
                     </form>
+{% if messages %}
+<script type="text/javascript">
+    $(window).load(function(){
+        $('#modal1').show();
+    });
+</script>
+
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
                 </div>
 
             </div>
@@ -210,6 +224,8 @@ var myfavbtn = document.getElementById("myfav");
                                     <input id="regpass2" type="password" class="validate" name="regpass2">
                                     <label for="pass">Repetir contrase&ntilde;a</label>
                                 </div>
+<div style="text-align:center" class="registrationFormAlert" id="divCheckPasswordMatch">
+                            </div>
                             </div>
                         </div>       
                         <div class="input-field col s12 m6 l12">
@@ -229,6 +245,31 @@ var myfavbtn = document.getElementById("myfav");
                             </div>
                         </div>
                     </form>
+
+
+<script>
+
+
+
+$(document).ready(function () {
+   $("#txtConfirmPassword").keyup(checkPasswordMatch);
+});
+$(document).ready(function () {
+   $("#regpass, #regpass2").keyup(checkPasswordMatch);
+});
+
+
+function checkPasswordMatch() {
+    var password = $("#regpass").val();
+    var confirmPassword = $("#regpass2").val();
+
+    if (password != confirmPassword)
+        $("#divCheckPasswordMatch").html("Las contraseñas NO coinciden");
+    else
+        $("#divCheckPasswordMatch").html("Las contraseñas coinciden :D");
+}
+
+</script>
                 </div>
             </div>
 

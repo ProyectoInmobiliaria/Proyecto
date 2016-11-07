@@ -14,7 +14,7 @@
         <style>
             body {
                 font-family: Roboto-regular;
-                background-color: #FAFAFA;
+                background-color:#E0E0E0;
                 color: #212121;
             }
 
@@ -123,6 +123,8 @@
 
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEd3RtCNs2RUdQkLl40wXvOpnhXMwMWpg&callback=initMap">
         </script>
+
+
     </head>
     <body>
         <div class="fixed-action-btn" style="bottom: 24; right: 24px;">
@@ -249,7 +251,7 @@
 
 </html>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" type="text/javascript"></script>
+
 <script>
 
 
@@ -270,7 +272,13 @@
     });
 
 
-
+            $(document).ready(function() {
+                $('select').material_select();
+                $('#myModal').leanModal();
+                $('#rolfi').leanModal();
+                $(".button-collapsed").sideNav();
+                $('.carousel').carousel(); 
+            });
 
 
 

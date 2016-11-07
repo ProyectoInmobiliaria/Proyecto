@@ -65,7 +65,7 @@ def log(request):
         user = authenticate(username=usern, password=passw)
         if user is not None:
             login(request, user)
-            return redirect ('/')
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         else:
             messages.add_message(request, messages.INFO, 'Usuario o contraseña incorrecta!')
             return redirect ('/')
@@ -107,7 +107,7 @@ def register(request):
 def logout(request):
     context = RequestContext(request)
     auth.logout(request)
-    return redirect ('/')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def casa(request, id_casa):
     context = RequestContext(request)

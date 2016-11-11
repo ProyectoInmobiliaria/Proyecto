@@ -50,7 +50,7 @@ class Perfil(models.Model):
     
     
 class Comment(models.Model):
-    casa = models.ForeignKey(Casa, null=True)
+    casa = models.ForeignKey(Casa, null=True, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     author = models.CharField(max_length=60)
     body = models.CharField(max_length=600)
@@ -59,10 +59,14 @@ class Comment(models.Model):
         return self.body
     
 class Image(models.Model):
+<<<<<<< HEAD
+    casa = models.ForeignKey(Casa, null=True, on_delete=models.CASCADE)
+=======
     casa = models.ForeignKey(Casa, null=True)
+>>>>>>> 7b4ebed10570026eb461e8d79b14b595bea05bb6
     img = models.FileField("Imagen de la Casa", upload_to="casa/")
     
 
 class Fav(models.Model):
     author = models.CharField(max_length=60)
-    casa = models.OneToOneField(Casa, on_delete=models.CASCADE)
+    casa = models.ForeignKey(Casa, on_delete=models.CASCADE)

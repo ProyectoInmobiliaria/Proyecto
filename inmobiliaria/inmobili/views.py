@@ -41,8 +41,6 @@ def index(request):
                         casa_list=casas.object_list))
     if user.is_authenticated:
         return render_to_response("index.html", context)
-    else:
-        return render_to_response("mapa.html", context)
 
 def mapa(request):
     context = RequestContext(request)
@@ -92,22 +90,26 @@ def register(request):
                 profile.save()
                 if userant is not None:
                     login(request, userant)
-                    return redirect ('/')
+                    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
                 else:
                     messages.add_message(request, messages.INFO, 'Algo salio mal')
-                    return redirect ('/')
+                    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
             else:
                 messages.add_message(request, messages.INFO, 'Contraseñas no coinciden')
-                return redirect ('/')
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         else:
             messages.add_message(request, messages.INFO, 'Ese usuario ya esta en uso')
-            return redirect ('/')
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
             
 
 def logout(request):
     context = RequestContext(request)
     auth.logout(request)
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    print request.META.get('HTTP_REFERER')
+    if request.META.get('HTTP_REFERER') == "http://127.0.0.1:8000/showfav/":
+            return redirect ('/')
+    else:
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def casa(request, id_casa):
     context = RequestContext(request)
@@ -144,14 +146,14 @@ def comment(request, id_casa):
 def favorite(request, id_casa):
     context = RequestContext(request)
     casa = Casa.objects.get(pk=id_casa)
-    author = request.user
-    f = Fav.objects.get(casa=casa)
-    if f is not None:
-        return redirect ('/mapa/')
-    else:
+    f = Fav.objects.filter(casa=casa, author=request.user)
+    if f is None:
         fav = Fav(author=author, casa=casa)
         fav.save()
-        return redirect ('/mapa/')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    else:
+        f.delete()
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def showfav(request):
     context = RequestContext(request)

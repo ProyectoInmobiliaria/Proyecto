@@ -1,4 +1,4 @@
-{% block nav %} {% if not user.is_anonymous %} {% load static %} {% load staticfiles %}
+{% block nav2 %} {% if not user.is_anonymous %} {% load static %} {% load staticfiles %}
 <!--logged-->
 <style>
     body {
@@ -54,12 +54,12 @@
 </script>
 <nav>
     <div class="nav-wrapper">
-        <div class="hide-on-small-only" data-activates="slide-out" id="leftspace"><a href="{% url 'index:showfav' %}" class="waves-effect waves-light btn white-text transparent z-depth-0" style="border:1px solid white;">{{user}}</a></div>
+        <div class="hide-on-small-only" data-activates="slide-out" id="leftspace"><a href="{% url 'index:showfav' %}" class="waves-effect waves-light btn grey-text transparent z-depth-0" style="border:1px solid #ABABAB;">{{user}}</a></div>
         <a href="#" data-activates="slide-out" class="button-collapsed hide-on-med-and-up"><i class="material-icons" style="font-size:45px; margin-left:8px;">menu</i></a>
         <ul class="right hide-on-med-and-down menu">  
-            <li><a href="{% url 'index:logout' %}"><i class="material-icons">close</i></a></li>
-            <a href="http://127.0.0.1:8000/" class="brand-logo center">Logo</a>
-            <li><a class="modal-trigger" id="rolfi" href="#rolfix" data-bubble="2"><i class="material-icons">new_releases</i></a></li>
+            <li><a href="{% url 'index:logout' %}"><i class="material-icons" style="color: #ABABAB;">close</i></a></li>
+            <a href="http://127.0.0.1:8000/" class="brand-logo center" style="color: #ABABAB;">Logo</a>
+            <li><a class="modal-trigger" id="rolfi" href="#rolfix" data-bubble="2"><i class="material-icons" style="color: #ABABAB;">new_releases</i></a></li>
 
         </ul>
     </div>
@@ -116,10 +116,10 @@
 <nav>
     <div class="nav-wrapper">
         <ul class="right hide-on-med-and-down">
-            <li><a class="btncontact">FEATURES</a></li>
-            <li><a class="btncontact">CONTACTO</a></li>
-            <a href="http://127.0.0.1:8000/" class="brand-logo center">Logo</a>
-            <li><a class="waves-effect waves-light btn white-text transparent z-depth-0" id="myModal" href="#modal1" style="border:1px solid white;">Ingresar</a></li>
+            <li><a class="btncontact" style="color: #ABABAB;">FEATURES</a></li>
+            <li><a class="btncontact" style="color: #ABABAB;">CONTACTO</a></li>
+            <a href="http://127.0.0.1:8000/" class="brand-logo center" style="color: #ABABAB;">Logo</a>
+            <li><a class="waves-effect waves-light btn grey-text transparent z-depth-0" id="myModal" href="#modal1" style="border:1px solid #ABABAB;">Ingresar</a></li>
         </ul>
     </div>
 </nav>
@@ -205,7 +205,6 @@
                         <div class="input-field col s12">
                             <input id="reguser" type="text" class="validate" name="reguser">
                             <label for="usuario">Nombre de usuario</label>
-<<<<<<< HEAD
                         </div>
                     </div>
                     <div class="row">
@@ -219,21 +218,6 @@
                             <input id="regpass" type="password" class="validate" name="regpass">
                             <label for="pass">Contrase&ntilde;a</label>
                         </div>
-=======
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="regmail" type="email" class="validate" name="regmail">
-                            <label for="email">Correo electr&oacute;nico</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="regpass" type="password" class="validate" name="regpass">
-                            <label for="pass">Contrase&ntilde;a</label>
-                        </div>
->>>>>>> 7b4ebed10570026eb461e8d79b14b595bea05bb6
 
                         <div class="row">
                             <div class="input-field col s6">
@@ -261,34 +245,10 @@
                         </div>
                     </div>
                 </form>
-<<<<<<< HEAD
-=======
 
->>>>>>> 7b4ebed10570026eb461e8d79b14b595bea05bb6
 
                 <script>
 
-<<<<<<< HEAD
-$(document).ready(function () {
-   $("#txtConfirmPassword").on("keyup",checkPasswordMatch);
-});
-$(document).ready(function () {
-   $("#regpass, #regpass2").on("keyup",checkPasswordMatch);
-});
-
-function checkPasswordMatch() {
-    var password = $("#regpass").val();
-    var confirmPassword = $("#regpass2").val();
-
-    if (password != confirmPassword && confirmPassword!="" ){
-        $("#regpass2").css("border-bottom-color","red");}
-    else{
-
-        $("#regpass2").css("border-bottom-color","green");
-}}
-
-</script>
-=======
 
 
                     $(document).ready(function () {
@@ -310,7 +270,6 @@ function checkPasswordMatch() {
                     }
 
                 </script>
->>>>>>> 7b4ebed10570026eb461e8d79b14b595bea05bb6
             </div>
         </div>
 

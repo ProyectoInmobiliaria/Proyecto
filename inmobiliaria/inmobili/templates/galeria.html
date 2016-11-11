@@ -1,4 +1,4 @@
-{% block galeria %} {% load static %} {% load staticfiles %}
+    {% block galeria %} {% load static %} {% load staticfiles %}
 <!--logged-->
 
 <html>
@@ -7,7 +7,11 @@
         <div class="carousel-cell img-wrap center">
             <div class="gallery-cell">
                 <a href="{% url 'index:casa' casa.id %}">
-                    <img class="responsive-img adjust" src="http://construyehogar.com/wp-content/uploads/2014/07/Fachada-de-casa-moderna-de-un-nivel.jpg" />
+                    {% if casa.img_frente %}
+                        <img class="responsive-img adjust" src="{{casa.img_frente.url}}" style="max-width: 600; max-height: 340; height: 340px; width: 600"/>
+                    {% else %}
+                        <img class="responsive-img adjust" src="http://construyehogar.com/wp-content/uploads/2014/07/Fachada-de-casa-moderna-de-un-nivel.jpg" style="max-width: 600; max-height: 340;" />
+                    {% endif %}
                 </a>
                 <div class="img-overlay">
 

@@ -25,19 +25,19 @@ class Casa(models.Model):
     tipo = models.CharField(max_length=16,
                             choices=CATEGORIAS1,
                             default=1)
-    location = models.CharField(max_length=60)  
-    district = models.CharField(max_length=60)
-    address = models.CharField(max_length=60)
-    surface = models.CharField(max_length=60)
-    free_surface = models.CharField(max_length=60)
-    cover_surface = models.CharField(max_length=60)
-    rooms = models.IntegerField(default=1)
-    bathrooms = models.IntegerField(default=1)
-    condition = models.CharField(max_length=60)
-    heating = models.CharField(max_length=60)
-    description = models.TextField()
-    price =  models.IntegerField(default=0)
-    people = models.IntegerField(default=1)
+    location = models.CharField("Provincia", max_length=60)  
+    district = models.CharField("Barrio", max_length=60)
+    address = models.CharField("Calle", max_length=60)
+    surface = models.CharField("Superficie", max_length=60)
+    free_surface = models.CharField("Superficie Libre", max_length=60)
+    cover_surface = models.CharField("Superficie cubierta", max_length=60)
+    rooms = models.IntegerField("Ambientes", default=1)
+    bathrooms = models.IntegerField("Baños", default=1)
+    condition = models.CharField("Condicion", max_length=60)
+    heating = models.CharField("Calefaccion", max_length=60)
+    description = models.TextField("Descripcion")
+    price =  models.IntegerField("Precio", default=0)
+    people = models.IntegerField("Cantidad de Personas", default=1)
     img_frente = models.ImageField("Imagen de la Casa", upload_to="casa/")
 
     def __unicode__(self):
@@ -59,7 +59,7 @@ class Comment(models.Model):
         return self.body
     
 class Image(models.Model):
-    casa = models.OneToOneField(Casa, on_delete=models.CASCADE)
+    casa = models.ForeignKey(Casa, null=True)
     img = models.FileField("Imagen de la Casa", upload_to="casa/")
     
 

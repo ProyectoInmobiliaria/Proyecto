@@ -14,5 +14,5 @@ urlpatterns = patterns('',
     url(r'^casa/(?P<id_casa>\d+)', 'inmobili.views.casa', name='casa'),
     url(r'^login/', 'inmobili.views.log', name='log'),
     url(r'^mapa/', 'inmobili.views.mapa', name='mapa'),
-    url(r"", "inmobili.views.index"),
+    url(r'^$', "inmobili.views.index"),
 )

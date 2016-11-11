@@ -97,7 +97,7 @@
 
                 var geocoder = new google.maps.Geocoder();
 
-                geocoder.geocode({ 'address': '{{casa.address}}, {{casa.district}}, Argentina'}, function(results, status) {
+                geocoder.geocode({ 'address': '{{casa.address}}, {{casa.location}}, Argentina'}, function(results, status) {
                     if (status == 'OK') {
                         var map1 = new google.maps.Map(document.getElementById("map"), {
                             zoom: 16,
@@ -133,16 +133,17 @@
             </a>
         </div>
         <br>
-        <!--<div class="carousel-cell center">
-<img class="responsive-img" src="{{ i.img.url }}"/>
-</div>-->  
+
         <br>
         <div data-flickity>
-            
-        </div><br>
-
+            {% for i in img %}
+            <div class="carousel-cell center">
+                <img class="responsive-img" src="{{ i.img.url }}"/>
+            </div>
+            {% endfor %}
+        </div>
         <div>
-            <h4 class="center" style="color:#424242; font-family:Roboto">{{casa.tipo}} de {{casa.address}}</h4>
+            <h4 class="center" style="color:#424242; font-family:Roboto; margin-top: 40px;">{{casa.tipo}} en {{casa.address}}, {{casa.location}}, Argentina </h4>
             <br>
         </div>
         <div class="row container">
@@ -244,9 +245,6 @@
         <div id="coment" class="row" style="background-color:#F5F5F5">
         </div>
         <div class="spacet" style="background-color:#F5F5F5 !important;"></div>
-        <div>
-            <img src="{{ i.img.url }}"/>
-        </div>
     </body>
 
 </html>

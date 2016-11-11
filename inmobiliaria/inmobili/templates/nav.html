@@ -21,11 +21,11 @@
         padding-top: 1%;
         position: absolute;
     }
-    
+
     .menu {
         display:inline-block;
     }
-    
+
     .red-fav{
         color: #F44336 !important;
     }
@@ -44,23 +44,23 @@
     }
 </style>
 <script>
-$(function() {
-var myfavbtn = document.getElementById("myfav");
-  $(myfavbtn).click( function() {
-    $(this).text("favorite");
-    $(this).toggleClass("red-fav");
-  } );
-} );
+    $(function() {
+        var myfavbtn = document.getElementById("myfav");
+        $(myfavbtn).click( function() {
+            $(this).text("favorite");
+            $(this).toggleClass("red-fav");
+        } );
+    } );
 </script>
 <nav>
     <div class="nav-wrapper">
-         <div class="hide-on-small-only" data-activates="slide-out" id="leftspace"><a href="{% url 'index:showfav' %}" class="waves-effect waves-light btn white-text transparent z-depth-0" style="border:1px solid white;">{{user}}</a></div>
+        <div class="hide-on-small-only" data-activates="slide-out" id="leftspace"><a href="{% url 'index:showfav' %}" class="waves-effect waves-light btn white-text transparent z-depth-0" style="border:1px solid white;">{{user}}</a></div>
         <a href="#" data-activates="slide-out" class="button-collapsed hide-on-med-and-up"><i class="material-icons" style="font-size:45px; margin-left:8px;">menu</i></a>
         <ul class="right hide-on-med-and-down menu">  
-             <li><a href="{% url 'index:logout' %}"><i class="material-icons">close</i></a></li>
-                <a href="http://127.0.0.1:8000/" class="brand-logo center">Logo</a>
-                <li><a class="modal-trigger" id="rolfi" href="#rolfix" data-bubble="2"><i class="material-icons">new_releases</i></a></li>
-           
+            <li><a href="{% url 'index:logout' %}"><i class="material-icons">close</i></a></li>
+            <a href="http://127.0.0.1:8000/" class="brand-logo center">Logo</a>
+            <li><a class="modal-trigger" id="rolfi" href="#rolfix" data-bubble="2"><i class="material-icons">new_releases</i></a></li>
+
         </ul>
     </div>
 </nav>
@@ -131,171 +131,171 @@ var myfavbtn = document.getElementById("myfav");
 <div id="modal1" class="modal" style="font-family:Roboto-regular;">
     <div class="modal-content">
 
+        <div class="row">
+            <div class="col s12">
+                <ul class="tabs" style="background-color:#FAFAFA;">
+                    <li class="tab col s3"><a href="#ingreso">Ingreso</a></li>
+                    <li class="tab col s3"><a href="#registro">Registro</a></li>
+                    <!--                        <li class="tab col s3"><a href="#contrasenia">Contraseña</a></li>-->
+                </ul>
+            </div>
+        </div>
+        <div id="ingreso" class="col s12">
+
+            <!-- Login -->
+
             <div class="row">
-                <div class="col s12">
-                    <ul class="tabs" style="background-color:#FAFAFA;">
-                        <li class="tab col s3"><a href="#ingreso">Ingreso</a></li>
-                        <li class="tab col s3"><a href="#registro">Registro</a></li>
-<!--                        <li class="tab col s3"><a href="#contrasenia">Contraseña</a></li>-->
-                    </ul>
-                </div>
-            </div>
-            <div id="ingreso" class="col s12">
-
-                <!-- Login -->
-
-                <div class="row">
-                    <form class="col s12" action="{% url 'index:log' %}" method="POST">
-                        {% csrf_token %}
-                        <div class="row">
-                            <br>
-                            <div class="input-field col s12">
-                                <input id="username" name="username" type="text" class="validate">
-                                <label for="user">Nombre de usuario</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <input id="password" name="password" type="password" class="validate">
-                                <label for="pass">Contraseña</label>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <button class="btn waves-effect waves-light grey darken-3" type="submit" name="action" style="width: 100%;">INGRESAR</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-{% if messages %}
-<script type="text/javascript">
-    $(window).load(function(){
-        $('#modal1').show();
-    });
-</script>
-
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
-                </div>
-
-            </div>
-
-
-            <!-- Registro -->
-
-            <div id="registro" class="col s12">
-                <div class="row">
-                    <form class="col s12" action="{% url 'index:register' %}" method="POST">
-                        {% csrf_token %}
-                        <div class="row">
-                            <br>
-                            <div class="input-field col s6">
-                                <input id="regfirst" type="text" class="validate" name="regfirst">
-                                <label for="nombre">Nombre</label>
-                            </div>
-                            <div class="input-field col s6">
-                                <input id="reglast" type="text" class="validate" name="reglast">
-                                <label for="apellido">Apellido</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <input id="reguser" type="text" class="validate" name="reguser">
-                                <label for="usuario">Nombre de usuario</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <input id="regmail" type="email" class="validate" name="regmail">
-                                <label for="email">Correo electr&oacute;nico</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s6">
-                                <input id="regpass" type="password" class="validate" name="regpass">
-                                <label for="pass">Contrase&ntilde;a</label>
-                            </div>
-
-                            <div class="row">
-                                <div class="input-field col s6">
-                                    <input id="regpass2" type="password" class="validate" name="regpass2">
-                                    <label for="pass">Repetir contrase&ntilde;a</label>
-                                </div>
-<div style="text-align:center" class="registrationFormAlert" id="divCheckPasswordMatch">
-                            </div>
-                            </div>
-                        </div>       
-                        <div class="input-field col s12 m6 l12">
-                            <select style="visibility: hidden;" class="icons" name="avatar">
-                                <option value="" disabled selected>Elige tu icono</option>
-                                <option value="{% static '1.png' %}" data-icon="{% static '1.png' %}" class="circle">Cisco</option>
-                                <option value="{% static '2.png' %}" data-icon="{% static '2.png' %}" class="circle">Barry</option>
-                                <option value="{% static '3.png' %}" data-icon="{% static '3.png' %}" class="circle">Wally</option>
-                                <option value="{% static '4.png' %}" data-icon="{% static '4.png' %}" class="circle">Joe</option>
-                                <option value="{% static '5.png' %}" data-icon="{% static '5.png' %}" class="circle">Wells</option>
-                            </select>
-                            <label style="font-size: 1rem;">Avatar</label>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <button class="btn waves-effect waves-light grey darken-3" type="submit" name="action" style="width:100%;">Reg&iacute;strate</button>
-                            </div>
-                        </div>
-                    </form>
-
-
-<script>
-
-
-
-$(document).ready(function () {
-   $("#txtConfirmPassword").keyup(checkPasswordMatch);
-});
-$(document).ready(function () {
-   $("#regpass, #regpass2").keyup(checkPasswordMatch);
-});
-
-
-function checkPasswordMatch() {
-    var password = $("#regpass").val();
-    var confirmPassword = $("#regpass2").val();
-
-    if (password != confirmPassword)
-        $("#divCheckPasswordMatch").html("Las contraseñas NO coinciden");
-    else
-        $("#divCheckPasswordMatch").html("Las contraseñas coinciden :D");
-}
-
-</script>
-                </div>
-            </div>
-
-            <!-- Recuperar contraseña -->
-
-<!--
-            <div id="contrasenia" class="col s12">
-                <div id="unread" class="col s12">
+                <form class="col s12" action="{% url 'index:log' %}" method="POST">
+                    {% csrf_token %}
                     <div class="row">
-                        <form class="col s12">
-                            <div class="row">
-                                <br>
-                                <div class="input-field col s12">
-                                    <input id="email" type="email" class="validate">
-                                    <label for="email">Correo electr&oacute;nico</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <a href="login.html" class="btn waves-effect waves-light col grey darken-3 s12">Recuperar contrase&ntilde;a</a>
-                                </div>
-                            </div>
-                        </form>
+                        <br>
+                        <div class="input-field col s12">
+                            <input id="username" name="username" type="text" class="validate">
+                            <label for="user">Nombre de usuario</label>
+                        </div>
                     </div>
-                </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="password" name="password" type="password" class="validate">
+                            <label for="pass">Contraseña</label>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <button class="btn waves-effect waves-light grey darken-3" type="submit" name="action" style="width: 100%;">INGRESAR</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                {% if messages %}
+                <script type="text/javascript">
+                    $(window).load(function(){
+                        $('#modal1').show();
+                    });
+                </script>
+
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
             </div>
+
+        </div>
+
+
+        <!-- Registro -->
+
+        <div id="registro" class="col s12">
+            <div class="row">
+                <form class="col s12" action="{% url 'index:register' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        <br>
+                        <div class="input-field col s6">
+                            <input id="regfirst" type="text" class="validate" name="regfirst">
+                            <label for="nombre">Nombre</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="reglast" type="text" class="validate" name="reglast">
+                            <label for="apellido">Apellido</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="reguser" type="text" class="validate" name="reguser">
+                            <label for="usuario">Nombre de usuario</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="regmail" type="email" class="validate" name="regmail">
+                            <label for="email">Correo electr&oacute;nico</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="regpass" type="password" class="validate" name="regpass">
+                            <label for="pass">Contrase&ntilde;a</label>
+                        </div>
+
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="regpass2" type="password" class="validate" name="regpass2">
+                                <label for="pass">Repetir contrase&ntilde;a</label>
+                            </div>
+                            <div style="text-align:center" class="registrationFormAlert" id="divCheckPasswordMatch">
+                            </div>
+                        </div>
+                    </div>       
+                    <div class="input-field col s12 m6 l12">
+                        <select style="visibility: hidden;" class="icons" name="avatar">
+                            <option value="" disabled selected>Elige tu icono</option>
+                            <option value="{% static '1.png' %}" data-icon="{% static '1.png' %}" class="circle">Cisco</option>
+                            <option value="{% static '2.png' %}" data-icon="{% static '2.png' %}" class="circle">Barry</option>
+                            <option value="{% static '3.png' %}" data-icon="{% static '3.png' %}" class="circle">Wally</option>
+                            <option value="{% static '4.png' %}" data-icon="{% static '4.png' %}" class="circle">Joe</option>
+                            <option value="{% static '5.png' %}" data-icon="{% static '5.png' %}" class="circle">Wells</option>
+                        </select>
+                        <label style="font-size: 1rem;">Avatar</label>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <button class="btn waves-effect waves-light grey darken-3" type="submit" name="action" style="width:100%;">Reg&iacute;strate</button>
+                        </div>
+                    </div>
+                </form>
+
+
+                <script>
+
+
+
+                    $(document).ready(function () {
+                        $("#txtConfirmPassword").keyup(checkPasswordMatch);
+                    });
+                    $(document).ready(function () {
+                        $("#regpass, #regpass2").keyup(checkPasswordMatch);
+                    });
+
+
+                    function checkPasswordMatch() {
+                        var password = $("#regpass").val();
+                        var confirmPassword = $("#regpass2").val();
+
+                        if (password != confirmPassword)
+                            $("#divCheckPasswordMatch").html("Las contraseñas NO coinciden");
+                        else
+                            $("#divCheckPasswordMatch").html("Las contraseñas coinciden :D");
+                    }
+
+                </script>
+            </div>
+        </div>
+
+        <!-- Recuperar contraseña -->
+
+        <!--
+<div id="contrasenia" class="col s12">
+<div id="unread" class="col s12">
+<div class="row">
+<form class="col s12">
+<div class="row">
+<br>
+<div class="input-field col s12">
+<input id="email" type="email" class="validate">
+<label for="email">Correo electr&oacute;nico</label>
+</div>
+</div>
+<div class="row">
+<div class="input-field col s12">
+<a href="login.html" class="btn waves-effect waves-light col grey darken-3 s12">Recuperar contrase&ntilde;a</a>
+</div>
+</div>
+</form>
+</div>
+</div>
+</div>
 -->
 
     </div>

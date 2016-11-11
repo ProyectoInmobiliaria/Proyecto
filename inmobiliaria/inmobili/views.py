@@ -112,8 +112,8 @@ def logout(request):
 def casa(request, id_casa):
     context = RequestContext(request)
     casa = Casa.objects.get(pk=id_casa)
-    context['img'] = Image.objects.filter(casa=casa)
-    context.update(dict(casa=casa, user=request.user))
+    img = Image.objects.filter(casa=casa)
+    context.update(dict(casa=casa, user=request.user, img=img))
     context.update(csrf(request))
     return render_to_response("casa.html", context)
 
@@ -186,4 +186,3 @@ def filtrar(request):
         context.update(dict(casas=foo2))
         context.update(csrf(request))
         return render_to_response("mapa.html", context)
-        

@@ -27,10 +27,6 @@
                 max-width: none;
             }
 
-            #map img {
-                max-width: none !important;
-            }
-
             .gm-style-iw {
                 width: 350px !important;
                 top: 15px !important;
@@ -251,7 +247,7 @@
                             console.log("{{casa.address}}")
 
                             infoBubble = new InfoBubble({
-                                content: '<a href="#"><img src="/static/1.png" style="margin-top: 15px; margin-left: 5px;"></a> <a style="margin-top:   5px; margin-right: 5px;" href="{% url "index:favorite" casa.id %}" class="secondary-content"><i class="material-icons">grade</i></a> <p style="margin-top: -60px; margin-left: 90px;">{{casa.district}}</p>  <p style="margin-left: 90px;">price: {{casa.price}}</p> <a href="{% url "index:casa" casa.id %}" style="margin-left: 290px;">Show more</a>',
+                                content: '<a href="#"><img class="responsive-img" src="{{casa.img_frente.url}}" style="margin-top: 15px;margin-left: 15px;max-width: 85px;"></a> <a style="margin-top: 5px; margin-right: 5px;" href="{% url "index:favorite" casa.id %}" class="secondary-content"><i class="material-icons">grade</i></a> <p style="margin-top: -60px;margin-left: 150px;">{{casa.address}}, {{casa.district}}, Argentina</p>  <p style="margin-left: 150px;">price: {{casa.price}}</p> <a href="{% url "index:casa" casa.id %}" style="margin-left: 419px;">Show more</a>',
                                 position: new google.maps.LatLng(-35, 151),
                                 shadowStyle: 1,
                                 padding: 0,
@@ -264,7 +260,7 @@
                                 arrowPosition: 30,
                                 backgroundClassName: 'phoney',
                                 arrowStyle: 2,
-                                maxHeight: 100
+                                maxHeight: 94
                             });
                             addListenerToMarker(marker, infoBubble);
                             function addListenerToMarker(marker, infoBubble){

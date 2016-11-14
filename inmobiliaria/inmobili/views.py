@@ -166,19 +166,19 @@ def showfav(request):
     context['favorites'] = Fav.objects.filter(author=user)
     return render_to_response("favorites.html", context)
 
-def filtrar(request):
+def busqueda(request):
     context = RequestContext(request)
     allcasas = Casa.objects.all()
     arry = []
     arry2 = []
     if 'POST' in request.method:
-        cas = request.POST['tipo1']
-        dep = request.POST['tipo2']
-        ofi = request.POST['tipo3']
-        opera = request.POST['operacion']
-        #pre = request.POST['precio']
-        barr = request.POST['barrio']
-        #room = request.POST['rooms']
+        cas = request.POST.get('tipo1', '')
+        dep = request.POST.get('tipo2', '')
+        ofi = request.POST.get('tipo3', '')
+        opera = request.POST.get('operacion', '')
+        #pre = request.POST.get('precio', '')
+        barr = request.POST.get('barrio', '')
+        #room = request.POST.get('rooms', '')
         for c in allcasas:
             if c.tipo in {cas, dep, ofi}:
                 if (c.Operation == opera and c.district == barr ):

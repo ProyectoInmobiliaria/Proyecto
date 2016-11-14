@@ -39,7 +39,7 @@ class Casa(models.Model):
     price =  models.IntegerField("Precio", default=0)
     people = models.IntegerField("Cantidad de Personas", default=1)
     img_frente = models.ImageField("Imagen de la Casa", upload_to="casa/")
-
+    created = models.DateTimeField(auto_now_add=True)
     def __unicode__(self):
         return self.address
 

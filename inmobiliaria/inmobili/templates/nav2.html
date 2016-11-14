@@ -59,7 +59,6 @@
         <ul class="right hide-on-med-and-down menu">  
             <li><a href="{% url 'index:logout' %}"><i class="material-icons" style="color: #ABABAB;">close</i></a></li>
             <a href="http://127.0.0.1:8000/" class="brand-logo center" style="color: #ABABAB;">Logo</a>
-            <li><a class="modal-trigger" id="rolfi" href="#rolfix" data-bubble="2"><i class="material-icons" style="color: #ABABAB;">new_releases</i></a></li>
 
         </ul>
     </div>
@@ -84,31 +83,6 @@
     <li><a class="waves-effect" href="{% url 'index:logout' %}"><i class="material-icons">close</i>Cerrar sesi&oacute;n</a></li>
 </ul>
 
-<!-- Notificaciones -->
-
-<div id="rolfix" class="modal bottom-sheet">
-    <div class="modal-content">
-        <h4>Notificaciones</h4>
-    </div>
-    <ul class="collection">
-        <li class="collection-item avatar">
-            <i class="material-icons circle blue">vpn_key</i>
-            <span class="title">Title</span>
-            <p>First Line <br>
-                Second Line
-            </p>
-            <a class="secondary-content"><i class="material-icons red-text">favorite</i></a>
-        </li>
-        <li class="collection-item avatar">
-            <i class="material-icons circle green">insert_chart</i>
-            <span class="title">Title</span>
-            <p>First Line <br>
-                Second Line
-            </p>
-            <a class="secondary-content"><i class="material-icons grey-text" id="myfav">favorite_border</i></a>
-        </li>
-    </ul>
-</div>
 
 
 {% else %}

@@ -27,7 +27,7 @@ from .models import Perfil
 def index(request):
     context = RequestContext(request)
     user = request.user
-    casas = Casa.objects.all().order_by("id")[0:10]
+    casas = Casa.objects.all().order_by("-created")[0:4]
     paginator = Paginator(casas, 5)
     try: page = int(request.GET.get("page", '5'))
     except ValueError: page = 1

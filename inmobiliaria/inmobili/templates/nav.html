@@ -52,64 +52,92 @@
         } );
     } );
 </script>
-<nav>
-    <div class="nav-wrapper">
-        <div class="hide-on-small-only" data-activates="slide-out" id="leftspace"><a href="{% url 'index:showfav' %}" class="waves-effect waves-light btn white-text transparent z-depth-0" style="border:1px solid white;">{{user}}</a></div>
-        <a href="#" data-activates="slide-out" class="button-collapsed hide-on-med-and-up"><i class="material-icons" style="font-size:45px; margin-left:8px;">menu</i></a>
-        <ul class="right hide-on-med-and-down menu">  
-            <li><a href="{% url 'index:logout' %}"><i class="material-icons">close</i></a></li>
-            <a href="http://127.0.0.1:8000/" class="brand-logo center">Logo</a>
-            <li><a class="modal-trigger" id="rolfi" href="#rolfix" data-bubble="2"><i class="material-icons">new_releases</i></a></li>
+    {% if request.path == "/showfav/" %}
+        <nav>
+            <div class="nav-wrapper">
+                <ul class="lefth hide-on-med-and-down menu">
+                    <a href="{{request.META.HTTP_REFERER}}"><i class="medium material-icons">keyboard_backspace</i></a>
+                </ul>
+                <a href="#" data-activates="slide-out" class="button-collapsed hide-on-med-and-up"><i class="material-icons" style="font-size:45px; margin-left:8px;">menu</i></a>
+                <ul class="right hide-on-med-and-down menu">  
+                    <li><a href="{% url 'index:logout' %}"><i class="material-icons">close</i></a>
+                    </li>
+                    <a href="http://127.0.0.1:8000/" class="brand-logo center">Logo</a>
+                </ul>
+            </div>
+        </nav>
 
+        <ul id="slide-out" class="side-nav">
+            <li>
+                <div class="userView">
+                    <a href="#"><img class="circle" src="{{user.perfil.avatar}}"></a>
+                    <a href="#"><span class="white-text name">{{user.first_name}} {{user.last_name}}</span></a>
+
+                    <img class="background" src="{% static 'back2b.png' %}">
+
+                    <a href="#"><span class="white-text email">{{user.email}}</span></a>
+                </div>
+            </li>
         </ul>
-    </div>
-</nav>
+    {% else %}
+        <nav>
+            <div class="nav-wrapper">
+                <div class="hide-on-small-only" data-activates="slide-out" id="leftspace"><a href="{% url 'index:showfav' %}" class="waves-effect waves-light btn white-text transparent z-depth-0" style="border:1px solid white;">{{user}}</a></div>
+                <a href="#" data-activates="slide-out" class="button-collapsed hide-on-med-and-up"><i class="material-icons" style="font-size:45px; margin-left:8px;">menu</i></a>
+                <ul class="right hide-on-med-and-down menu">  
+                    <li><a href="{% url 'index:logout' %}"><i class="material-icons">close</i></a></li>
+                    <a href="http://127.0.0.1:8000/" class="brand-logo center">Logo</a>
+                    <li><a class="modal-trigger" id="rolfi" href="#rolfix" data-bubble="2"><i class="material-icons">new_releases</i></a></li>
 
-<ul id="slide-out" class="side-nav">
-    <li>
-        <div class="userView">
-            <a href="#"><img class="circle" src="{{user.perfil.avatar}}"></a>
-            <a href="#"><span class="white-text name">{{user.first_name}} {{user.last_name}}</span></a>
+                </ul>
+            </div>
+        </nav>
 
-            <img class="background" src="{% static 'back2b.png' %}">
+        <ul id="slide-out" class="side-nav">
+            <li>
+                <div class="userView">
+                    <a href="#"><img class="circle" src="{{user.perfil.avatar}}"></a>
+                    <a href="#"><span class="white-text name">{{user.first_name}} {{user.last_name}}</span></a>
 
-            <a href="#"><span class="white-text email">{{user.email}}</span></a>
+                    <img class="background" src="{% static 'back2b.png' %}">
+
+                    <a href="#"><span class="white-text email">{{user.email}}</span></a>
+                </div>
+            </li>
+            <li><a href="{% url 'index:showfav' %}"><i class="material-icons">favorite</i>Casas favoritas </a></li>
+            <li><a class="modal-trigger" id="rolfi" href="#rolfix" data-bubble="2"><i class="material-icons">notifications</i>Notificaciones</a></li>
+            <li>
+                <div class="divider"></div>
+            </li>
+            <li><a class="waves-effect" href="{% url 'index:logout' %}"><i class="material-icons">close</i>Cerrar sesi&oacute;n</a></li>
+        </ul>
+
+        <!-- Notificaciones -->
+
+        <div id="rolfix" class="modal bottom-sheet">
+            <div class="modal-content">
+                <h4>Notificaciones</h4>
+            </div>
+            <ul class="collection">
+                <li class="collection-item avatar">
+                    <i class="material-icons circle blue">vpn_key</i>
+                    <span class="title">Title</span>
+                    <p>First Line <br>
+                        Second Line
+                    </p>
+                    <a class="secondary-content"><i class="material-icons red-text">favorite</i></a>
+                </li>
+                <li class="collection-item avatar">
+                    <i class="material-icons circle green">insert_chart</i>
+                    <span class="title">Title</span>
+                    <p>First Line <br>
+                        Second Line
+                    </p>
+                    <a class="secondary-content"><i class="material-icons grey-text" id="myfav">favorite_border</i></a>
+                </li>
+            </ul>
         </div>
-    </li>
-    <li><a href="{% url 'index:showfav' %}"><i class="material-icons">favorite</i>Casas favoritas </a></li>
-    <li><a class="modal-trigger" id="rolfi" href="#rolfix" data-bubble="2"><i class="material-icons">notifications</i>Notificaciones</a></li>
-    <li>
-        <div class="divider"></div>
-    </li>
-    <li><a class="waves-effect" href="{% url 'index:logout' %}"><i class="material-icons">close</i>Cerrar sesi&oacute;n</a></li>
-</ul>
-
-<!-- Notificaciones -->
-
-<div id="rolfix" class="modal bottom-sheet">
-    <div class="modal-content">
-        <h4>Notificaciones</h4>
-    </div>
-    <ul class="collection">
-        <li class="collection-item avatar">
-            <i class="material-icons circle blue">vpn_key</i>
-            <span class="title">Title</span>
-            <p>First Line <br>
-                Second Line
-            </p>
-            <a class="secondary-content"><i class="material-icons red-text">favorite</i></a>
-        </li>
-        <li class="collection-item avatar">
-            <i class="material-icons circle green">insert_chart</i>
-            <span class="title">Title</span>
-            <p>First Line <br>
-                Second Line
-            </p>
-            <a class="secondary-content"><i class="material-icons grey-text" id="myfav">favorite_border</i></a>
-        </li>
-    </ul>
-</div>
-
+    {% endif %}
 
 {% else %}
 <!--Not Logged-->
@@ -205,7 +233,6 @@
                         <div class="input-field col s12">
                             <input id="reguser" type="text" class="validate" name="reguser">
                             <label for="usuario">Nombre de usuario</label>
-<<<<<<< HEAD
                         </div>
                     </div>
                     <div class="row">
@@ -219,9 +246,8 @@
                             <input id="regpass" type="password" class="validate" name="regpass">
                             <label for="pass">Contrase&ntilde;a</label>
                         </div>
-=======
-                        </div>
                     </div>
+
                     <div class="row">
                         <div class="input-field col s12">
                             <input id="regmail" type="email" class="validate" name="regmail">
@@ -233,7 +259,6 @@
                             <input id="regpass" type="password" class="validate" name="regpass">
                             <label for="pass">Contrase&ntilde;a</label>
                         </div>
->>>>>>> 7b4ebed10570026eb461e8d79b14b595bea05bb6
 
                         <div class="row">
                             <div class="input-field col s6">
@@ -261,56 +286,27 @@
                         </div>
                     </div>
                 </form>
-<<<<<<< HEAD
-=======
-
->>>>>>> 7b4ebed10570026eb461e8d79b14b595bea05bb6
 
                 <script>
-
-<<<<<<< HEAD
-$(document).ready(function () {
-   $("#txtConfirmPassword").on("keyup",checkPasswordMatch);
-});
-$(document).ready(function () {
-   $("#regpass, #regpass2").on("keyup",checkPasswordMatch);
-});
-
-function checkPasswordMatch() {
-    var password = $("#regpass").val();
-    var confirmPassword = $("#regpass2").val();
-
-    if (password != confirmPassword && confirmPassword!="" ){
-        $("#regpass2").css("border-bottom-color","red");}
-    else{
-
-        $("#regpass2").css("border-bottom-color","green");
-}}
-
-</script>
-=======
-
-
                     $(document).ready(function () {
-                        $("#txtConfirmPassword").keyup(checkPasswordMatch);
+                        $("#txtConfirmPassword").on("keyup",checkPasswordMatch);
                     });
                     $(document).ready(function () {
-                        $("#regpass, #regpass2").keyup(checkPasswordMatch);
+                        $("#regpass, #regpass2").on("keyup",checkPasswordMatch);
                     });
-
 
                     function checkPasswordMatch() {
                         var password = $("#regpass").val();
                         var confirmPassword = $("#regpass2").val();
 
-                        if (password != confirmPassword)
-                            $("#divCheckPasswordMatch").html("Las contraseñas NO coinciden");
-                        else
-                            $("#divCheckPasswordMatch").html("Las contraseñas coinciden :D");
-                    }
+                        if (password != confirmPassword && confirmPassword!="" ){
+                            $("#regpass2").css("border-bottom-color","red");}
+                        else{
+
+                            $("#regpass2").css("border-bottom-color","green");
+                        }}
 
                 </script>
->>>>>>> 7b4ebed10570026eb461e8d79b14b595bea05bb6
             </div>
         </div>
 

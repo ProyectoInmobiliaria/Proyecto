@@ -59,11 +59,7 @@ class Comment(models.Model):
         return self.body
     
 class Image(models.Model):
-<<<<<<< HEAD
     casa = models.ForeignKey(Casa, null=True, on_delete=models.CASCADE)
-=======
-    casa = models.ForeignKey(Casa, null=True)
->>>>>>> 7b4ebed10570026eb461e8d79b14b595bea05bb6
     img = models.FileField("Imagen de la Casa", upload_to="casa/")
     
 

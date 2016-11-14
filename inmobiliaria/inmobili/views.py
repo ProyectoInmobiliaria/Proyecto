@@ -115,7 +115,8 @@ def casa(request, id_casa):
     context = RequestContext(request)
     casa = Casa.objects.get(pk=id_casa)
     img = Image.objects.filter(casa=casa)
-    context.update(dict(casa=casa, user=request.user, img=img))
+    f = Fav.objects.filter(casa=casa).filter(author=request.user)
+    context.update(dict(casa=casa, user=request.user, img=img, favorite=f))
     context.update(csrf(request))
     return render_to_response("casa.html", context)
 
@@ -146,13 +147,17 @@ def comment(request, id_casa):
 def favorite(request, id_casa):
     context = RequestContext(request)
     casa = Casa.objects.get(pk=id_casa)
-    f = Fav.objects.filter(casa=casa, author=request.user)
-    if f is None:
+    author=request.user
+    f = Fav.objects.filter(casa=casa).filter(author=author)
+    print f 
+    if not f:
         fav = Fav(author=author, casa=casa)
         fav.save()
+        print "gurde"
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
         f.delete()
+        print "bore"
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def showfav(request):
@@ -164,27 +169,26 @@ def showfav(request):
 def filtrar(request):
     context = RequestContext(request)
     allcasas = Casa.objects.all()
-    foo = []
+    arry = []
+    arry2 = []
     if 'POST' in request.method:
         cas = request.POST['tipo1']
         dep = request.POST['tipo2']
         ofi = request.POST['tipo3']
         opera = request.POST['operacion']
-        pre = request.POST['precio']
+        #pre = request.POST['precio']
         barr = request.POST['barrio']
-        room = request.POST['rooms']
+        #room = request.POST['rooms']
         for c in allcasas:
             if c.tipo in {cas, dep, ofi}:
-                if (c.Operation == opera and c.district == barr and c.rooms == room):
-                    print pre
-                    print pre[0]
-                    print pre[1]
-                    if c.price >= pre[0] and c.price < pre[1]:
-                        foo.append(c)
-                        break
-        foo2 = set(foo)
-        print foo2
-        
-        context.update(dict(casas=foo2))
+                if (c.Operation == opera and c.district == barr ):
+                    arry2.append(c)
+                    break
+        foo2 = set(arry2)
+
+        for a in allcasas:
+            arry.append(a.district)
+        foo = set(arry)
+        context.update(dict(casas=foo2, foo=foo))
         context.update(csrf(request))
         return render_to_response("mapa.html", context)

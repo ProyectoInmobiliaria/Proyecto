@@ -127,18 +127,27 @@
 
     </head>
     <body>
+        {% if not user.is_anonymous %}
         <div class="fixed-action-btn" style="bottom: 24; right: 24px;">
-            <a class="btn-floating btn-large grey" id="navbtn">
-                <i class="large material-icons" style="margin-top:2px; margin-left:1px;">favorite</i>
-            </a>
+            {% if favorite %}
+                <a class="btn-floating btn-large red" id="navbtn" href="{% url 'index:favorite' casa.id %}">
+                    <i class="large material-icons" style="margin-top:2px; margin-left:1px;">favorite</i>
+                </a>
+            {% else %}
+                <a class="btn-floating btn-large grey" id="navbtn" href="{% url 'index:favorite' casa.id %}">
+                    <i class="large material-icons" style="margin-top:2px; margin-left:1px;">favorite</i>
+                </a>
+            {% endif %}
         </div>
-        <br>
-
+        {% endif %}
         <br>
         <div data-flickity>
+            <div class="carousel-cell center">
+                <img style="max-width: 1000; max-height: 500;" class="responsive-img" src="{{ casa.img_frente.url }}"/>
+            </div>
             {% for i in img %}
             <div class="carousel-cell center">
-                <img class="responsive-img" src="{{ i.img.url }}"/>
+                <img style="max-width: 1000; max-height: 500;" class="responsive-img" src="{{ i.img.url }}"/>
             </div>
             {% endfor %}
         </div>
@@ -245,6 +254,7 @@
         <div id="coment" class="row" style="background-color:#F5F5F5">
         </div>
         <div class="spacet" style="background-color:#F5F5F5 !important;"></div>
+        
     </body>
 
 </html>

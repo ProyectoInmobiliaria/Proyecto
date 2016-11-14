@@ -23,7 +23,7 @@
             #map {
                 margin: 0;
                 padding: 0;
-                height: 800px;
+                height: 100%;
                 max-width: none;
             }
 
@@ -144,10 +144,10 @@
                     {% csrf_token %}
                     <li>
 
-                        <!--<div class="chip">
+                        <div class="chip">
 Precio
 <i class="close material-icons">close</i>
-</div>-->
+</div>
                         <div class="ptop"></div>
 
                         <p class="big">Tipo</p>
@@ -171,8 +171,11 @@ Precio
 
                         <p class="big">Precio</p>
                             <div class="row">
-                                <div class="input-field col s12" style="margin-top: 0px;">
-                                    <input style="width: 160px; margin-left: -10px;" id="min" type="text" placeholder="Min."><input style="margin-left: 15px; width: 160px;" id="min" type="text" placeholder="Max.">
+                                <div class="input-field col s5" style="margin-top: 0px; padding-left:0px; padding-right:0px;"> 
+                                    <input id="min" type="text" placeholder="Minimo">
+                                </div>
+                                <div class="input-field col s5 push-l2" style="margin-top: 0px; padding-left:0px; padding-right:0px;"> 
+                                <input id="min" type="text" placeholder="M&aacute;ximo">
                                 </div>
                             </div>
 
@@ -225,7 +228,8 @@ Precio
                     center: {lat: -31.4 , lng: -64.1833},
                     zoom: 13,
                     mapTypeControl: false,
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                    mapTypeId: google.maps.MapTypeId.ROADMAP,
+                    styles: [{"featureType":"all","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"all","stylers":[{"visibility":"simplified"},{"color":"#5b6571"},{"lightness":"35"}]},{"featureType":"administrative.neighborhood","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"landscape","elementType":"all","stylers":[{"visibility":"on"},{"color":"#f3f4f4"}]},{"featureType":"landscape.man_made","elementType":"geometry","stylers":[{"weight":0.9},{"visibility":"off"}]},{"featureType":"poi.park","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#83cead"}]},{"featureType":"road","elementType":"all","stylers":[{"visibility":"on"},{"color":"#ffffff"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"on"},{"color":"#fee379"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"road.highway","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.local","elementType":"labels","stylers":[{"visibility":"shown"},{"color":"#95a5a6"}, {"weight":0.1}]},{"featureType":"administrative.country","elementType":"geometry","stylers":[{"visibility":"shown"},{"color":"#95a5a6"}]},{"featureType":"road.highway","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"road.highway.controlled_access","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"road.arterial","elementType":"all","stylers":[{"visibility":"simplified"},{"color":"#ffffff"}]},{"featureType":"road.arterial","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"visibility":"on"},{"color":"#7fc8ed"}]}]
                 };
 
                 window.map1 = new google.maps.Map(document.getElementById("map"),mapOptions);
@@ -237,28 +241,32 @@ Precio
                     geocoder.geocode({ 'address': '{{casa.address}}, {{casa.district}}, Argentina'}, function(results, status) {
                         if (status == 'OK') {
                             //locations.push(results[0].geometry.location);
-                            //var image = '/static/marker.png';
-                            var markerOptions = { position: results[0].geometry.location}
-                            //icon: image}
+                            var image = '/static/houseicon.png';
+                            var markerOptions = { position: results[0].geometry.location,
+                            icon: image}
                             marker = new google.maps.Marker(markerOptions);
                             marker.setMap(map1);
                             console.log("{{casa.address}}")
 
                             infoBubble = new InfoBubble({
-                                content: '<a href="#"><img class="responsive-img" src="{{casa.img_frente.url}}" style="margin-top: 15px;margin-left: 15px;max-width: 85px;"></a> <a style="margin-top: 5px; margin-right: 5px;" href="{% url "index:favorite" casa.id %}" class="secondary-content"><i class="material-icons">grade</i></a> <p style="margin-top: -60px;margin-left: 150px;">{{casa.address}}, {{casa.district}}, Argentina</p>  <p style="margin-left: 150px;">price: {{casa.price}}</p> <a href="{% url "index:casa" casa.id %}" style="margin-left: 419px;">Show more</a>',
+                                 content: '<img src="https://www.yellowbustours.com/admin/public/getimage.ashx?Image=/Files/Images/YellowBus/Braga/sugestao.jpg&Format=jpg&Width=280&Height=100&Crop=0" style="filter: grayscale(100%) brightness(60%);"><p style="position:absolute; top:17px; left:15px; color:#fff; font-size:17px; padding-left:5px; font-family:Roboto-bold;">DEPARTAMENTO</p> <p style="position:absolute; top:50px; left:15px; color:#fff; font-size:13px; padding-left:5px;">Villa Urquiza</p> <p style="padding: 0px 10px 0px 10px; overflow: hidden;display: -webkit-box;-webkit-line-clamp: 5; -webkit-box-orient: vertical; font-size:12px; color:#616161;"> Venta de Departamento 2 AMBIENTES en VILLA URQUIZA. Frente con Balcón Terraza de 8.66 x 3, y opcional cochera fija Cubierta. El Edificio cuenta con Amenities. Piscina, patio de juegos y Quincho o Salón de usos Múltiples El Departamento se encuentra en Excelente Estado y cuenta con: Living Comedor (5.50 x 3.50) 1º Dormitorio (3.30 x 3.00) Cocina con Lavadero Incorporado (5.00 x 1.80) Baño Completo. Baulera tipo jaula de 3.00 x 1.50 x 2.70 (en sótano del edificio) Opcional Cochera Fija Cubierta. </p><div class="divider" style="background-color:#95a5a6;"></div><div class="card-action"><a class="btn z-depth-0" style="font-size:15px; color:#616161; background-color:#fff; width:100%;"><i class="material-icons right">keyboard_arrow_right</i>VER MAS</a>',
                                 position: new google.maps.LatLng(-35, 151),
-                                shadowStyle: 1,
+                                shadowStyle: 0,
                                 padding: 0,
-                                backgroundColor: 'rgb(211, 211, 211)',
-                                borderRadius: 4,
-                                arrowSize: 10,
+                                backgroundColor: '#fff',
+                                borderRadius: 0,
+                                borderColor: "#95a5a6",
+                                arrowSize: 0,
                                 border: null,
                                 disableAutoPan: true,
                                 hideCloseButton: true,
-                                arrowPosition: 30,
+                                arrowPosition: 48,
                                 backgroundClassName: 'phoney',
-                                arrowStyle: 2,
-                                maxHeight: 94
+                                arrowStyle: 0,
+                                minWidth: 282,
+                                maxWidth: 282,
+                                maxHeight: 256,
+                                minHeight: 256,
                             });
                             addListenerToMarker(marker, infoBubble);
                             function addListenerToMarker(marker, infoBubble){

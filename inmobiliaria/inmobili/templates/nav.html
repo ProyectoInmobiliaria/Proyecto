@@ -113,32 +113,26 @@
         </ul>
 
         <!-- Notificaciones -->
-
-        <div id="rolfix" class="modal bottom-sheet">
-            <div class="modal-content">
-                <h4>Notificaciones</h4>
-            </div>
-            <ul class="collection">
-                <li class="collection-item avatar">
-                    <i class="material-icons circle blue">vpn_key</i>
-                    <span class="title">Title</span>
-                    <p>First Line <br>
-                        Second Line
-                    </p>
-                    <a class="secondary-content"><i class="material-icons red-text">favorite</i></a>
-                </li>
-                <li class="collection-item avatar">
-                    <i class="material-icons circle green">insert_chart</i>
-                    <span class="title">Title</span>
-                    <p>First Line <br>
-                        Second Line
-                    </p>
-                    <a class="secondary-content"><i class="material-icons grey-text" id="myfav">favorite_border</i></a>
-                </li>
-            </ul>
-        </div>
+        {% ifchanged casa.created %}
+            {% for casa in casa_list %}
+                <div id="rolfix" class="modal bottom-sheet">
+                    <div class="modal-content">
+                        <h4>Casa Nueva!</h4>
+                    </div>
+                    <ul style="margin-bottom: 2; margin-top: -1%;" class="collection">
+                        <li class="collection-item avatar">
+                            <i class="material-icons circle blue">home</i>
+                            <span class="title">{{casa.address}}</span>
+                            <p>Barrio: {{casa.district}}<br>
+                                Precio: {{casa.price}}
+                            </p>
+                            <a class="secondary-content"><i class="material-icons red-text">favorite</i></a>
+                        </li>
+                    </ul>
+                </div>
+            {% endfor %}
+        {% endifchanged %}
     {% endif %}
-
 {% else %}
 <!--Not Logged-->
 <nav>
@@ -235,19 +229,6 @@
                             <label for="usuario">Nombre de usuario</label>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="regmail" type="email" class="validate" name="regmail">
-                            <label for="email">Correo electr&oacute;nico</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="regpass" type="password" class="validate" name="regpass">
-                            <label for="pass">Contrase&ntilde;a</label>
-                        </div>
-                    </div>
-
                     <div class="row">
                         <div class="input-field col s12">
                             <input id="regmail" type="email" class="validate" name="regmail">

@@ -27,7 +27,7 @@ from .models import Perfil
 def index(request):
     context = RequestContext(request)
     user = request.user
-    casas = Casa.objects.all().order_by("id")[0:10]
+    casas = Casa.objects.all().order_by("-created")[0:4]
     paginator = Paginator(casas, 5)
     try: page = int(request.GET.get("page", '5'))
     except ValueError: page = 1
@@ -176,16 +176,107 @@ def busqueda(request):
         dep = request.POST.get('tipo2', '')
         ofi = request.POST.get('tipo3', '')
         opera = request.POST.get('operacion', '')
-        #pre = request.POST.get('precio', '')
+        premin = request.POST.get('premin', '0')
+        premax = request.POST.get('premax', '')
         barr = request.POST.get('barrio', '')
-        #room = request.POST.get('rooms', '')
+        room = request.POST.get('rooms', '')
+
         for c in allcasas:
             if c.tipo in {cas, dep, ofi}:
-                if (c.Operation == opera and c.district == barr ):
-                    arry2.append(c)
-                    break
+                if opera != '':
+                    if premax != '':
+                        if  barr != '':
+                            if room != '':
+                                amax = room[1:]
+                                amin = room[:1]
+                                amin = int(amin)
+                                amax = int(amax)
+                                if (c.price >= premin and c.price <= premax and c.rooms >= amin and c.rooms <= amax and c.district == barr and c.Operation == opera):
+                                    arry2.append(c)
+                            else:
+                                if (c.price >= premin and c.price <= premax and c.district == barr and c.Operation == opera):
+                                    arry2.append(c)
+                        else:
+                            if room != '':
+                                amax = room[1:]
+                                amin = room[:1]
+                                amin = int(amin)
+                                amax = int(amax)
+                                if (c.price >= premin and c.price <= premax and c.rooms >= amin and c.rooms <= amax and c.Operation == opera):
+                                    arry2.append(c)
+                            else:
+                                if (c.price >= premin and c.price <= premax and c.Operation == opera):
+                                    arry2.append(c)
+                    else:
+                        if  barr != '':
+                            if room != '':
+                                amax = room[1:]
+                                amin = room[:1]
+                                amin = int(amin)
+                                amax = int(amax)
+                                if (c.rooms >= amin and c.rooms <= amax and c.district == barr and c.Operation == opera):
+                                    arry2.append(c)
+                            else:
+                                if (c.district == barr and c.Operation == opera):
+                                    arry2.append(c)
+                        else:
+                            if room != '':
+                                amax = room[1:]
+                                amin = room[:1]
+                                amin = int(amin)
+                                amax = int(amax)
+                                if (c.rooms >= amin and c.rooms <= amax and c.Operation == opera):
+                                    arry2.append(c)
+                            else:
+                                if (c.Operation == opera):
+                                    arry2.append(c)
+                else:
+                    if premax != '':
+                        if  barr != '':
+                            if room != '':
+                                amax = room[1:]
+                                amin = room[:1]
+                                amin = int(amin)
+                                amax = int(amax)
+                                if (c.price >= premin and c.price <= premax and c.rooms >= amin and c.rooms <= amax and c.district == barr):
+                                    arry2.append(c)
+                            else:
+                                if (c.price >= premin and c.price <= premax and c.district == barr):
+                                    arry2.append(c)
+                        else:
+                            if room != '':
+                                amax = room[1:]
+                                amin = room[:1]
+                                amin = int(amin)
+                                amax = int(amax)
+                                if (c.price >= premin and c.price <= premax and c.rooms >= amin and c.rooms <= amax):
+                                    arry2.append(c)
+                            else:
+                                if (c.price >= premin and c.price <= premax):
+                                    arry2.append(c)
+                    else:
+                        if  barr != '':
+                            if room != '':
+                                amax = room[1:]
+                                amin = room[:1]
+                                amin = int(amin)
+                                amax = int(amax)
+                                if (c.rooms >= amin and c.rooms <= amax and c.district == barr):
+                                    arry2.append(c)
+                            else:
+                                if (c.district == barr):
+                                    arry2.append(c)
+                        else:
+                            if room != '':
+                                amax = room[1:]
+                                amin = room[:1]
+                                amin = int(amin)
+                                amax = int(amax)
+                                if (c.rooms >= amin and c.rooms <= amax):
+                                    arry2.append(c)
+                            else:
+                                arry2.append(c)
         foo2 = set(arry2)
-
         for a in allcasas:
             arry.append(a.district)
         foo = set(arry)

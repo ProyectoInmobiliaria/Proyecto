@@ -144,11 +144,11 @@
                     {% csrf_token %}
                     <li>
 
-                        <div class="chip">
-Precio
-<i class="close material-icons">close</i>
-</div>
-                        <div class="ptop"></div>
+                        <!--<div class="chip">
+                            Precio
+                            <i class="close material-icons">close</i>
+                        </div>
+                        <div class="ptop"></div>-->
 
                         <p class="big">Tipo</p>
                         <p style="margin-top:0px;">
@@ -170,14 +170,14 @@ Precio
                         </div>
 
                         <p class="big">Precio</p>
-                            <div class="row">
-                                <div class="input-field col s5" style="margin-top: 0px; padding-left:0px; padding-right:0px;"> 
-                                    <input id="min" type="text" placeholder="Minimo">
-                                </div>
-                                <div class="input-field col s5 push-l2" style="margin-top: 0px; padding-left:0px; padding-right:0px;"> 
-                                <input id="min" type="text" placeholder="M&aacute;ximo">
-                                </div>
+                        <div class="row">
+                            <div class="input-field col s5" style="margin-top: 0px; padding-left:0px; padding-right:0px;"> 
+                                <input id="min" type="text" placeholder="Minimo" name="premin">
                             </div>
+                            <div class="input-field col s5 push-l2" style="margin-top: 0px; padding-left:0px; padding-right:0px;"> 
+                                <input id="min" type="text" placeholder="M&aacute;ximo" name="premax">
+                            </div>
+                        </div>
 
 
                         <p class="big">Barrio</p>
@@ -193,19 +193,19 @@ Precio
 
                         <p class="big">Ambientes</p>
                         <div class="input-field col s12 grey-text" style="margin-top: 0px;">
-                            <select style="visibility: hidden;" multiple style="margin-bottom:-100px;" name="rooms">
+                            <select style="visibility: hidden;" style="margin-bottom:-100px;" name="rooms">
                                 <option value="" disabled selected>Cualquiera</option>
-                                <option value="1">1-3</option>
-                                <option value="2">4-6</option>
-                                <option value="6">6-9</option>
-                                <option value="4">+9</option>
+                                <option value="13">1-3</option>
+                                <option value="46">4-6</option>
+                                <option value="69">6-9</option>
+                                <option value="9100">+9</option>
                             </select>
                         </div>
 
                         <button class="btn waves-effect waves-light right" type="submit" name="action">Filtrar
                             <i class="material-icons right">format_paint</i>
                         </button>
-                        
+
                         <br>
                     </li>
                 </form>
@@ -243,13 +243,13 @@ Precio
                             //locations.push(results[0].geometry.location);
                             var image = '/static/houseicon.png';
                             var markerOptions = { position: results[0].geometry.location,
-                            icon: image}
+                                                 icon: image}
                             marker = new google.maps.Marker(markerOptions);
                             marker.setMap(map1);
                             console.log("{{casa.address}}")
 
                             infoBubble = new InfoBubble({
-                                 content: '<img src="https://www.yellowbustours.com/admin/public/getimage.ashx?Image=/Files/Images/YellowBus/Braga/sugestao.jpg&Format=jpg&Width=280&Height=100&Crop=0" style="filter: grayscale(100%) brightness(60%);"><p style="position:absolute; top:17px; left:15px; color:#fff; font-size:17px; padding-left:5px; font-family:Roboto-bold;">DEPARTAMENTO</p> <p style="position:absolute; top:50px; left:15px; color:#fff; font-size:13px; padding-left:5px;">Villa Urquiza</p> <p style="padding: 0px 10px 0px 10px; overflow: hidden;display: -webkit-box;-webkit-line-clamp: 5; -webkit-box-orient: vertical; font-size:12px; color:#616161;"> Venta de Departamento 2 AMBIENTES en VILLA URQUIZA. Frente con Balcón Terraza de 8.66 x 3, y opcional cochera fija Cubierta. El Edificio cuenta con Amenities. Piscina, patio de juegos y Quincho o Salón de usos Múltiples El Departamento se encuentra en Excelente Estado y cuenta con: Living Comedor (5.50 x 3.50) 1º Dormitorio (3.30 x 3.00) Cocina con Lavadero Incorporado (5.00 x 1.80) Baño Completo. Baulera tipo jaula de 3.00 x 1.50 x 2.70 (en sótano del edificio) Opcional Cochera Fija Cubierta. </p><div class="divider" style="background-color:#95a5a6;"></div><div class="card-action"><a class="btn z-depth-0" style="font-size:15px; color:#616161; background-color:#fff; width:100%;"><i class="material-icons right">keyboard_arrow_right</i>VER MAS</a>',
+                                content: '<img src="https://www.yellowbustours.com/admin/public/getimage.ashx?Image=/Files/Images/YellowBus/Braga/sugestao.jpg&Format=jpg&Width=280&Height=100&Crop=0" style="filter: grayscale(100%) brightness(60%);"><p style="position:absolute; top:17px; left:15px; color:#fff; font-size:17px; padding-left:5px; font-family:Roboto-bold;">{{casa.tipo}}</p> <p style="position:absolute; top:50px; left:15px; color:#fff; font-size:13px; padding-left:5px;">{{casa.district}}</p> <p style="padding: 0px 10px 0px 10px; overflow: hidden;display: -webkit-box;-webkit-line-clamp: 5; -webkit-box-orient: vertical; font-size:12px; color:#616161;"> Venta de Departamento 2 AMBIENTES en VILLA URQUIZA. Frente con Balcón Terraza de 8.66 x 3, y opcional cochera fija Cubierta. El Edificio cuenta con Amenities. Piscina, patio de juegos y Quincho o Salón de usos Múltiples El Departamento se encuentra en Excelente Estado y cuenta con: Living Comedor (5.50 x 3.50) 1º Dormitorio (3.30 x 3.00) Cocina con Lavadero Incorporado (5.00 x 1.80) Baño Completo. Baulera tipo jaula de 3.00 x 1.50 x 2.70 (en sótano del edificio) Opcional Cochera Fija Cubierta. </p><div class="divider" style="background-color:#95a5a6;"></div><div class="card-action"><a href="{% url "index:casa" casa.id %}" class="btn z-depth-0" style="font-size:15px; color:#616161; background-color:#fff; width:100%;"><i class="material-icons right">keyboard_arrow_right</i>VER MAS</a>',
                                 position: new google.maps.LatLng(-35, 151),
                                 shadowStyle: 0,
                                 padding: 0,
@@ -261,7 +261,7 @@ Precio
                                 disableAutoPan: true,
                                 hideCloseButton: true,
                                 arrowPosition: 48,
-                                backgroundClassName: 'phoney',
+                                backgroundClassName: 'phoney',  
                                 arrowStyle: 0,
                                 minWidth: 282,
                                 maxWidth: 282,

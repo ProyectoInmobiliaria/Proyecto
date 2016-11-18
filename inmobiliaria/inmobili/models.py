@@ -66,3 +66,11 @@ class Image(models.Model):
 class Fav(models.Model):
     author = models.CharField(max_length=60)
     casa = models.ForeignKey(Casa, on_delete=models.CASCADE)
+    
+class Respuesta(models.Model):
+    comment = models.OneToOneField(Comment, null=True, on_delete=models.CASCADE)
+    author = models.CharField(max_length=60)
+    body = models.CharField(max_length=600)
+    
+    def __unicode__(self):
+        return self.body

@@ -1,0 +1,94 @@
+if opera != '':
+                    if premax != '':
+                        if  barr != '':
+                            if room != '':
+                                amax = room[1:]
+                                amin = room[:1]
+                                amin = int(amin)
+                                amax = int(amax)
+                                if (c.price >= premin and c.price <= premax and c.rooms >= amin and c.rooms <= amax and c.district == barr and c.Operation == opera):
+                                    arry2.append(c)
+                            else:
+                                if (c.price >= premin and c.price <= premax and c.district == barr and c.Operation == opera):
+                                    arry2.append(c)
+                        else:
+                            if room != '':
+                                amax = room[1:]
+                                amin = room[:1]
+                                amin = int(amin)
+                                amax = int(amax)
+                                if (c.price >= premin and c.price <= premax and c.rooms >= amin and c.rooms <= amax and c.Operation == opera):
+                                    arry2.append(c)
+                            else:
+                                if (c.price >= premin and c.price <= premax and c.Operation == opera):
+                                    arry2.append(c)
+                    else:
+                        if  barr != '':
+                            if room != '':
+                                amax = room[1:]
+                                amin = room[:1]
+                                amin = int(amin)
+                                amax = int(amax)
+                                if (c.rooms >= amin and c.rooms <= amax and c.district == barr and c.Operation == opera):
+                                    arry2.append(c)
+                            else:
+                                if (c.district == barr and c.Operation == opera):
+                                    arry2.append(c)
+                        else:
+                            if room != '':
+                                amax = room[1:]
+                                amin = room[:1]
+                                amin = int(amin)
+                                amax = int(amax)
+                                if (c.rooms >= amin and c.rooms <= amax and c.Operation == opera):
+                                    arry2.append(c)
+                            else:
+                                if (c.Operation == opera):
+                                    arry2.append(c)
+                else:
+                    if premax != '':
+                        if  barr != '':
+                            if room != '':
+                                amax = room[1:]
+                                amin = room[:1]
+                                amin = int(amin)
+                                amax = int(amax)
+                                if (c.price >= premin and c.price <= premax and c.rooms >= amin and c.rooms <= amax and c.district == barr):
+                                    arry2.append(c)
+                            else:
+                                if (c.price >= premin and c.price <= premax and c.district == barr):
+                                    arry2.append(c)
+                        else:
+                            if room != '':
+                                amax = room[1:]
+                                amin = room[:1]
+                                amin = int(amin)
+                                amax = int(amax)
+                                if (c.price >= premin and c.price <= premax and c.rooms >= amin and c.rooms <= amax):
+                                    arry2.append(c)
+                            else:
+                                if (c.price >= premin and c.price <= premax):
+                                    arry2.append(c)
+                    else:
+                        if  barr != '':
+                            if room != '':
+                                amax = room[1:]
+                                amin = room[:1]
+                                amin = int(amin)
+                                amax = int(amax)
+                                if (c.rooms >= amin and c.rooms <= amax and c.district == barr):
+                                    arry2.append(c)
+                            else:
+                                if (c.district == barr):
+                                    arry2.append(c)
+                        else:
+                            if room != '':
+                                amax = room[1:]
+                                amin = room[:1]
+                                amin = int(amin)
+                                amax = int(amax)
+                                if (c.rooms >= amin and c.rooms <= amax):
+                                    arry2.append(c)
+                            else:
+                                arry2.append(c)
+        foo2 = set(arry2)

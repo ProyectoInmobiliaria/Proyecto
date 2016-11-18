@@ -124,8 +124,8 @@ def comentarios(request, id_casa):
     context = RequestContext(request)
     u = User.objects.all()
     casa = Casa.objects.get(pk=id_casa)
-    context['comments'] = Comment.objects.filter(casa=casa)
-    context.update(dict(casa=casa, users=u))
+    con = Comment.objects.filter(casa=casa)
+    context.update(dict(casa=casa, users=u, comments=con))
     context.update(csrf(request))
     return render_to_response("coments.html", context)
 
@@ -169,8 +169,10 @@ def showfav(request):
 def busqueda(request):
     context = RequestContext(request)
     allcasas = Casa.objects.all()
-    arry = []
-    arry2 = []
+    barrio = []
+    attributosCasa = []
+    attributosIngresados = []
+    casa = []
     if 'POST' in request.method:
         cas = request.POST.get('tipo1', '')
         dep = request.POST.get('tipo2', '')
@@ -180,106 +182,17 @@ def busqueda(request):
         premax = request.POST.get('premax', '')
         barr = request.POST.get('barrio', '')
         room = request.POST.get('rooms', '')
-
+        
+        
+        
         for c in allcasas:
             if c.tipo in {cas, dep, ofi}:
-                if opera != '':
-                    if premax != '':
-                        if  barr != '':
-                            if room != '':
-                                amax = room[1:]
-                                amin = room[:1]
-                                amin = int(amin)
-                                amax = int(amax)
-                                if (c.price >= premin and c.price <= premax and c.rooms >= amin and c.rooms <= amax and c.district == barr and c.Operation == opera):
-                                    arry2.append(c)
-                            else:
-                                if (c.price >= premin and c.price <= premax and c.district == barr and c.Operation == opera):
-                                    arry2.append(c)
-                        else:
-                            if room != '':
-                                amax = room[1:]
-                                amin = room[:1]
-                                amin = int(amin)
-                                amax = int(amax)
-                                if (c.price >= premin and c.price <= premax and c.rooms >= amin and c.rooms <= amax and c.Operation == opera):
-                                    arry2.append(c)
-                            else:
-                                if (c.price >= premin and c.price <= premax and c.Operation == opera):
-                                    arry2.append(c)
-                    else:
-                        if  barr != '':
-                            if room != '':
-                                amax = room[1:]
-                                amin = room[:1]
-                                amin = int(amin)
-                                amax = int(amax)
-                                if (c.rooms >= amin and c.rooms <= amax and c.district == barr and c.Operation == opera):
-                                    arry2.append(c)
-                            else:
-                                if (c.district == barr and c.Operation == opera):
-                                    arry2.append(c)
-                        else:
-                            if room != '':
-                                amax = room[1:]
-                                amin = room[:1]
-                                amin = int(amin)
-                                amax = int(amax)
-                                if (c.rooms >= amin and c.rooms <= amax and c.Operation == opera):
-                                    arry2.append(c)
-                            else:
-                                if (c.Operation == opera):
-                                    arry2.append(c)
-                else:
-                    if premax != '':
-                        if  barr != '':
-                            if room != '':
-                                amax = room[1:]
-                                amin = room[:1]
-                                amin = int(amin)
-                                amax = int(amax)
-                                if (c.price >= premin and c.price <= premax and c.rooms >= amin and c.rooms <= amax and c.district == barr):
-                                    arry2.append(c)
-                            else:
-                                if (c.price >= premin and c.price <= premax and c.district == barr):
-                                    arry2.append(c)
-                        else:
-                            if room != '':
-                                amax = room[1:]
-                                amin = room[:1]
-                                amin = int(amin)
-                                amax = int(amax)
-                                if (c.price >= premin and c.price <= premax and c.rooms >= amin and c.rooms <= amax):
-                                    arry2.append(c)
-                            else:
-                                if (c.price >= premin and c.price <= premax):
-                                    arry2.append(c)
-                    else:
-                        if  barr != '':
-                            if room != '':
-                                amax = room[1:]
-                                amin = room[:1]
-                                amin = int(amin)
-                                amax = int(amax)
-                                if (c.rooms >= amin and c.rooms <= amax and c.district == barr):
-                                    arry2.append(c)
-                            else:
-                                if (c.district == barr):
-                                    arry2.append(c)
-                        else:
-                            if room != '':
-                                amax = room[1:]
-                                amin = room[:1]
-                                amin = int(amin)
-                                amax = int(amax)
-                                if (c.rooms >= amin and c.rooms <= amax):
-                                    arry2.append(c)
-                            else:
-                                arry2.append(c)
-        foo2 = set(arry2)
+                casa.append(c)
+        
+        casas = set(casa)
         for a in allcasas:
-            arry.append(a.district)
-        foo = set(arry)
-        context.update(dict(casas=foo2, foo=foo))
+            barrio.append(a.district)
+        barrios = set(barrio)
+        context.update(dict(casas=casas, foo=barrios))
         context.update(csrf(request))
         return render_to_response("mapa.html", context)

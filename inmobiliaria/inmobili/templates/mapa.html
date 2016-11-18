@@ -163,7 +163,7 @@
                         <p class="big" style="margin-top: -10px !important;">Operacion</p>
                         <div class="input-field col s12 grey-text" style="margin-top:-1px;">
                             <select style="visibility: hidden;" name="operacion">
-                                <option value="" disabled selected>Cualquiera</option>
+                                <option disabled selected>Cualquiera</option>
                                 <option value="Venta">Venta</option>
                                 <option value="Alquiler">Alquiler</option>
                             </select>
@@ -183,7 +183,7 @@
                         <p class="big">Barrio</p>
                         <div class="input-field col s12 grey-text" style="margin-top:-1px;">
                             <select style="visibility: hidden;" name="barrio">
-                                <option value="" disabled selected>Cualquiera</option>
+                                <option disabled selected>Cualquiera</option>
 
                                 {% for a in foo %}
                                 <option value="{{a}}">{{a}}</option>
@@ -194,11 +194,11 @@
                         <p class="big">Ambientes</p>
                         <div class="input-field col s12 grey-text" style="margin-top: 0px;">
                             <select style="visibility: hidden;" style="margin-bottom:-100px;" name="rooms">
-                                <option value="" disabled selected>Cualquiera</option>
-                                <option value="13">1-3</option>
-                                <option value="46">4-6</option>
-                                <option value="69">6-9</option>
-                                <option value="9100">+9</option>
+                                <option disabled selected>Cualquiera</option>
+                                <option value="1-3">1-3</option>
+                                <option value="4-6">4-6</option>
+                                <option value="6-9">6-9</option>
+                                <option value="9-100">+9</option>
                             </select>
                         </div>
 

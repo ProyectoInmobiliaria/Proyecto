@@ -125,7 +125,7 @@ def comentarios(request, id_casa):
     u = User.objects.all()
     casa = Casa.objects.get(pk=id_casa)
     con = Comment.objects.filter(casa=casa)
-    context.update(dict(casa=casa, users=u, comments=con))
+    context.update(dict(casa=casa, users=u, comments=con, unu=request.user))
     context.update(csrf(request))
     return render_to_response("coments.html", context)
 
@@ -170,29 +170,49 @@ def busqueda(request):
     context = RequestContext(request)
     allcasas = Casa.objects.all()
     barrio = []
-    attributosCasa = []
-    attributosIngresados = []
+    attributosIngresados = {}
     casa = []
     if 'POST' in request.method:
-        cas = request.POST.get('tipo1', '')
-        dep = request.POST.get('tipo2', '')
-        ofi = request.POST.get('tipo3', '')
-        opera = request.POST.get('operacion', '')
-        premin = request.POST.get('premin', '0')
-        premax = request.POST.get('premax', '')
-        barr = request.POST.get('barrio', '')
-        room = request.POST.get('rooms', '')
+        attributosIngresados['tipo__in'] = []
+        attributosIngresados['tipo__in'].append(request.POST.get('tipo1', None))
+        attributosIngresados['tipo__in'].append(request.POST.get('tipo2', None))
+        attributosIngresados['tipo__in'].append(request.POST.get('tipo3', None))
+        
+        if request.POST.get('operacion', False):
+            attributosIngresados['Operation'] = request.POST.get('operacion', None)
+        if not request.POST.get('premin', 0) == '':
+            attributosIngresados['price__gte'] = request.POST.get('premin', 0)
+        if not request.POST.get('premax', 0) == '':
+            attributosIngresados['price__lte'] = request.POST.get('premax', 0)
         
         
+        if request.POST.get('barrio', False):
+            attributosIngresados['district'] = request.POST.get('barrio', None)
+        if request.POST.get('rooms', False):
+            rooms = request.POST.get('rooms', None).split('-')
+            attributosIngresados['room__gte'] = rooms[0]
+            attributosIngresados['room__lte'] = rooms[1]
         
-        for c in allcasas:
-            if c.tipo in {cas, dep, ofi}:
-                casa.append(c)
+        print(dict(attributosIngresados))
         
-        casas = set(casa)
+        casas = Casa.objects.filter(**attributosIngresados)
+        
+        
         for a in allcasas:
             barrio.append(a.district)
         barrios = set(barrio)
         context.update(dict(casas=casas, foo=barrios))
         context.update(csrf(request))
         return render_to_response("mapa.html", context)
+    
+def answer(request, id_comment):
+    context = RequestContext(request)
+    coment = Comment.objects.get(pk=id_comment)
+    if 'POST' in request.method:
+        author = request.user
+        content = request.POST['body']
+        respuesta = Respuesta(comment=coment,
+                             author=author,
+                             body=content)
+        respuesta.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

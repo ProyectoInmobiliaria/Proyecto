@@ -163,7 +163,9 @@ def favorite(request, id_casa):
 def showfav(request):
     context = RequestContext(request)
     user = request.user
-    context['favorites'] = Fav.objects.filter(author=user)
+    favorites = Fav.objects.filter(author=user)
+    context.update(dict(user=user, favorites=favorites))
+    context.update(csrf(request))
     return render_to_response("favorites.html", context)
 
 def busqueda(request):

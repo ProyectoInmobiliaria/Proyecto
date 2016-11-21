@@ -14,7 +14,11 @@
             background-image: url("{% static 'ddd.png' %}");
         }
 
-        .card {
+        .center {
+			text-align: center;
+			font-family: GillSans;
+		}
+		.card {
             border-radius: 0px;
         }
 
@@ -169,33 +173,53 @@
                     <div class="card ns">
                         <div class="card-content">
                             <div class="tabs-vertical-2">
-
                                 <div id="a">
-
                                     <p>Usuario: {{user.username}}</p>
                                     <p>Nombre: {{user.first_name}} {{user.last_name}}</p>
                                     <p>Date Joined: {{user.date_joined}}</p>
                                     <p>Email: {{user.email}}</p>
-
-
                                 </div>
-
                                 <div id="b">
-
                                     {% for i in favorites %}
-                                    {{i.casa}}<br>
+                                    <div class="center">
+										<l >Casas que te han interesado</l>
+                                        <table class="highlight bordered seisuno left">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="left-align"><a href="{% url 'index:casa' i.casa.id %}">{{i.casa}}</a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                     {% empty %}
                                     <li>No posee casas favoritas</li>
                                     {% endfor %}
-
                                 </div>
-
-                                <div id="c">c</div>
-
-
-
+                                <div id="c">
+                                    <div class="row">
+                                        <form class="col s12"  method="POST">
+                                            {% csrf_token %}
+                                            <div class="row">
+                                                <div class="input-field col s6">
+                                                    <input id="regpass" type="password" class="validate" name="edipass">
+                                                    <label for="pass">Contrase&ntilde;a</label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="input-field col s6">
+                                                    <input id="regpass2" type="password" class="validate" name="edipass2">
+                                                    <label for="pass">Repetir contrase&ntilde;a</label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <button class="btn waves-effect waves-light grey darken-3" type="submit" name="action" style="width:100%;">Cambiar</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
-
                         </div>
                     </div>
                 </div>

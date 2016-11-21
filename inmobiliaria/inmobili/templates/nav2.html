@@ -54,11 +54,12 @@
 </script>
 <nav>
     <div class="nav-wrapper">
-        <div class="hide-on-small-only" data-activates="slide-out" id="leftspace"><a href="{% url 'index:showfav' %}" class="waves-effect waves-light btn grey-text transparent z-depth-0" style="border:1px solid #ABABAB;">{{user}}</a></div>
+        <div class="hide-on-small-only" data-activates="slide-out" id="leftspace"><a href="{% url 'index:showfav' %}" class="waves-effect waves-light btn transparent z-depth-0" style="border:1px solid #9E9E9E; color:#9E9E9E">{{user}}</a></div>
         <a href="#" data-activates="slide-out" class="button-collapsed hide-on-med-and-up"><i class="material-icons" style="font-size:45px; margin-left:8px;">menu</i></a>
         <ul class="right hide-on-med-and-down menu">  
-            <li><a href="{% url 'index:logout' %}"><i class="material-icons" style="color: #ABABAB;">close</i></a></li>
-            <a href="http://127.0.0.1:8000/" class="brand-logo center" style="color: #ABABAB;">Logo</a>
+            <li><a href="{% url 'index:logout' %}"><i class="material-icons" style="color: #9E9E9E;">close</i></a></li>
+            <a href="http://127.0.0.1:8000/" class="brand-logo center" style="color: #9E9E9E; margin-top:10px;"><img src="{% static 'icong.png' %}"></a>
+            <li><a class="modal-trigger" id="rolfi" href="#rolfix" data-bubble="2"><i class="material-icons" style="color: #9E9E9E;">new_releases</i></a></li>
 
         </ul>
     </div>
@@ -89,8 +90,6 @@
 <nav>
     <div class="nav-wrapper">
         <ul class="right hide-on-med-and-down">
-            <li><a class="btncontact" style="color: #ABABAB;">FEATURES</a></li>
-            <li><a class="btncontact" style="color: #ABABAB;">CONTACTO</a></li>
             <a href="http://127.0.0.1:8000/" class="brand-logo center" style="color: #ABABAB;">Logo</a>
             <li><a class="waves-effect waves-light btn grey-text transparent z-depth-0" id="myModal" href="#modal1" style="border:1px solid #ABABAB;">Ingresar</a></li>
         </ul>
@@ -245,32 +244,6 @@
                 </script>
             </div>
         </div>
-
-        <!-- Recuperar contraseña -->
-
-        <!--
-<div id="contrasenia" class="col s12">
-<div id="unread" class="col s12">
-<div class="row">
-<form class="col s12">
-<div class="row">
-<br>
-<div class="input-field col s12">
-<input id="email" type="email" class="validate">
-<label for="email">Correo electr&oacute;nico</label>
-</div>
-</div>
-<div class="row">
-<div class="input-field col s12">
-<a href="login.html" class="btn waves-effect waves-light col grey darken-3 s12">Recuperar contrase&ntilde;a</a>
-</div>
-</div>
-</form>
-</div>
-</div>
-</div>
--->
-
     </div>
 </div>
 

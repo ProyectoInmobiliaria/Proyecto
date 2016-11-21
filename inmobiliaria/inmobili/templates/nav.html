@@ -55,14 +55,13 @@
     {% if request.path == "/showfav/" %}
         <nav>
             <div class="nav-wrapper">
-                <ul class="lefth hide-on-med-and-down menu">
-                    <a href="{{request.META.HTTP_REFERER}}"><i class="medium material-icons">keyboard_backspace</i></a>
+                <ul class="menu">
+                    <a href="{{request.META.HTTP_REFERER}}"><i class="medium material-icons" style="margin-top:0px;">reply</i></a>
                 </ul>
-                <a href="#" data-activates="slide-out" class="button-collapsed hide-on-med-and-up"><i class="material-icons" style="font-size:45px; margin-left:8px;">menu</i></a>
-                <ul class="right hide-on-med-and-down menu">  
-                    <li><a href="{% url 'index:logout' %}"><i class="material-icons">close</i></a>
+                <ul class="right menu">  
+                    <li><a href="{% url 'index:logout' %}"><i class="material-icons" style="margin-top:0px;">close</i></a>
                     </li>
-                    <a href="http://127.0.0.1:8000/" class="brand-logo center">Logo</a>
+                     <a href="http://127.0.0.1:8000/" class="brand-logo center"><img src="{% static 'icon.png' %}" style="margin-top:15px; width:96px; height:46px;"></a>
                 </ul>
             </div>
         </nav>
@@ -86,7 +85,7 @@
                 <a href="#" data-activates="slide-out" class="button-collapsed hide-on-med-and-up"><i class="material-icons" style="font-size:45px; margin-left:8px;">menu</i></a>
                 <ul class="right hide-on-med-and-down menu">  
                     <li><a href="{% url 'index:logout' %}"><i class="material-icons">close</i></a></li>
-                    <a href="http://127.0.0.1:8000/" class="brand-logo center">Logo</a>
+                    <a href="http://127.0.0.1:8000/" class="brand-logo center"><img src="{% static 'icon.png' %}" style="margin-top:15px;"></a>
                     <li><a class="modal-trigger" id="rolfi" href="#rolfix" data-bubble="1"><i class="material-icons">new_releases</i></a></li>
 
                 </ul>
@@ -114,11 +113,11 @@
 
         <!-- Notificaciones -->
 
-        {% ifchanged casa.created %}
+ {% ifchanged casa.created %}
             {% for casa in casa_list %}
                 <div id="rolfix" class="modal bottom-sheet">
                     <div class="modal-content">
-                        <h4>Casa Nueva!</h4>
+                        <h4>Notificaciones</h4>
                     </div>
                     <ul style="margin-bottom: 2; margin-top: -1%;" class="collection">
                         <li class="collection-item avatar">
@@ -139,9 +138,9 @@
 <nav>
     <div class="nav-wrapper">
         <ul class="right hide-on-med-and-down">
-            <li><a class="btncontact">FEATURES</a></li>
+            <li><a class="btncontact" href="">FEATURES</a></li>
             <li><a class="btncontact">CONTACTO</a></li>
-            <a href="http://127.0.0.1:8000/" class="brand-logo center">Logo</a>
+            <a href="http://127.0.0.1:8000/" class="brand-logo center"><img src="{% static 'icon.png' %}" style="margin-top:15px;"></a>
             <li><a class="waves-effect waves-light btn white-text transparent z-depth-0" id="myModal" href="#modal1" style="border:1px solid white;">Ingresar</a></li>
         </ul>
     </div>

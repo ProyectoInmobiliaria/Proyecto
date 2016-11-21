@@ -2,292 +2,464 @@
 
 <html>
 
-    <head>
-        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}" media="screen,projection" />
-        <link rel="stylesheet" href="{% static 'css/flickity.css' %}" media="screen">
-        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
-        <script src="{% static 'js/flickity.pkgd.min.js' %}"></script>
+<head>
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}" media="screen,projection" />
+    <link rel="stylesheet" href="{% static 'css/flickity.css' %}" media="screen">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+    <script src="{% static 'js/flickity.pkgd.min.js' %}"></script>
 
-        <title>Casa</title>
-        <style>
-            body {
-                font-family: Roboto-regular;
-                background-color:#ffffff;
-                color: #212121;
-            }
-
-            .flickity-page-dots {
-                bottom: -20px;
-            }
-            #map {
-                height: 40%;
-                min-height: 255px;
-                width: 100%;
-            }
-
-            .siz {
-                font-size: 2.5em;
-            }
-
-            .darkgrey {
-                color: #757575;
-            }
-
-            .spaced {
-                padding-top: 1%;
-            }
-
-            .spacet {
-                padding-bottom: 3%;
-                background-color: #fdfdfd;
-            }
-
-            .seisuno {
-                color: #616161;
-            }
-
-            .respuesta-mensaje{
-                height: 45px;
-                background-color: #E0E0E0;
-                position: absolute;
-                width: 3px;
-                margin-left: 45px;
-            }
-
-            .respuesta-mensaje2{
-                width: 40px;
-                margin-top: 45px;
-                position: absolute;
-                height: 3px;
-                background-color: #E0E0E0;
-                margin-left: 45px;
-            }
-
+    <title>Casa</title>
+    <style>
+        .input-field label.active {
+            -webkit-transform: translateY(-160%);
+            transform: translateY(-160%);
+        }
+        
+        body {
+            font-family: Roboto-regular;
+            background-color: #ffffff;
+            color: #212121;
+        }
+        
+        .flickity-page-dots {
+            bottom: -20px;
+        }
+        
+        #map {
+            height: 40%;
+            min-height: 255px;
+            width: 100%;
+        }
+        
+        .siz {
+            font-size: 2.5em;
+        }
+        
+        .darkgrey {
+            color: #757575;
+        }
+        
+        .spaced {
+            padding-top: 1%;
+        }
+        
+        .spacet {
+            padding-bottom: 3%;
+            background-color: #fdfdfd;
+        }
+        
+        .seisuno {
+            color: #616161;
+        }
+        
+        .respuesta-mensaje {
+            height: 45px;
+            background-color: #E0E0E0;
+            position: absolute;
+            width: 3px;
+            margin-left: 45px;
+        }
+        
+        .respuesta-mensaje2 {
+            width: 40px;
+            margin-top: 45px;
+            position: absolute;
+            height: 3px;
+            background-color: #E0E0E0;
+            margin-left: 45px;
+        }
+        
+        .carousel-cell {
+            background: #FFFFFF;
+            width: 100%;
+            height: 500px !important;
+            margin-right: 10px;
+        }
+        
+        .redbck {
+            background-color: #EF5350 !important;
+        }
+        
+        .flickity-prev-next-button {
+            background: #FAFAFA !important;
+            background: hsla(0, 0%, 100%, 0.75);
+        }
+        
+        .navbm {
+            font-size: 22px;
+        }
+        
+        @media screen and (max-width: 500px) {
             .carousel-cell {
-                background: #FAFAFA;
-                width: 100%;
-                height: 500px !important;
-                margin-right: 10px;
+                height: 200px !important;
             }
-
-            .redbck{
-                background-color: #EF5350 !important;
+        }
+        
+        @media screen and (max-width: 800px) and (min-width: 500px) {
+            .carousel-cell {
+                height: 450px !important;
             }
+        }
+    </style>
 
-            .flickity-prev-next-button {
-                background: #FAFAFA !important;
-                background: hsla(0, 0%, 100%, 0.75);
-            }
-
-            @media screen and (max-width: 500px){
-                .carousel-cell {
-                    height: 200px !important;
-                }}
-
-            @media screen and (max-width: 800px) and (min-width: 500px){
-                .carousel-cell {
-                    height: 450px !important;
-                }}
-
-        </style>
-        <script>
-            function initMap() {
-
-                var geocoder = new google.maps.Geocoder();
-
-                geocoder.geocode({ 'address': '{{casa.address}}, {{casa.location}}, Argentina'}, function(results, status) {
-                    if (status == 'OK') {
-                        var map1 = new google.maps.Map(document.getElementById("map"), {
-                            zoom: 16,
-                            mapTypeControl: false,
-                            center: results[0].geometry.location,
-                            scrollwheel: false,
-                        });
-
-                        var markerOptions = { position: results[0].geometry.location}
-                        marker = new google.maps.Marker(markerOptions);
-                        marker.setMap(map1);
-
-                    } else {
-                        alert("Geocoding no tuvo éxito debido a: " + status);
+    <script>
+        function initMap() {
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({
+                'address': '{{casa.address}}, {{casa.location}}, Argentina'
+            }, function(results, status) {
+                if (status == 'OK') {
+                    var map1 = new google.maps.Map(document.getElementById("map"), {
+                        zoom: 16,
+                        mapTypeControl: false,
+                        center: results[0].geometry.location,
+                        scrollwheel: false,
+                        styles: [{
+                            "featureType": "all",
+                            "elementType": "labels",
+                            "stylers": [{
+                                "visibility": "off"
+                            }]
+                        }, {
+                            "featureType": "administrative",
+                            "elementType": "all",
+                            "stylers": [{
+                                "visibility": "simplified"
+                            }, {
+                                "color": "#5b6571"
+                            }, {
+                                "lightness": "35"
+                            }]
+                        }, {
+                            "featureType": "administrative.neighborhood",
+                            "elementType": "all",
+                            "stylers": [{
+                                "visibility": "off"
+                            }]
+                        }, {
+                            "featureType": "landscape",
+                            "elementType": "all",
+                            "stylers": [{
+                                "visibility": "on"
+                            }, {
+                                "color": "#f3f4f4"
+                            }]
+                        }, {
+                            "featureType": "landscape.man_made",
+                            "elementType": "geometry",
+                            "stylers": [{
+                                "weight": 0.9
+                            }, {
+                                "visibility": "off"
+                            }]
+                        }, {
+                            "featureType": "poi.park",
+                            "elementType": "geometry.fill",
+                            "stylers": [{
+                                "visibility": "on"
+                            }, {
+                                "color": "#83cead"
+                            }]
+                        }, {
+                            "featureType": "road",
+                            "elementType": "all",
+                            "stylers": [{
+                                "visibility": "on"
+                            }, {
+                                "color": "#ffffff"
+                            }]
+                        }, {
+                            "featureType": "road",
+                            "elementType": "labels",
+                            "stylers": [{
+                                "visibility": "off"
+                            }]
+                        }, {
+                            "featureType": "road.highway",
+                            "elementType": "all",
+                            "stylers": [{
+                                "visibility": "on"
+                            }, {
+                                "color": "#fee379"
+                            }]
+                        }, {
+                            "featureType": "road.highway",
+                            "elementType": "geometry",
+                            "stylers": [{
+                                "visibility": "on"
+                            }]
+                        }, {
+                            "featureType": "road.highway",
+                            "elementType": "labels",
+                            "stylers": [{
+                                "visibility": "off"
+                            }]
+                        }, {
+                            "featureType": "road.local",
+                            "elementType": "labels",
+                            "stylers": [{
+                                "visibility": "shown"
+                            }, {
+                                "color": "#95a5a6"
+                            }, {
+                                "weight": 0.1
+                            }]
+                        }, {
+                            "featureType": "administrative.country",
+                            "elementType": "geometry",
+                            "stylers": [{
+                                "visibility": "shown"
+                            }, {
+                                "color": "#95a5a6"
+                            }]
+                        }, {
+                            "featureType": "road.highway",
+                            "elementType": "labels.icon",
+                            "stylers": [{
+                                "visibility": "off"
+                            }]
+                        }, {
+                            "featureType": "road.highway.controlled_access",
+                            "elementType": "labels.icon",
+                            "stylers": [{
+                                "visibility": "off"
+                            }]
+                        }, {
+                            "featureType": "road.arterial",
+                            "elementType": "all",
+                            "stylers": [{
+                                "visibility": "simplified"
+                            }, {
+                                "color": "#ffffff"
+                            }]
+                        }, {
+                            "featureType": "road.arterial",
+                            "elementType": "labels",
+                            "stylers": [{
+                                "visibility": "off"
+                            }]
+                        }, {
+                            "featureType": "road.arterial",
+                            "elementType": "labels.icon",
+                            "stylers": [{
+                                "visibility": "off"
+                            }]
+                        }, {
+                            "featureType": "water",
+                            "elementType": "all",
+                            "stylers": [{
+                                "visibility": "on"
+                            }, {
+                                "color": "#7fc8ed"
+                            }]
+                        }]
+                    });
+                    var image = '/static/houseicon.png';
+                    var markerOptions = {
+                        position: results[0].geometry.location,
+                        icon: image
                     }
-                });
-            }
+                    marker = new google.maps.Marker(markerOptions);
+                    marker.setMap(map1);
 
-        </script>
-        {% block nav %}
-        {% include "nav2.html" %}
-        {% endblock %}
+                } else {
+                    alert("Geocoding no tuvo éxito debido a: " + status);
+                }
+            });
+        }
+    </script>
+    {% block nav %} {% include "nav2.html" %} {% endblock %}
 
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEd3RtCNs2RUdQkLl40wXvOpnhXMwMWpg&callback=initMap">
-        </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEd3RtCNs2RUdQkLl40wXvOpnhXMwMWpg&callback=initMap">
+    </script>
+</head>
 
-
-    </head>
-    <body>
-        {% if not user.is_anonymous %}
-        <div class="fixed-action-btn" style="bottom: 24; right: 24px;">
-            {% if favorite %}
-                <a class="btn-floating btn-large red" id="navbtn" href="{% url 'index:favorite' casa.id %}">
-                    <i class="large material-icons" style="margin-top:2px; margin-left:1px;">favorite</i>
-                </a>
-            {% else %}
-                <a class="btn-floating btn-large grey" id="navbtn" href="{% url 'index:favorite' casa.id %}">
-                    <i class="large material-icons" style="margin-top:2px; margin-left:1px;">favorite</i>
-                </a>
-            {% endif %}
-        </div>
-        {% endif %}
-        <br>
-        <div data-flickity>
-            <div class="carousel-cell center">
-                <img style="max-width: 1000; max-height: 500;" class="responsive-img" src="{{ casa.img_frente.url }}"/>
-            </div>
-            {% for i in img %}
-            <div class="carousel-cell center">
-                <img style="max-width: 1000; max-height: 500;" class="responsive-img" src="{{ i.img.url }}"/>
-            </div>
-            {% endfor %}
-        </div>
-        <div>
-            <h4 class="center" style="color:#424242; font-family:Roboto; margin-top: 40px;">{{casa.tipo}} en {{casa.address}}, {{casa.location}}, Argentina </h4>
+<body>
+    <!-- Modal Structure -->
+    <div id="msjmodal" class="modal">
+        <div class="modal-content">
             <br>
-        </div>
-        <div class="row container">
-            <div class="col s12 offset-l1 seisuno">
-                <div class="col l2 s4 center-align grey-text"><i class="material-icons siz darkgrey">store</i>
-                    <br>
-                    <p class="center-align darkgrey">{{casa.tipo}}</p>
+            <h4 class="center" style="font-family:Roboto-thin; padding-left:12px; color:#424242;">Envianos un email</h4>
+            <div class="row" id="cfcontent" style="margin-top:-20px;">
+                <br>
+                <div class="input-field col s10 push-s1">
+                    <input type="text" name="regfirst">
+                    <label for="nombre">Nombre</label>
+
                 </div>
-                <div class="col l2 center-align grey-text hide-on-med-and-down"><i class="material-icons siz darkgrey">accessibility</i>
-                    <br>
-                    <p class="center-align darkgrey">{{casa.rooms}} ambientes</p>
+                <div class="row">
+                    <div class="input-field col s10 push-s1">
+                        <input id="regmail" type="email" name="regmail">
+                        <label for="email">Correo</label>
+                    </div>
                 </div>
-                <div class="col l2 s4 center-align grey-text "><i class="material-icons siz darkgrey">attach_money</i>
-                    <br>
-                    <p class="center-align darkgrey">{{casa.price}}</p>
-                </div>
-                <div class="col l2 s4 center-align grey-text"><i class="material-icons siz darkgrey">room</i>
-                    <br>
-                    <p class="center-align darkgrey">{{casa.district}}</p>
-                </div>
-                <div class="col l2 center-align grey-text hide-on-med-and-down"><i class="material-icons siz darkgrey">face</i>
-                    <br>
-                    <p class="center-align darkgrey">{{casa.people}} personas</p>
-                </div>
+                <div class="row">
+                    <div class="input-field col s10 push-s1">
+                        <textarea class="materialize-textarea" style="padding:0px 0px 0px 0px;"></textarea>
+                        <label for="text">Mensaje</label>
+                    </div>
+                </div><a class="btn waves-effect transparent waves-light z-depth-0 right" style="margin-right:12px; margin-top:12px; color:#212121; padding-right:55px;">Enviar mensaje<i class="material-icons right grey-text">arrow_forward</i></a>
             </div>
         </div>
+    </div>
 
-        <div class="divider"></div>
+    <br>
 
-        <div class="spaced" style="background-color:#fdfdfd"></div>
+    <div class="fixed-action-btn vertical click-to-toggle">
+        <a class="btn-floating btn-large orange" style="width:70px; height:70px;">
+            <i class="large material-icons" style="font-size:2.5rem; margin-top:6px; margin-left: 0px;">mode_edit</i>
+        </a>
+        <ul style="bottom:70px;">
+            {% if not user.is_anonymous %}{% if favorite %}
+            <li><a class="btn-floating btn-large red" href="{% url 'index:favorite' casa.id %}"><i class="material-icons navbm" id="navbm">favorite</i></a></li>
+            {% else %}
+            <li><a class="btn-floating btn-large grey" href="{% url 'index:favorite' casa.id %}"><i class="material-icons navbm" id="navbm">favorite</i></a></li>{% endif %}{% endif %}
+            <li><a class="btn-floating btn-large deep indigo" href="#msjmodal" id="emailmodal"><i class="material-icons">email</i></a></li>
+        </ul>
+    </div>
 
-        <div class="row">
-            <div class="col l10 center push-l1">
-                <h4 class="center" style="color:#424242">Descripci&oacute;n</h4>
-                <p class="seisuno">Venta de Departamento 2 AMBIENTES en VILLA URQUIZA. Frente con Balcón Terraza de 8.66 x 3, y opcional cochera fija Cubierta. El Edificio cuenta con Amenities. Piscina, patio de juegos y Quincho o Salón de usos Múltiples El Departamento se encuentra en Excelente Estado y cuenta con: Living Comedor (5.50 x 3.50) 1º Dormitorio (3.30 x 3.00) Cocina con Lavadero Incorporado (5.00 x 1.80) Baño Completo. Baulera tipo jaula de 3.00 x 1.50 x 2.70 (en sótano del edificio) Opcional Cochera Fija Cubierta.</p>
+
+    <div data-flickity>
+        <div class="carousel-cell center">
+            <img style="max-width: 1000; max-height: 500;" class="responsive-img" src="{{ casa.img_frente.url }}" />
+        </div>
+        {% for i in img %}
+        <div class="carousel-cell center">
+            <img style="max-width: 1000; max-height: 500;" class="responsive-img" src="{{ i.img.url }}" />
+        </div>
+        {% endfor %}
+    </div>
+    <div>
+        <h4 class="center" style="color:#424242; font-family:Roboto; margin-top: 40px;">{{casa.tipo}} en {{casa.address}}, {{casa.location}}, Argentina </h4>
+        <br>
+    </div>
+    <div class="row container">
+        <div class="col s12 offset-l1 seisuno">
+            <div class="col l2 s4 center-align grey-text"><i class="material-icons siz darkgrey">store</i>
+                <br>
+                <p class="center-align darkgrey">{{casa.tipo}}</p>
             </div>
+            <div class="col l2 center-align grey-text hide-on-med-and-down"><i class="material-icons siz darkgrey">accessibility</i>
+                <br>
+                <p class="center-align darkgrey">{{casa.rooms}} ambientes</p>
+            </div>
+            <div class="col l2 s4 center-align grey-text "><i class="material-icons siz amber-text">attach_money</i>
+                <br>
+                <p class="center-align darkgrey">{{casa.price}}</p>
+            </div>
+            <div class="col l2 s4 center-align grey-text"><i class="material-icons siz darkgrey">room</i>
+                <br>
+                <p class="center-align darkgrey">{{casa.district}}</p>
+            </div>
+            <div class="col l2 center-align grey-text hide-on-med-and-down"><i class="material-icons siz darkgrey">face</i>
+                <br>
+                <p class="center-align darkgrey">{{casa.people}} personas</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="spaced" style="background-color:#fdfdfd"></div>
+
+    <div class="row">
+        <div class="col l10 center push-l1">
+            <h4 class="center" style="color:#424242">Descripci&oacute;n</h4>
+            <p class="seisuno">Venta de Departamento 2 AMBIENTES en VILLA URQUIZA. Frente con Balcón Terraza de 8.66 x 3, y opcional cochera fija Cubierta. El Edificio cuenta con Amenities. Piscina, patio de juegos y Quincho o Salón de usos Múltiples El Departamento se encuentra en Excelente Estado y cuenta con: Living Comedor (5.50 x 3.50) 1º Dormitorio (3.30 x 3.00) Cocina con Lavadero Incorporado (5.00 x 1.80) Baño Completo. Baulera tipo jaula de 3.00 x 1.50 x 2.70 (en sótano del edificio) Opcional Cochera Fija Cubierta.</p>
+        </div>
+        <div class="col m5 push-m1 s12">
+            <table class="highlight bordered seisuno">
+                <tbody>
+                    <tr>
+                        <td>Localidad</td>
+                        <td class="right-align">{{casa.location}}</td>
+                    </tr>
+                    <tr>
+                        <td>Barrio</td>
+                        <td class="right-align">{{casa.district}}</td>
+                    </tr>
+                    <tr>
+                        <td>Dirección</td>
+                        <td class="right-align">{{casa.address}}</td>
+                    </tr>
+                    <tr>
+                        <td>Operacion</td>
+                        <td class="right-align">{{casa.Operation}}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row" style="background-color:#fdfdfd">
             <div class="col m5 push-m1 s12">
                 <table class="highlight bordered seisuno">
                     <tbody>
                         <tr>
-                            <td>Localidad</td>
-                            <td class="right-align">{{casa.location}}</td>
+                            <td>Superficie Libre</td>
+                            <td class="right-align">{{casa.free_surface}}</td>
                         </tr>
                         <tr>
-                            <td>Barrio</td>
-                            <td class="right-align">{{casa.district}}</td>
+                            <td>Superficie Cubierta</td>
+                            <td class="right-align">{{casa.cover_surface}}</td>
                         </tr>
                         <tr>
-                            <td>Dirección</td>
-                            <td class="right-align">{{casa.address}}</td>
+                            <td>Calefacción</td>
+                            <td class="right-align">{{casa.heating}}</td>
                         </tr>
                         <tr>
-                            <td>Operacion</td>
-                            <td class="right-align">{{casa.Operation}}</td>
+                            <td>Baños</td>
+                            <td class="right-align">{{casa.bathrooms}}</td>
                         </tr>
 
                     </tbody>
                 </table>
             </div>
-
-            <div class="row" style="background-color:#fdfdfd">
-                <div class="col m5 push-m1 s12">
-                    <table class="highlight bordered seisuno">
-                        <tbody>
-                            <tr>
-                                <td>Superficie Libre</td>
-                                <td class="right-align">{{casa.free_surface}}</td>
-                            </tr>
-                            <tr>
-                                <td>Superficie Cubierta</td>
-                                <td class="right-align">{{casa.cover_surface}}</td>
-                            </tr>
-                            <tr>
-                                <td>Calefacción</td>
-                                <td class="right-align">{{casa.heating}}</td>
-                            </tr>
-                            <tr>
-                                <td>Baños</td>
-                                <td class="right-align">{{casa.bathrooms}}</td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
         </div>
-        <div class="spacet"></div>
-        <div class="divider "></div>
+    </div>
+    <div class="spacet"></div>
+    <div class="divider "></div>
 
 
-        <br>
-        <h4 class="center">Ubicaci&oacute;n</h4>
-        <br>
+    <br>
+    <h4 class="center">Ubicaci&oacute;n</h4>
+    <br>
 
-        <div id="map"></div>
-        <br>
-        <div class="divider"></div>
+    <div id="map"></div>
+    <br>
+    <div class="divider"></div>
 
-        <div id="coment" class="row" style="background-color:#F5F5F5">
-        </div>
-        <div class="spacet" style="background-color:#F5F5F5 !important;"></div>
-        
-    </body>
+    <div id="coment" class="row" style="background-color:#F5F5F5">
+    </div>
+    <div class="spacet" style="background-color:#F5F5F5 !important;"></div>
+
+</body>
 
 </html>
 
 
 <script>
-
-
     $(function() {
         var navbtn = document.getElementById("navbtn");
-        $(navbtn).click( function() {
+        $(navbtn).click(function() {
             $(this).toggleClass("redbck");
-        } );
-    } );
-
-
-
+        });
+    });
 
     $.ajax({
         url: "{% url 'index:comentarios' casa.id %}",
     }).success(function(data) {
-        $( "#coment" ).html(data);
+        $("#coment").html(data);
     });
 
-
-            $(document).ready(function() {
-                $('select').material_select();
-                $('#myModal').leanModal();
-                $('#rolfi').leanModal();
-                $(".button-collapsed").sideNav();
-                $('.carousel').carousel(); 
-                $('.collapsible').collapsible();
-            });
-
-
+    $(document).ready(function() {
+        $('select').material_select();
+        $('#myModal').leanModal();
+        $('#rolfi').leanModal();
+        $('#emailmodal').leanModal();
+        $(".button-collapsed").sideNav();
+        $('.carousel').carousel();
+    });
 </script>

@@ -1,12 +1,13 @@
-{% load static %} {% load staticfiles %}
+ {% load static %} {% load staticfiles %}
 
 <style>
     img{
         filter: brightness(95%);
     }
 </style>
-
-
+{% if request.user.is_superuser %}
+        <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+{% endif %}
 <div>
     <div class="col s12 m8 offset-m2">
         <br>

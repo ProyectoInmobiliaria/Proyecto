@@ -190,8 +190,8 @@ def busqueda(request):
             attributosIngresados['district'] = request.POST.get('barrio', None)
         if request.POST.get('rooms', False):
             rooms = request.POST.get('rooms', None).split('-')
-            attributosIngresados['room__gte'] = rooms[0]
-            attributosIngresados['room__lte'] = rooms[1]
+            attributosIngresados['rooms__gte'] = rooms[0]
+            attributosIngresados['rooms__lte'] = rooms[1]
         
         print(dict(attributosIngresados))
         

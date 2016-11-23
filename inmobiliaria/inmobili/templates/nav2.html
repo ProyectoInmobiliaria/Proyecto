@@ -30,18 +30,6 @@
         color: #F44336 !important;
     }
 
-    .menu a:hover[data-bubble]:after, .menu a:active[data-bubble]:after, .menu a:focus[data-bubble]:after{
-        content:attr(data-bubble);
-        position:absolute;
-        right:0.4em;
-        height:1.5em;
-        line-height:1.5em;
-        padding:0 .46em;
-        background-color: rgba(0, 150, 136, 0.8);
-        color:#fff;
-        border-radius:4em;
-        top:0.3em;
-    }
 </style>
 <script>
     $(function() {
@@ -59,8 +47,6 @@
         <ul class="right hide-on-med-and-down menu">  
             <li><a href="{% url 'index:logout' %}"><i class="material-icons" style="color: #9E9E9E;">close</i></a></li>
             <a href="http://127.0.0.1:8000/" class="brand-logo center" style="color: #9E9E9E; margin-top:10px;"><img src="{% static 'icong.png' %}"></a>
-            <li><a class="modal-trigger" id="rolfi" href="#rolfix" data-bubble="2"><i class="material-icons" style="color: #9E9E9E;">new_releases</i></a></li>
-
         </ul>
     </div>
 </nav>

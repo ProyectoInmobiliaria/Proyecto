@@ -8,21 +8,17 @@
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
         <title>Perfil</title>
-    </head> 
+    </head>
     <style>
         body {
             background-image: url("{% static 'ddd.png' %}");
         }
 
-        .center {
-			text-align: center;
-			font-family: GillSans;
-		}
-		.card {
+        .card {
             border-radius: 0px;
         }
 
-        .material-icons {
+        .tabicons {
             margin-top: 9px;
             font-size: 30px;
             color: #ede7f6;
@@ -32,6 +28,16 @@
             display: none;
         }
 
+        .uslist{
+            margin-top: 7.8%;
+            padding-right: 20px;
+            font-size: 30px;
+        }
+
+        h6{
+            margin-top:-20px;
+            margin-left:50px;
+        }
 
         @media screen and (min-width: 1000px){
 
@@ -47,7 +53,7 @@
 
             .tab{
                 margin: 37px 0px 50px 0px !important;
-            }    
+            }
 
             .tabs-vertical {
                 height: 400px;
@@ -55,7 +61,7 @@
 
             .tabs-vertical-2 {
                 height: 400px;
-            }    
+            }
 
             .active {
                 border-right: 3px solid #d1c4e9;
@@ -64,6 +70,8 @@
 
             .ns {
                 background-color: #fafafa;
+                max-height:400;
+                margin-top:27;
             }
 
             #ttr{
@@ -87,16 +95,16 @@
 
             #nopr{
                 padding-right: 0px;
-            }  
+            }
 
             #nopl{
                 padding-left: 0px;
-            }    
+            }
+
+
         }
 
-
-
-        @media screen and (max-width: 999px){    
+        @media screen and (max-width: 999px){
             .tabs {
                 margin-top: 110px;
                 background-color: transparent;
@@ -132,7 +140,7 @@
 
         }
 
-    </style>    
+    </style>
 
     <div id="nav">
         {% block nav %}
@@ -140,28 +148,28 @@
         {% endblock %}
     </div>
 
-    <body>
+    <body style="font-family:Roboto-normal">
         <div class="row mys" style="margin-top:4%;">
             <div style="margin-top:4%" class="row mys">
                 <div class="col s12 l5 push-l1" id="nopr">
-                    <div class="card deep-purple lighten-1">
+                    <div class="card deep-purple lighten-1 z-depth-2" style="z-index:5;">
                         <div class="card-content" id="nopr">
                             <div class="tabs-vertical">
                                 <div class="col s12 l9 white-text center">
                                     <img class="circle" src="{{user.perfil.avatar}}">
                                     <p style="font-size:25px; margin-top:10px;">{{user.first_name}} {{user.last_name}}</p>
-                                    <p style="margin-top:5px; color:#b39ddb;">{{user}}</p>
+                                    <p style="margin-top:5px; color:#b39ddb; font-family:Roboto-bold;">{{user}}</p>
                                 </div>
-                                <div class="col l3 lark" style="text-align:right;">
+                                <div class="col s12 l3 lark" style="text-align:right;">
                                     <ul class="tabs" id="ttr">
                                         <li class="tab" id="ttr">
-                                            <a href="#a"><i class="material-icons">person</i></a>
+                                            <a href="#a"><i class="material-icons tabicons">person</i></a>
                                         </li>
                                         <li class="tab">
-                                            <a href="#b"><i class="material-icons">favorite</i></a>
+                                            <a href="#b"><i class="material-icons tabicons">favorite</i></a>
                                         </li>
                                         <li class="tab">
-                                            <a href="#c"><i class="material-icons">edit</i></a>
+                                            <a href="#c"><i class="material-icons tabicons">edit</i></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -170,50 +178,54 @@
                     </div>
                 </div>
                 <div class="col s12 l5 push-l1" id="nopl">
-                    <div class="card ns">
+                    <div class="card grey lighten-5 ns">
                         <div class="card-content">
                             <div class="tabs-vertical-2">
                                 <div id="a">
-                                    <p>Usuario: {{user.username}}</p>
-                                    <p>Nombre: {{user.first_name}} {{user.last_name}}</p>
-                                    <p>Date Joined: {{user.date_joined}}</p>
-                                    <p>Email: {{user.email}}</p>
+                                    <ul style="margin-left: 20px;">
+                                        <li><i class="material-icons uslist grey-text text-lighten-1">perm_identity</i><h6>{{user.username}}</h6></li>
+                                        <li><i class="material-icons uslist grey-text text-lighten-1">face</i><h6>{{user.first_name}} {{user.last_name}}</h6></li>
+                                        <li><i class="material-icons uslist grey-text text-lighten-1">perm_contact_calendar</i><h6>{{user.date_joined}}</h6></li>
+                                        <li><i class="material-icons uslist grey-text text-lighten-1">mail</i><h6>{{user.email}}</h6></li>
+                                    </ul>
                                 </div>
                                 <div id="b">
                                     {% for i in favorites %}
-                                    <div class="center">
-										<l >Casas que te han interesado</l>
+                                    <div class="center"  style="margin-left: 20px; margin-right:20px;">
                                         <table class="highlight bordered seisuno left">
                                             <tbody>
                                                 <tr>
-                                                    <td class="left-align"><a href="{% url 'index:casa' i.casa.id %}">{{i.casa}}</a></td>
+                                                    <td class="left-align"><a class="black-text" href="{% url 'index:casa' i.casa.id %}">{{i.casa}}</a></td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>
                                     {% empty %}
-                                    <li>No posee casas favoritas</li>
+                                    <ul class="center">
+                                    <li class="grey-text" style="font-size:25px;">No posee casas favoritas</li>
+                                        <br>
+                                    <i class="material-icons grey-text center" style="font-size:70px;">sentiment_dissatisfied</i></ul>
                                     {% endfor %}
                                 </div>
                                 <div id="c">
-                                    <div class="row">
+                                    <div class="row" style="margin-top:60px;">
                                         <form class="col s12"  method="POST">
                                             {% csrf_token %}
                                             <div class="row">
-                                                <div class="input-field col s6">
+                                                <div class="input-field col s8 push-s2">
                                                     <input id="regpass" type="password" class="validate" name="edipass">
                                                     <label for="pass">Contrase&ntilde;a</label>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="input-field col s6">
+                                                <div class="input-field col s8 push-s2">
                                                     <input id="regpass2" type="password" class="validate" name="edipass2">
                                                     <label for="pass">Repetir contrase&ntilde;a</label>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="input-field col s12">
-                                                    <button class="btn waves-effect waves-light grey darken-3" type="submit" name="action" style="width:100%;">Cambiar</button>
+                                                <div class="input-field col push-s4">
+                                                    <button class="btn transparent z-depth-0 black-text" type="submit" name="action">Cambiar<i class="material-icons right grey-text" style="font-size:25px;">check_circle</i></button>
                                                 </div>
                                             </div>
                                         </form>

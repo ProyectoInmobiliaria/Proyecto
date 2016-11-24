@@ -160,13 +160,13 @@ def favorite(request, id_casa):
         print "bore"
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-def showfav(request):
+def perfil(request):
     context = RequestContext(request)
     user = request.user
     favorites = Fav.objects.filter(author=user)
     context.update(dict(user=user, favorites=favorites))
     context.update(csrf(request))
-    return render_to_response("favorites.html", context)
+    return render_to_response("perfil.html", context)
 
 def busqueda(request):
     context = RequestContext(request)

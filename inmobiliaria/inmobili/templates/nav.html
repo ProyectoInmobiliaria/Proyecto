@@ -52,15 +52,14 @@
         } );
     } );
 </script>
-    {% if request.path == "/showfav/" %}
+    {% if request.path == "/perfil/" %}
+<body>
         <nav>
             <div class="nav-wrapper">
                 <ul class="menu">
                     <a href="{{request.META.HTTP_REFERER}}"><i class="medium material-icons" style="margin-top:0px;">reply</i></a>
                 </ul>
-                <ul class="right menu">  
-                    <li><a href="{% url 'index:logout' %}"><i class="material-icons" style="margin-top:0px;">close</i></a>
-                    </li>
+                <ul class="right menu">
                      <a href="http://127.0.0.1:8000/" class="brand-logo center"><img src="{% static 'icon.png' %}" style="margin-top:15px; width:96px; height:46px;"></a>
                 </ul>
             </div>
@@ -81,7 +80,7 @@
     {% else %}
         <nav>
             <div class="nav-wrapper">
-                <div class="hide-on-small-only" data-activates="slide-out" id="leftspace"><a href="{% url 'index:showfav' %}" class="waves-effect waves-light btn white-text transparent z-depth-0" style="border:1px solid white;">{{user}}</a></div>
+                <div class="hide-on-small-only" data-activates="slide-out" id="leftspace"><a href="{% url 'index:perfil' %}" class="waves-effect waves-light btn white-text transparent z-depth-0" style="border:1px solid white;">{{user}}</a></div>
                 <a href="#" data-activates="slide-out" class="button-collapsed hide-on-med-and-up"><i class="material-icons" style="font-size:45px; margin-left:8px;">menu</i></a>
                 <ul class="right hide-on-med-and-down menu">  
                     <li><a href="{% url 'index:logout' %}"><i class="material-icons">close</i></a></li>
@@ -103,7 +102,7 @@
                     <a href="#"><span class="white-text email">{{user.email}}</span></a>
                 </div>
             </li>
-            <li><a href="{% url 'index:showfav' %}"><i class="material-icons">favorite</i>Casas favoritas </a></li>
+            <li><a href="{% url 'index:perfil' %}"><i class="material-icons">favorite</i>Casas favoritas </a></li>
             <li><a class="modal-trigger" id="rolfi" href="#rolfix" data-bubble="2"><i class="material-icons">notifications</i>Notificaciones</a></li>
             <li>
                 <div class="divider"></div>
@@ -150,7 +149,7 @@
 
 <!-- Modal Structure -->
 
-<div id="modal1" class="modal" style="font-family:Roboto-regular;">
+<div id="modal1" class="modal" style="font-family:Roboto-normal;">
     <div class="modal-content">
 
         <div class="row">
@@ -318,6 +317,6 @@
 
     </div>
 </div>
-
+</body>
 {% endif %}
 {% endblock %}

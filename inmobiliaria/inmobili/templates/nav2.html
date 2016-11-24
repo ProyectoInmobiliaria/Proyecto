@@ -30,18 +30,6 @@
         color: #F44336 !important;
     }
 
-    .menu a:hover[data-bubble]:after, .menu a:active[data-bubble]:after, .menu a:focus[data-bubble]:after{
-        content:attr(data-bubble);
-        position:absolute;
-        right:0.4em;
-        height:1.5em;
-        line-height:1.5em;
-        padding:0 .46em;
-        background-color: rgba(0, 150, 136, 0.8);
-        color:#fff;
-        border-radius:4em;
-        top:0.3em;
-    }
 </style>
 <script>
     $(function() {
@@ -54,13 +42,11 @@
 </script>
 <nav>
     <div class="nav-wrapper">
-        <div class="hide-on-small-only" data-activates="slide-out" id="leftspace"><a href="{% url 'index:showfav' %}" class="waves-effect waves-light btn transparent z-depth-0" style="border:1px solid #9E9E9E; color:#9E9E9E">{{user}}</a></div>
+        <div class="hide-on-small-only" data-activates="slide-out" id="leftspace"><a href="{% url 'index:perfil' %}" class="waves-effect waves-light btn transparent z-depth-0" style="border:1px solid #9E9E9E; color:#9E9E9E">{{user}}</a></div>
         <a href="#" data-activates="slide-out" class="button-collapsed hide-on-med-and-up"><i class="material-icons" style="font-size:45px; margin-left:8px;">menu</i></a>
         <ul class="right hide-on-med-and-down menu">  
             <li><a href="{% url 'index:logout' %}"><i class="material-icons" style="color: #9E9E9E;">close</i></a></li>
             <a href="http://127.0.0.1:8000/" class="brand-logo center" style="color: #9E9E9E; margin-top:10px;"><img src="{% static 'icong.png' %}"></a>
-            <li><a class="modal-trigger" id="rolfi" href="#rolfix" data-bubble="2"><i class="material-icons" style="color: #9E9E9E;">new_releases</i></a></li>
-
         </ul>
     </div>
 </nav>
@@ -76,7 +62,7 @@
             <a href="#"><span class="white-text email">{{user.email}}</span></a>
         </div>
     </li>
-    <li><a href="{% url 'index:showfav' %}"><i class="material-icons">favorite</i>Casas favoritas </a></li>
+    <li><a href="{% url 'index:perfil' %}"><i class="material-icons">favorite</i>Casas favoritas </a></li>
     <li><a class="modal-trigger" id="rolfi" href="#rolfix" data-bubble="2"><i class="material-icons">notifications</i>Notificaciones</a></li>
     <li>
         <div class="divider"></div>

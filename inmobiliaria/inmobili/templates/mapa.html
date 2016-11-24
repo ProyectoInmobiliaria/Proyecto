@@ -241,7 +241,15 @@
                     geocoder.geocode({ 'address': '{{casa.address}}, {{casa.district}}, Argentina'}, function(results, status) {
                         if (status == 'OK') {
                             //locations.push(results[0].geometry.location);
-                            var image = '/static/houseicon.png';
+                            {% if casa.tipo == "Casa" %}
+								var image = '/static/houseicon.png';
+							{% endif %}
+							{% if casa.tipo == "Departamento" %}
+								var image = '/static/aparticon.png';
+							{% endif %}
+							{% if casa.tipo == "Oficina" %}
+								var image = '/static/officeicon.png';
+							{% endif %}
                             var markerOptions = { position: results[0].geometry.location,
                                                  icon: image}
                             marker = new google.maps.Marker(markerOptions);

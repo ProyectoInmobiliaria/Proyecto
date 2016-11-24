@@ -10,6 +10,11 @@
         <title>Perfil</title>
     </head>
     <style>
+
+		.messi{
+			width: auto;
+			height: auto;
+		}
         body {
             background-image: url("{% static 'ddd.png' %}");
         }
@@ -209,25 +214,15 @@
                                 </div>
                                 <div id="c">
                                     <div class="row" style="margin-top:60px;">
-                                        <form class="col s12"  method="POST">
+                                        <form class="col s12" action="{% url 'index:cambiai' user.perfil.id  %}" method="POST">
                                             {% csrf_token %}
-                                            <div class="row">
-                                                <div class="input-field col s8 push-s2">
-                                                    <input id="regpass" type="password" class="validate" name="edipass">
-                                                    <label for="pass">Contrase&ntilde;a</label>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="input-field col s8 push-s2">
-                                                    <input id="regpass2" type="password" class="validate" name="edipass2">
-                                                    <label for="pass">Repetir contrase&ntilde;a</label>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="input-field col push-s4">
-                                                    <button class="btn transparent z-depth-0 black-text" type="submit" name="action">Cambiar<i class="material-icons right grey-text" style="font-size:25px;">check_circle</i></button>
-                                                </div>
-                                            </div>
+                                            <div class="col s12 l9 white-text center">
+												<button value="{% static '1.png' %}" name="img1" ><img  src="{% static '1.png' %}" class="messi" onclick="submit"></button>
+												<button value="{% static '2.png' %}" name="img2"><img  src="{% static '2.png' %}" class="messi" onclick="submit"></button>
+												<button value="{% static '3.png' %}" name="img3"><img  src="{% static '3.png' %}" class="messi" onclick="submit"></button>
+												<button value="{% static '4.png' %}" name="img4"><img  src="{% static '4.png' %}" class="messi" onclick="submit"></button>
+												<button value="{% static '5.png' %}" name="img5"><img src="{% static '5.png' %}" class="messi" onclick="submit"></button>
+											</div>
                                         </form>
                                     </div>
                                 </div>

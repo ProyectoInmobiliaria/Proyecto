@@ -218,3 +218,22 @@ def answer(request, id_comment):
                              body=content)
         respuesta.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def cambiai(request,id_perfil):
+    context = RequestContext(request)
+    ims = []
+    arr = []
+    if 'POST' in request.method:
+        ims.append(request.POST.get('img1', None))
+        ims.append(request.POST.get('img2', None))
+        ims.append(request.POST.get('img3', None))
+        ims.append(request.POST.get('img4', None))
+        ims.append(request.POST.get('img5', None))
+
+        for i in ims:
+            if i != None:
+				#guardar img
+                arr.append(i)
+                print arr
+                Perfil.objects.filter(pk=id_perfil).update(avatar=arr[0])
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

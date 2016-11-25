@@ -10,10 +10,31 @@
         <title>Perfil</title>
     </head>
     <style>
-
+        .nofilter{
+            border: none;
+            background-color: transparent;
+            padding: 0 8 0 8;
+        }
+        
+        .messi.activeimg{
+            border: 3px solid #D1C4E9;
+            border-radius: 100%;
+            filter: grayscale(0%) brightness(0.9);
+        }
+        
+        .nofilter:hover {
+            background-color: transparent;
+        }
+        
+        .nofilter:active{
+            background-color: transparent;
+        }
+        
 		.messi{
-			width: auto;
-			height: auto;
+            margin-top: auto;
+			width: 72px;
+			height: 72px;
+            filter: grayscale(80%) brightness(0.6);
 		}
         body {
             background-image: url("{% static 'ddd.png' %}");
@@ -206,22 +227,25 @@
                                         </table>
                                     </div>
                                     {% empty %}
-                                    <ul class="center">
+                                    <ul class="center" style="margin-top:100px;">
                                     <li class="grey-text" style="font-size:25px;">No posee casas favoritas</li>
                                         <br>
                                     <i class="material-icons grey-text center" style="font-size:70px;">sentiment_dissatisfied</i></ul>
                                     {% endfor %}
                                 </div>
                                 <div id="c">
-                                    <div class="row" style="margin-top:60px;">
-                                        <form class="col s12" action="{% url 'index:cambiai' user.perfil.id  %}" method="POST">
+                                    <div class="row" style="margin-top:70px;">
+                                        <form action="{% url 'index:cambiai' user.perfil.id  %}" method="POST">
                                             {% csrf_token %}
-                                            <div class="col s12 l9 white-text center">
-												<button value="{% static '1.png' %}" name="img1" ><img  src="{% static '1.png' %}" class="messi" onclick="submit"></button>
-												<button value="{% static '2.png' %}" name="img2"><img  src="{% static '2.png' %}" class="messi" onclick="submit"></button>
-												<button value="{% static '3.png' %}" name="img3"><img  src="{% static '3.png' %}" class="messi" onclick="submit"></button>
-												<button value="{% static '4.png' %}" name="img4"><img  src="{% static '4.png' %}" class="messi" onclick="submit"></button>
-												<button value="{% static '5.png' %}" name="img5"><img src="{% static '5.png' %}" class="messi" onclick="submit"></button>
+                                            <h4 class="grey-text center" style="padding-bottom:30px;">Eleg&iacute; tu icono</h4>
+                                            <div class="col s12 center">
+                                                {% for i in ava %}
+                                                {% if user.perfil.avatar == "/static/i.png" %}
+												<button class="nofilter"  value="{{ STATIC_URL }}{{i}}.png" id="img2" name="img2"  onclick="changeimg()"><img  src="{{ STATIC_URL }}{{i}}.png" class="messi activeimg"></button>
+                                                {% else %}
+                                                <button class="nofilter"  value="{{ STATIC_URL }}{{i}}.png" id="img2" name="img2"  onclick="changeimg()"><img  src="{{ STATIC_URL }}{{i}}.png" class="messi"></button>
+                                                {% endif %}
+                                                {% endfor %}
 											</div>
                                         </form>
                                     </div>

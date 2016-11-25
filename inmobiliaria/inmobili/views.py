@@ -106,7 +106,7 @@ def logout(request):
     context = RequestContext(request)
     auth.logout(request)
     print request.META.get('HTTP_REFERER')
-    if request.META.get('HTTP_REFERER') == "http://127.0.0.1:8000/showfav/":
+    if request.META.get('HTTP_REFERER') == "http://127.0.0.1:8000/perfil/":
             return redirect ('/')
     else:
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
@@ -163,8 +163,9 @@ def favorite(request, id_casa):
 def perfil(request):
     context = RequestContext(request)
     user = request.user
+    ava = [1, 2, 3, 4, 5]
     favorites = Fav.objects.filter(author=user)
-    context.update(dict(user=user, favorites=favorites))
+    context.update(dict(user=user, favorites=favorites, ava=ava))
     context.update(csrf(request))
     return render_to_response("perfil.html", context)
 
@@ -234,6 +235,6 @@ def cambiai(request,id_perfil):
             if i != None:
 				#guardar img
                 arr.append(i)
-                print arr
-                Perfil.objects.filter(pk=id_perfil).update(avatar=arr[0])
-                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        print arr
+        Perfil.objects.filter(pk=id_perfil).update(avatar=arr[0])
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
